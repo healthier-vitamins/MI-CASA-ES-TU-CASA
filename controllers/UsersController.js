@@ -6,7 +6,7 @@ router.get("/", (req, res) => {
 })
 
 // signup
-router.post("/singup", (req, res) => {
+router.post("/signup", (req, res) => {
     res.send("you'll signuphere")
   })
 
