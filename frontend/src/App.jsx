@@ -7,22 +7,24 @@ import Profile from "./pages/Profile"
 import ShowPost from "./pages/ShowPost"
 import "./App.css"
 
+
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Layout/>}>
-            <Route index element={<IndexHome/>}/>
-            <Route path="/credentials/:id" element={<Credentials/>}/>
-            <Route path="/create-post/" element={<CreatePost/>}/>
-            <Route path="/profile/:id" element={<Profile/>}/>
-            <Route path="/show-post/:id" element={<ShowPost/>}/>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<IndexHome />} />
+            <Route path="/sign-up" element={<SignUp />} />
+            <Route path="/create-post" element={<CreatePost />} />
+            <Route path="/profile/:id" element={<Profile />} />
+            <Route path="/show-post/:id" element={<ShowPost />} />
           </Route>
+          <Route path="/login" element={<Login />} />
         </Routes>
       </BrowserRouter>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
