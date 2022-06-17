@@ -4,10 +4,10 @@ const postSchema = mongoose.Schema({
   img: [{type: String, required: true }],
   description: {type: String, required: true },
   style: {type: String, required: true },
-  cost: Number, 
-  username: String,
-  commentcount: Number,
-  likecount: Number,
+  cost: {type: Number}, 
+  username: {type: String},
+  commentCount: [{type: String}],
+  likeCount: [{type: String}],
 });
 
 module.exports = mongoose.model("Post", postSchema);
