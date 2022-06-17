@@ -3,10 +3,12 @@ function Profile() {
     return (
         <div className="user-profile"> 
         <div className="user-profile-header">
-        <img className="profile-pic" src="https://i.imgur.com/fSBfFDP.jpg"/>
-        <h2 className="username-h2">joe mama</h2>
-        <p>number of posts: 21</p>
-        <p>total likes: 220</p>
+            <img className="profile-pic" src="https://i.imgur.com/fSBfFDP.jpg"/>
+            <h2 className="username-h2">joe mama</h2>
+            <div className="user-posts-likes">
+                <p>number of posts: 21</p>
+                <p>total likes: 220</p>
+            </div>
         </div>
         <div className="user-posts-col-left">
             <div className="post-card">
