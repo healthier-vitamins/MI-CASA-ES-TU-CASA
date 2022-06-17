@@ -5,6 +5,7 @@ import IndexHome from "./pages/IndexHome"
 import Layout from "./pages/Layout"
 import Profile from "./pages/Profile"
 import ShowPost from "./pages/ShowPost"
+import "./App.css"
 
 function App() {
   return (

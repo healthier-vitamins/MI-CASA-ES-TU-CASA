@@ -1,5 +1,5 @@
 html {
-  max-width: 70ch;
+  max-width: 90ch;
   padding: 3em 1em;
   margin: auto;
   line-height: 1.75;
@@ -14,4 +14,33 @@ p,ul,ol {
   margin-bottom: 2em;
   color: #1d1d1d;
   font-family: sans-serif;
+}
+
+a {
+  display: inline-block;
+  padding: 0 5px 10px 5px;
+  color: #1d1d1d;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-family: sans-serif;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* profile page css */
+.user-profile {
+  background-color: #F9F9F9;
+}
+
+.user-profile-header {
+  padding: 10px;
+  max-width: 40rem;
+}
+
+.profile-pic {
+  max-height: 10rem;
+  border: 8px solid #F1BE87;
+  border-radius: 50%;
 }
