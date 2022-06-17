@@ -5,7 +5,8 @@ router.get("/", (req, res) => {
     res.send("probably don't need this route")
 })
 // create post
-router.get("/create", (req, res) => {
+//! i think needs to be router.post
+router.post("/create", (req, res) => {
     res.send("you'll create post here")
   })
 

@@ -11,7 +11,8 @@ const UsersController = require("./controllers/UsersController");
 
 // express init
 const app = express();
-//
+
+// for dist/root file
 const path = require("path");
 
 // envs
@@ -30,6 +31,7 @@ mongoose.connection.once("open", () => {
 
 // middleware
 app.use(express.json());
+// dist init
 app.use(express.static("./frontend/dist"));
 app.use("/api/posts", PostsController);
 app.use("/api/reviews", ReviewsController);
@@ -45,7 +47,7 @@ app.get("/api/home", (req, res) => {
   res.send("random posts will be here")
 })
 
-//
+// for dist root/file
 app.get("/*", (req, res) => {
   res.sendFile(path.join(__dirname, "./frontend/dist/index.html"));
 });
