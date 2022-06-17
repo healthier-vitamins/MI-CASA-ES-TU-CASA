@@ -1,12 +1,13 @@
 const express = require("express");
 const router = express.Router();
+const Users = require("../models/Users");
 
 router.get("/", (req, res) => {
     res.send("probably don't need this route")
 })
 
 // signup
-router.post("/singup", (req, res) => {
+router.post("/signup", (req, res) => {
     res.send("you'll signuphere")
   })
 
