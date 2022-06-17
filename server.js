@@ -2,10 +2,17 @@
 const express = require("express");
 
 // mongoose init
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
+
+// controllers
+const PostsController = require("./controllers/PostsController");
+const ReviewsController = require("./controllers/ReviewsController");
+const UsersController = require("./controllers/UsersController");
 
 // express init
 const app = express();
+//
+const path = require("path");
 
 // envs
 const PORT = process.env.PORT ?? 3000
@@ -23,11 +30,25 @@ mongoose.connection.once("open", () => {
 
 // middleware
 app.use(express.json());
+app.use(express.static("./frontend/dist"));
+app.use("/api/posts", PostsController);
+app.use("/api/reviews", ReviewsController);
+app.use("/api/users", UsersController);
 
 // express init
 app.get("/api/", (req, res) => {
     res.send("welcome to the hoe in me");
 })
+
+// home 
+app.get("/api/home", (req, res) => {
+  res.send("random posts will be here")
+})
+
+//
+app.get("/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "./frontend/dist/index.html"));
+});
 
 // express init
 app.listen(PORT, () => {
