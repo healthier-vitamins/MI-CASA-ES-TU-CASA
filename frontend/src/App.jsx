@@ -1,11 +1,12 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import CreatePost from "./pages/CreatePost";
-import SignUp from "./pages/SignUp";
-import IndexHome from "./pages/IndexHome";
-import Layout from "./pages/Layout";
-import Profile from "./pages/Profile";
-import ShowPost from "./pages/ShowPost";
-import Login from "./pages/Login";
+import { BrowserRouter, Route, Routes } from "react-router-dom"
+import CreatePost from "./pages/CreatePost"
+import Credentials from "./pages/Credentials"
+import IndexHome from "./pages/IndexHome"
+import Layout from "./pages/Layout"
+import Profile from "./pages/Profile"
+import ShowPost from "./pages/ShowPost"
+import "./App.css"
+
 
 function App() {
   return (
