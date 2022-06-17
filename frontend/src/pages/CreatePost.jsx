@@ -6,6 +6,7 @@ function CreatePost() {
         <p>discription</p>
         <p>style</p>
         <p>cost</p>
+        <button> post your design! </button>
         </div>
     )
 }
