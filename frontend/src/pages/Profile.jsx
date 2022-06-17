@@ -11,6 +11,7 @@ function Profile() {
             </div>
         </div>
         <div className="user-posts-col-left">
+            <h4>Joe Mama's Posts</h4>
             <div className="post-card">
                 <p>img-here.png</p>
                 <p>title: i love my wife</p>
@@ -25,6 +26,7 @@ function Profile() {
             </div>
         </div>
         <div className="user-liked-posts-col-right">
+            <h4>Joe Mama's Likes</h4>
             <div className="post-card">
                 <p>img-here.png</p>
                 <p>title: i am hungry</p>
