@@ -37,6 +37,9 @@ a:hover {
 .user-profile-header {
   padding: 10px;
   max-width: 40rem;
+  display: grid;
+  grid-template-columns: 30% 70%;
+  grid-template-rows: 30% 70%;
 }
 
 .profile-pic {
