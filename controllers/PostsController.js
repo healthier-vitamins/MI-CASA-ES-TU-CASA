@@ -14,4 +14,14 @@ router.get("/:id", (req, res) => {
     res.send("post will be here")
   })
 
+// update
+router.put("/:id", (req, res) => {
+    res.send("update")
+  })
+
+//delete 
+router.delete("/:id", (req, res) => {
+    res.send("delete")
+  })
+
   module.exports = router;

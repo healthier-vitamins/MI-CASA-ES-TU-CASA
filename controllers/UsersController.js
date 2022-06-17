@@ -4,14 +4,20 @@ const router = express.Router();
 router.get("/", (req, res) => {
     res.send("probably don't need this route")
 })
-// create post
-router.get("/create", (req, res) => {
-    res.send("you'll create post here")
+
+// signup
+router.post("/singup", (req, res) => {
+    res.send("you'll signuphere")
   })
 
-//show post
-router.get("/:id", (req, res) => {
-    res.send("post will be here")
+// login
+router.post("/login", (req, res) => {
+    res.send("you'll log in here")
+  })
+
+//show user page
+router.get("/username", (req, res) => {
+    res.send("user page will be here")
   })
 
   module.exports = router;
