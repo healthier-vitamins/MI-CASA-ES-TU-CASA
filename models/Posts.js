@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
 
 const postSchema = mongoose.Schema({
-  style: String,
-  description: String,
-  img: [String], 
-  cost: Number,
+  img: [{type: String, required: true }],
+  description: {type: String, required: true },
+  style: {type: String, required: true },
+  cost: Number, 
   username: String,
   commentcount: Number,
   likecount: Number,
