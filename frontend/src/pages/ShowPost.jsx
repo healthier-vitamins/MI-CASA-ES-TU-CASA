@@ -1,13 +1,30 @@
 import "./showpost.css"
+import { useState } from "react"
+import ImageModal from "../components/showPost/ImageModal"
 
 function ShowPost() {
+    const [showModal, setShowModal] = useState(false)
+
+    const toggleModal = () => {
+        setShowModal(prev => !prev);
+        console.log("showModal", showModal)
+    }
+    
     return (
         <div className="post-container">
+            <div>
+                <ImageModal showModal={showModal} setShowModal={setShowModal} />
+            </div>
         <a href="/profile/:id">caitlikesdogs</a>'s post
         <div className="post-images">
-            <img src="https://i.imgur.com/woBZD95.jpeg" width={"280px"} alt="" />
-            <img src="https://i.imgur.com/woBZD95.jpeg" width={"280px"} alt="" />
-            <img src="https://i.imgur.com/woBZD95.jpeg" width={"280px"} alt="" />
+            <img src="https://i.imgur.com/woBZD95.jpeg" 
+            width={"280px"} 
+            alt="" 
+             onClick={toggleModal}
+            />
+            <img src="https://i.imgur.com/woBZD95.jpeg" width={"280px"} alt="" onClick={toggleModal} />
+            <img src="https://i.imgur.com/woBZD95.jpeg" width={"280px"} alt="" onClick={toggleModal} />
+            {/* <span class="close-button">close</span> */}
         </div>
         <div className="post-discription">
         <div className="disc-left">
@@ -49,3 +66,4 @@ function ShowPost() {
 }
 
 export default ShowPost;
+
