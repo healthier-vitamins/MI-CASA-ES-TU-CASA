@@ -29,21 +29,4 @@ a:hover {
   text-decoration: underline;
 }
 
-/* profile page css */
-.user-profile {
-  background-color: #F9F9F9;
-}
 
-.user-profile-header {
-  padding: 10px;
-  max-width: 40rem;
-  display: grid;
-  grid-template-columns: 30% 70%;
-  grid-template-rows: 30% 70%;
-}
-
-.profile-pic {
-  max-height: 10rem;
-  border: 8px solid #F1BE87;
-  border-radius: 50%;
-}
