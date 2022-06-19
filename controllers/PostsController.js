@@ -1,15 +1,22 @@
+const { application } = require("express");
 const express = require("express");
 const Posts = require("../models/Posts");
 const router = express.Router();
-// removed "import post from '../models/Posts'"
 
 router.get("/", (req, res) => {
   res.send("probably don't need this route");
 });
+
 // create post
-//! i think needs to be router.post
-router.post("/create", (req, res) => {
-  res.send("you'll create post here");
+
+//res.status(StatusCodes.CREATED).
+router.post("/create", async (req, res) => {
+  try {
+    const post = await Posts.create(req.body);
+    res.send(post);
+  } catch (error) {
+    res.send(error);
+  }
 });
 
 
@@ -28,7 +35,7 @@ router.delete("/:id", (req, res) => {
     //     await Posts.deleteMany({});
     //     const newPosts = await Posts.create([
       //       {
-        //         img: "00img link or import from image download.",
+        //         img: " .",
         //         description: "00description",
         //         style: "00scandinavian/modern/minimalist/industrial",
         //         cost: 000000,
