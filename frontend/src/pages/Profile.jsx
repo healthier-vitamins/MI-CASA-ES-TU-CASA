@@ -1,26 +1,27 @@
+import "./Profile.css"
 
 function Profile() {
     return (
         <div className="user-profile"> 
         <div className="user-profile-header">
             <img className="profile-pic" src="https://i.imgur.com/fSBfFDP.jpg"/>
-            <h2 className="username-h2">joe mama</h2>
+            <h2 className="profile-user">joe mama</h2>
             <div className="user-posts-likes">
-                <p>number of posts: 21</p>
-                <p>total likes: 220</p>
+                <p>Number of posts: 21</p>
+                <p>Total likes: 220</p>
             </div>
         </div>
         <div className="user-posts-col-left">
             <h4>Joe Mama's Posts</h4>
             <div className="post-card">
-                <p>img-here.png</p>
-                <p>title: i love my wife</p>
-                <p>short-description: this style is suitable for those who like chaos and disorder</p>
+                <img className="post-placeholder-img" src="https://i.imgur.com/TL68x25.jpg"/>
+                <p className="post-card-title">title: i love my wife</p>
+                <p>short-description: chaos and disorder</p>
                 <p>link here a href</p>
             </div>
             <div className="post-card">
-                <p>img-here.png</p>
-                <p>title: i eat children</p>
+                <img className="post-placeholder-img" src="https://i.imgur.com/TL68x25.jpg"/>
+                <p className="post-card-title">title: i eat children</p>
                 <p>short-description: yum yum</p>
                 <p>link here a href</p>
             </div>
@@ -28,14 +29,14 @@ function Profile() {
         <div className="user-liked-posts-col-right">
             <h4>Joe Mama's Likes</h4>
             <div className="post-card">
-                <p>img-here.png</p>
-                <p>title: i am hungry</p>
+                <img className="post-placeholder-img" src="https://i.imgur.com/TL68x25.jpg"/>
+                <p className="post-card-title">title: i am hungry</p>
                 <p>short-description: starving no yums</p>
                 <p>link here a href</p>
             </div>
             <div className="post-card">
-                <p>img-here.png</p>
-                <p>title: kimye house</p>
+                <img className="post-placeholder-img" src="https://i.imgur.com/TL68x25.jpg"/>
+                <p className="post-card-title">title: kimye house</p>
                 <p>short-description: before the divorce</p>
                 <p>link here a href</p>
             </div>
