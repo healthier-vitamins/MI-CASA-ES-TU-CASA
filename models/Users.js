@@ -7,7 +7,7 @@ const userSchema = Schema({
   firstName: { type: String, required: true },
   lastName:{ type: String, required: true },
   email: { type: String, required: true },
-  interior_designer: { type: String },
+  company_name: { type: String },
   profileImg: String,
   socialLink: String,
   postCount: [{ type: Schema.Types.ObjectId, ref: "Posts" }], 
