@@ -1,7 +1,7 @@
 import Card from 'react-bootstrap/Card';
 
 function PostCard({ post }) {
-  console.log(post);
+  // console.log(post);
   return (
 
     <div>

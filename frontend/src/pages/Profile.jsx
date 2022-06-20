@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import "./Profile.css"
 
 function Profile() {
+//    const [userId, setUserId] = useState({});
     const { id } = useParams();
     const [ userProfile, setUserProfile ] = useState({});
 
