@@ -4,6 +4,12 @@
     line-height: 1.75;
     font-size: 1.25em;
 }
+.titlebar { 
+    display: table; 
+    width: 100%; 
+    background-color:#649DA6; 
+}
+
 .title { 
     display: table-cell; 
     text-align: left; 

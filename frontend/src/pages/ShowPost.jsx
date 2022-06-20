@@ -66,9 +66,9 @@ function ShowPost() {
         <div className="disc-right">
           <p>
             {" "}
-            discription discription discription discription discription
-            discription discription discription discription discription
-            discription{" "}
+            description description description description description
+            description description description description description
+            description{" "}
           </p>
         </div>
       </div>
