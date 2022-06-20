@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAtom } from "jotai";
 import { userAtom } from "../App.jsx";
 
@@ -6,6 +6,7 @@ import "./Login.css";
 
 function Login() {
   const [user, setUser] = useAtom(userAtom);
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -22,11 +23,14 @@ function Login() {
       body: JSON.stringify(loginInfo),
     })
     .then((response) => response.json())
-    .then((data) => {
-      console.log(data.data)
-     
-    })
+    .then((data) => {setUser(data)
+      console.log(data)
+      });
   };
+
+  if (user.status === "success") {
+    navigate('/')
+  }
     
   return (
     <div className="login-page">
