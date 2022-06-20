@@ -3,23 +3,25 @@ import { useEffect, useState } from "react";
 import "./Profile.css"
 
 function Profile() {
-    const [userProfile, setUserProfile] = useState({});
     const { id } = useParams();
+    const [ userProfile, setUserProfile ] = useState({});
 
     useEffect(() => {
-        fetch(`api/users/username/${id}`)
+        fetch(`/api/users/username/${id}`)
         .then((response) => response.json())
-        .then((data) => setUserProfile(data))
+        .then((data) => {setUserProfile(data)
+            console.log(data)
+        });
     }, []);
 
     return (
         <div className="user-profile"> 
         <div className="user-profile-header">
-            <img className="profile-pic" src="https://i.imgur.com/fSBfFDP.jpg"/>
-            <h2 className="profile-user">{userProfile.firstName}</h2>
+            <img className="profile-pic" src={userProfile.profileImg}/>
+            <h2 className="profile-user">{userProfile.firstName} {userProfile.lastName}</h2>
             <div className="user-posts-likes">
-                <p>Number of posts: 21</p>
-                <p>Total likes: 220</p>
+                <p>Number of posts: {userProfile.postCount}</p>
+                <p>Total likes: {userProfile.likeCount}</p>
             </div>
         </div>
         <div className="user-posts-col-left">
