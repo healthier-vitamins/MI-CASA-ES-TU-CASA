@@ -4,11 +4,22 @@
     text-align: left;
     display: flex;  
 }  
+
 .index-login {
-    max-width: 200px;
     float: right;
-    margin-right: 3rem;
+    display: flex;
+    margin-left:auto;
+    max-width: 250px;
+    margin-right: 1rem;
 }
+
+.index-container {
+  justify-content: center;
+  margin-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+}
+
 *,
   :before,
   :after {
@@ -103,13 +114,6 @@
     margin-top: 6rem;
     margin-bottom: 3rem;
     }
-
-.index-container {
-    justify-content: center;
-    margin-top: 2rem;
-    display: flex;
-    flex-wrap: wrap;
-}
 
 .post-card {
     margin: 1rem;

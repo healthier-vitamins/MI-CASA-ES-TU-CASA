@@ -3,19 +3,18 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import FilterSearch from "../components/Index/FilterSearch";
 import PostCard from "../components/Index/PostCard";
+import { useAtom } from "jotai";
+import { userAtom } from "../App.jsx";
 import "./IndexHome.css";
 
 function IndexHome() {
   const [allPosts, setAllPosts] = useState({});
+  const [user, setUser] = useAtom(userAtom);
   const [filterBy, setFilterBy] = useState({
     categories: "minimalist",
     username: "",
     price: "",
   });
-
-    // if (user.status === "success") {
-  //   return "No Holiday here"
-  // }
 
   useEffect(() => {
     fetch("/api/posts/")
@@ -31,12 +30,11 @@ function IndexHome() {
 
     return (
       <>
+          <div className="index-container">
         <div className="index-login">
-        {/* if logged in show user name and link to user page */}
-        {/* {user.status === "success" ? "username" : } */}
-        <Link to="/sign-up">Sign Up</Link>/<Link to="/login">Login</Link>
+        {user.status === "success" ? "username" : 
+        <><Link to="/sign-up">Sign Up</Link><p>/</p><Link to="/login">Login</Link></> }
         </div>
-      <div className="index-container">
         <div className="index-title">
           {/* clip-text--no-textzone をクラスに追加すると黒なしになる*/}
         <div className="clip-text">

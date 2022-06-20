@@ -1,6 +1,7 @@
 import "./ShowPost.css"
 import { useState } from "react"
 import ImageModal from "../components/showPost/ImageModal"
+import { Splide, SplideSlide } from '@splidejs/react-splide';
 
 
 function ShowPost() {
@@ -35,12 +36,12 @@ function ShowPost() {
       </div>
       <div className="post-images-wrapper"> 
       {/* <Splide 
-          options={{
-            perPage: 4,
-            arrows: false,
-            rewind : true,
+          options={{  
+            perPage: 5,
+            arrows: true,
+            rewind : false,
             drag: "free",
-            gap: "1rem",
+            gap: "10rem",
         }}
       > */}
             <div className="post-images">
@@ -53,8 +54,8 @@ function ShowPost() {
                 onClick={handleclick => {setImgId(i)
                   toggleModal()}}
             />
-          // </SplideSlide>
-                ))}
+            ))}
+          {/* </SplideSlide> */}
                 </div>
          {/* </Splide> */}
          </div>
