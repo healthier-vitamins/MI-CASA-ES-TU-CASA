@@ -1,16 +1,27 @@
 import { Link } from "react-router-dom";
+import { userAtom } from "../App.jsx";
+import { useAtom } from "jotai";
 
-function NavBar () {
-    return (
-        <div className="navbar">
-        <Link to="/" >Home Page</Link>
-        <Link to="/sign-up/">Sign Up/Login</Link>
-        <Link to="/profile/:id">Profile</Link>
-        <Link to="/show-post/:id">onClick event (ShowPost)</Link>
-        {/* if logged in */}
-        <Link to="/create-post">Create Post</Link>
-        </div>
-    )
+function NavBar() {
+  const [user, setUser] = useAtom(userAtom);
+
+  const ShowCreatePost = () => {
+    if (Object.keys(user).length > 0) {
+      return <Link to="/create-post">Create Post</Link>;
+    } else {
+      return null;
+    }
+  };
+
+  return (
+    <div className="navbar">
+      <Link to="/">Home Page</Link>
+      <Link to="/sign-up/">Sign Up/Login</Link>
+      <Link to="/profile/:id">Profile</Link>
+      <Link to="/show-post/:id">onClick event (ShowPost)</Link>
+      <ShowCreatePost />
+    </div>
+  );
 }
 
 export default NavBar;

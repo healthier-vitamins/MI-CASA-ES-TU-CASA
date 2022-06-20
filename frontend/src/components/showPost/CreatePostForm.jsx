@@ -1,10 +1,16 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import {useState} from "react"
+import { useState, useRef } from "react";
+import { userAtom } from "../../App.jsx";
+import { useAtom } from "jotai";
 
 function CreatePostForm({ entry, setEntry }) {
-  const [data, setData] = useState({})
+  const imgRef = useRef(null);
+
+  // const [imgs, setImgs] = useState([])
+  const [data, setData] = useState({});
   const navigate = useNavigate();
+  const [user, setUser] = useAtom(userAtom);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -14,12 +20,28 @@ function CreatePostForm({ entry, setEntry }) {
     });
   };
 
-  // const handleChangeName = (e) => {
-  //   setLastImg(e.target.value);
-  // };
+  // const newArr = [];
+  const handleImgClick = () => {
+    const newArr = entry.img;
+    newArr.push(imgRef.current.value);
+    setEntry({
+      ...entry,
+      img: newArr,
+    });
+    console.log(entry);
+  };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleSubmit = () => {
+    // console.log(entry);
+    // console.log(user);
+
+    // if (entry.username.length < 1 || entry.company_name.length < 1) {
+    setEntry({
+      ...entry,
+      ["company_name"]: user?.data.company_name,
+      ["username"]: user?.data._id,
+    });
+
     fetch("/api/posts/create", {
       method: "POST",
       headers: {
@@ -28,47 +50,27 @@ function CreatePostForm({ entry, setEntry }) {
       body: JSON.stringify(entry),
     })
       .then((response) => response.json())
-      .then((data) => setData(data));
-      const id = data.data._id;
-    console.log("post submitted!", entry);
-    // if ({status: "success"}) {
-      navigate(`/show-post/${id}`)
-    // } else {
-    //   return null;
-    // } 
+      .then((data) => console.log(data.data));
+    // const id = data.data._id;
+    // console.log("post submitted!", entry);
+    //! if ({status: "success"}) {
+    // navigate(`/show-post/${id}`);
+    //! } else {
+    //!   return null;
+    //! }
   };
 
   return (
     <div>
-      <form>
-        <label htmlFor="img">Upload image</label>
+      <form onSubmit={(e) => e.preventDefault()}>
+        <label htmlFor="title">Title</label>
         <input
           onChange={handleChange}
-          value={entry.img}
+          value={entry.title}
+          name="title"
           type="text"
-          name="img"
-          id="img"
-          placeholder="upload image"
-        ></input>
-        <p> add </p>
-        <label htmlFor="short_description">Short Description</label>
-        <input
-          onChange={handleChange}
-          value={entry.short_description}
-          type="short_description"
-          name="short_description"
-          id="short_description"
-          placeholder="short_description"
-        ></input>
-        <br />
-        <label htmlFor="img">Upload image</label>
-        <input
-          onChange={handleChange}
-          value={entry.img}
-          type="text"
-          name="img"
-          id="img"
-          placeholder="upload image"
+          id="title"
+          placeholder="Title"
         ></input>
         <br />
         <label htmlFor="description">Description</label>
@@ -80,7 +82,7 @@ function CreatePostForm({ entry, setEntry }) {
           placeholder="description; 500 characters"
         ></textarea>
         <br />
-        <label htmlFor="short-description">Description</label>
+        <label htmlFor="short-description">Short Description</label>
         <textarea
           onChange={handleChange}
           value={entry.short_description}
@@ -102,10 +104,21 @@ function CreatePostForm({ entry, setEntry }) {
         <input
           onChange={handleChange}
           value={entry.cost}
+          type="number"
           name="cost"
           id="cost"
           placeholder="Cost"
         ></input>
+        <br />
+        <label htmlFor="img">Upload image</label>
+        <input
+          ref={imgRef}
+          type="text"
+          name="img"
+          id="img"
+          placeholder="Upload image"
+        ></input>
+        <button onClick={handleImgClick}>Submit images</button>
         <br />
         <button type="submit" onClick={handleSubmit}>
           post your design!
