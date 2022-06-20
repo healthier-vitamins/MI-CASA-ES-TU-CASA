@@ -72,10 +72,35 @@ router.get("/seed", async (req, res) => {
   }
 });
 
-// signup
-router.post("/signup", (req, res) => {
-  res.send("you'll signuphere");
-});
+// signup route
+router.post("/signup", async (req, res) => {
+  const { 
+    username, 
+    password, 
+    firstName, 
+    lastName, 
+    email, 
+    company_name, 
+    profileImg, 
+    socialLink
+  } = req.body;
+  console.log(req.body)
+  const newUser = await Users.findOne({ username })
+  if (newUser === null) {
+     bcrypt.hash(password, saltRounds, function(err ,hash) {
+        let hashedPassword = hash
+        console.log(hashedPassword)
+    })
+  } else {
+    console.log(error)
+  }
+  try {
+    const createUser = await Users.create(req.body);
+  } catch (error) {
+    console.log(error)
+  };
+  res.send(req.body)
+})
 
 // login
 router.post("/login", async (req, res) => {
