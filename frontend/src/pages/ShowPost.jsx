@@ -1,7 +1,8 @@
-import "./showpost.css";
-import { useState } from "react";
-import ImageModal from "../components/showPost/ImageModal";
-import { Splide, SplideSlide } from "@splidejs/react-splide";
+
+import "./ShowPost.css"
+import { useState } from "react"
+import ImageModal from "../components/showPost/ImageModal"
+
 
 function ShowPost() {
   const [showModal, setShowModal] = useState(false);

@@ -30,7 +30,7 @@ router.post("/:id", (req, res) => {
 //         comment: "FINE LA HORR",
 //         username: "33userId.username",
 //         postId: "33postId._id-helps to link to post",
-// //       },
+//       },
 //     ]);
 //     res.send(newReviews);
 //   } catch (error) {

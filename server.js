@@ -31,6 +31,7 @@ mongoose.connection.once("open", () => {
 
 // middleware
 app.use(express.json());
+
 // dist init
 app.use(express.static("./frontend/dist"));
 app.use("/api/posts", PostsController);
@@ -42,10 +43,11 @@ app.get("/api/", (req, res) => {
     res.send("welcome to the hoe in me");
 })
 
+//! might not be needed
 // home 
-app.get("/api/home", (req, res) => {
-  res.send("random posts will be here")
-})
+// app.get("/api/home", (req, res) => {
+//   res.send("random posts will be here")
+// })
 
 // for dist root/file
 app.get("/*", (req, res) => {
