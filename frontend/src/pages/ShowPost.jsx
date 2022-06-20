@@ -1,4 +1,3 @@
-
 import "./ShowPost.css"
 import { useState } from "react"
 import ImageModal from "../components/showPost/ImageModal"
