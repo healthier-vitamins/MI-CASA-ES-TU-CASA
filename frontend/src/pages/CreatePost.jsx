@@ -1,4 +1,7 @@
 function CreatePost() {
+
+    
+
     return (
         <div className="createpost-container">
         <h2>Add your design</h2>
