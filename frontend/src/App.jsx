@@ -6,7 +6,11 @@ import Profile from "./pages/Profile"
 import ShowPost from "./pages/ShowPost"
 import SignUp from "./pages/SignUp"
 import Login from "./pages/Login"
+import { atom } from "jotai";
 import "./App.css"
+
+// jotai userAtom
+export const userAtom = atom({});
 
 function App() {
   return (

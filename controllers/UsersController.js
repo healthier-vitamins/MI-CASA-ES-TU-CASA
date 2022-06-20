@@ -1,11 +1,118 @@
 const express = require("express");
-const router = express.Router();
+const session = require("express-session");
+const bcrypt = require("bcrypt");
 const Users = require("../models/Users");
+const { StatusCodes } = require("http-status-codes");
 
+const router = express.Router();
+
+// middleware
+router.use(
+  session({
+    secret: "keyboard cat",
+    resave: false,
+    saveUninitialized: true,
+    // cookie: { secure: true }
+  })
+);
+
+// test route
 router.get("/", (req, res) => {
-    res.send("probably don't need this route")
-})
+  res.send("probably don't need this route");
+});
 
+// seed route
+router.get("/seed", async (req, res) => {
+  try {
+    await Users.deleteMany({});
+    const fixedUsers = await Users.create([
+      {
+        username: "joemama",
+        password: bcrypt.hashSync("12345678", saltRounds),
+        firstName: "Joe",
+        lastName: "Mama",
+        email: "joemama@email.com",
+        profileImg: "https://i.imgur.com/fSBfFDP.jpg",
+        socialLink: "https://www.instagram.com/richkids_english_police/?hl=en",
+        postCount: 2,
+        likeCount: 0,
+      },
+      {
+        username: "whatsupdog",
+        password: bcrypt.hashSync("12345678", saltRounds),
+        firstName: "Up",
+        lastName: "Dog",
+        email: "whatsupdog@email.com",
+        profileImg: "https://i.imgur.com/9S7TWYn.jpg",
+        socialLink: "https://www.instagram.com/world_record_egg/",
+        postCount: 6,
+        likeCount: 666,
+      },
+      {
+        username: "whatsamatterbaby",
+        password: bcrypt.hashSync("12345678", saltRounds),
+        firstName: "Matter",
+        lastName: "Baby",
+        email: "matterbaby@email.com",
+        profileImg: "https://i.imgur.com/2jdd9fW.jpg",
+        socialLink: "https://www.instagram.com/nocturnaltrashposts/?hl=en",
+        postCount: 21,
+        likeCount: 420,
+      },
+    ]);
+    res.send(fixedUsers);
+  } catch (error) {
+    res.send(error);
+  }
+});
+
+// signup
+router.post("/signup", (req, res) => {
+  res.send("you'll signuphere");
+});
+
+// login
+router.post("/login", async (req, res) => {
+  const { username, password } = req.body;
+  console.log(req.body)
+  const userLogin = await Users.findOne({ username });
+    if (userLogin === null) {
+      res 
+        .status(StatusCodes.NOT_FOUND)
+        .send({ status: "fail", data: "Username not found :(" });
+    } else {
+      if 
+        (bcrypt.compareSync(password, userLogin.password)) {
+        req.session.user = userLogin
+        // console.log("login session", req.session.user)
+        // res.status(StatusCodes.OK).send(user);
+        res.send(userLogin);
+      } else {
+        res.send("password fail")
+      }
+    }
+});
+
+// const isLoggedIn = (req, res, next) => {
+//   if (req.session.user) {
+//     return next();
+//   } else {
+//     res.send("login fail");
+//   }
+// }
+
+//show user page
+router.get("/username/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const userId = await Users.findById(id);
+    res.send(userId);
+  } catch (error) {
+    res.send(error);
+  }
+});
+
+module.exports = router;
 
 // router.get("/seed", async (req, res) => {
 //   try {
@@ -37,20 +144,3 @@ router.get("/", (req, res) => {
 //     res.send(error);
 //   }
 // });
-
-// signup
-router.post("/signup", (req, res) => {
-    res.send("you'll signuphere")
-  })
-
-// login
-router.post("/login", (req, res) => {
-    res.send("you'll log in here")
-  })
-
-//show user page
-router.get("/username", (req, res) => {
-    res.send("user page will be here")
-  })
-
-  module.exports = router;
