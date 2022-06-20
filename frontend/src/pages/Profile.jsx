@@ -1,11 +1,22 @@
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 import "./Profile.css"
 
 function Profile() {
+    const [userProfile, setUserProfile] = useState({});
+    const { id } = useParams();
+
+    useEffect(() => {
+        fetch(`api/users/username/${id}`)
+        .then((response) => response.json())
+        .then((data) => setUserProfile(data))
+    }, []);
+
     return (
         <div className="user-profile"> 
         <div className="user-profile-header">
             <img className="profile-pic" src="https://i.imgur.com/fSBfFDP.jpg"/>
-            <h2 className="profile-user">joe mama</h2>
+            <h2 className="profile-user">{userProfile.firstName}</h2>
             <div className="user-posts-likes">
                 <p>Number of posts: 21</p>
                 <p>Total likes: 220</p>
