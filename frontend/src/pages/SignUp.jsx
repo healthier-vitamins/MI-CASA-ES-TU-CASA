@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 
 function SignUp() {
-  const handleClick = () => {
+  
+  const handleClick = (event) => {
+    event.preventDefault();
     console.log("click!");
   };
   return (
