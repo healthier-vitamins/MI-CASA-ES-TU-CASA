@@ -93,6 +93,14 @@ router.post("/login", async (req, res) => {
     }
 });
 
+// const isLoggedIn = (req, res, next) => {
+//   if (req.session.user) {
+//     return next();
+//   } else {
+//     res.send("login fail");
+//   }
+// }
+
 //show user page
 router.get("/username/:id", async (req, res) => {
   const { id } = req.params;
