@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const Reviews = require("../models/Reviews");
+const Comments = require("../models/Comments");
 
 //create review
 router.post("/:id", (req, res) => {

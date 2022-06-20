@@ -1,14 +1,17 @@
 const mongoose = require("mongoose");
+const {Schema} = mongoose;
 
-const postSchema = mongoose.Schema({
-  title: {type: String, required: true, default:"no title" },
+const postSchema = Schema({
   img: [{type: String, required: true }],
-  description: {type: String, required: true },
+  short_description: {type: String, required: true, maxLength: 120},
+  description: {type: String, required: true, maxLength: 250 },
   style: {type: String, required: true },
   cost: {type: Number}, 
-  username: {type: String},
-  commentCount: [{type: String}],
-  likeCount: [{type: String}],
+  company_name: {type: Schema.Types.ObjectId, ref: "Users"},
+  username: {type: Schema.Types.ObjectId, ref: "Users"},
+  comment_count: [{type: Schema.Types.ObjectId, ref: "Reviews"}],
+  like_count: [{type: Schema.Types.ObjectId, ref: "Users"}],
 });
 
-module.exports = mongoose.model("Post", postSchema);
+const Posts = mongoose.model("Posts", postSchema)
+module.exports = Posts
