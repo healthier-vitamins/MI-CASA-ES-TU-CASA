@@ -6,6 +6,10 @@ const { StatusCodes } = require("http-status-codes");
 
 const router = express.Router();
 
+
+// saltRounds for bcrypt!!!
+const saltRounds = bcrypt.genSaltSync(10);
+
 // middleware
 router.use(
   session({
@@ -32,10 +36,11 @@ router.get("/seed", async (req, res) => {
         firstName: "Joe",
         lastName: "Mama",
         email: "joemama@email.com",
+        company_name: "Who's Joe",
         profileImg: "https://i.imgur.com/fSBfFDP.jpg",
         socialLink: "https://www.instagram.com/richkids_english_police/?hl=en",
-        postCount: 2,
-        likeCount: 0,
+        // postCount: "",
+        // likeCount: "",
       },
       {
         username: "whatsupdog",
@@ -43,10 +48,11 @@ router.get("/seed", async (req, res) => {
         firstName: "Up",
         lastName: "Dog",
         email: "whatsupdog@email.com",
+        company_name: "Snoop Dogg",
         profileImg: "https://i.imgur.com/9S7TWYn.jpg",
         socialLink: "https://www.instagram.com/world_record_egg/",
-        postCount: 6,
-        likeCount: 666,
+        // postCount: [6],
+        // likeCount: [666],
       },
       {
         username: "whatsamatterbaby",
@@ -54,10 +60,11 @@ router.get("/seed", async (req, res) => {
         firstName: "Matter",
         lastName: "Baby",
         email: "matterbaby@email.com",
+        company_name: "Aaaa",
         profileImg: "https://i.imgur.com/2jdd9fW.jpg",
         socialLink: "https://www.instagram.com/nocturnaltrashposts/?hl=en",
-        postCount: 21,
-        likeCount: 420,
+        // postCount: [21],
+        // likeCount: [37],
       },
     ]);
     res.send(fixedUsers);
