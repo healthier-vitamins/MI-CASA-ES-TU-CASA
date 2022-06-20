@@ -1,8 +1,8 @@
+const { application } = require("express");
 const express = require("express");
 const { StatusCodes } = require("http-status-codes");
 const Posts = require("../models/Posts");
 const router = express.Router();
-// removed "import post from '../models/Posts'"
 
 // index home page show posts
 router.get("/", async (req, res) => {
@@ -41,6 +41,7 @@ router.delete("/:id", (req, res) => {
 });
 
 // router.get("/seed", async (req, res) => {
+
 //   try {
 //     await Posts.deleteMany({});
 //     const newPosts = await Posts.create([
