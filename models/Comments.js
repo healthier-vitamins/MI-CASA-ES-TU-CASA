@@ -1,11 +1,11 @@
 const mongoose = require("mongoose");
 const {Schema} = mongoose;
 
-const reviewSchema = Schema({
+const commentSchema = Schema({
     comment: {type: String, required: true},
     author: {type: Schema.Types.ObjectId, ref: "Users"},
     postId: {type: Schema.Types.ObjectId, ref: "Posts"},
 });
 
-const Reviews = mongoose.model("Reviews", reviewSchema)
-module.exports = Reviews
+const Comments = mongoose.model("Comments", commentSchema)
+module.exports = Comments
