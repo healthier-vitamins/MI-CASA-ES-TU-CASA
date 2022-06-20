@@ -21,17 +21,14 @@ router.get("/", async (req, res) => {
 });
 
 // create post
-
-
-//res.status(StatusCodes.CREATED).
 router.post("/create", async (req, res) => {
   try {
-    const post = await Posts.create(req.body);
-    res.send(post);
+    const createPost = await Posts.create(req.body);
+    res.status(StatusCodes.CREATED).send({status: "success", data: createPost})
   } catch (error) {
-    res.send(error);
+    res.status(StatusCodes.NOT_FOUND).send({status: "fail", data: "Failed to create"})
   }
-});
+ });
 
 // update
 router.put("/:id", (req, res) => {
