@@ -1,8 +1,8 @@
+const { application } = require("express");
 const express = require("express");
 const { StatusCodes } = require("http-status-codes");
 const Posts = require("../models/Posts");
 const router = express.Router();
-// removed "import post from '../models/Posts'"
 
 // index home page show posts
 router.get("/", async (req, res) => {
@@ -21,8 +21,16 @@ router.get("/", async (req, res) => {
 });
 
 // create post
-router.post("/create", (req, res) => {
-  res.send("you'll create post here");
+
+
+//res.status(StatusCodes.CREATED).
+router.post("/create", async (req, res) => {
+  try {
+    const post = await Posts.create(req.body);
+    res.send(post);
+  } catch (error) {
+    res.send(error);
+  }
 });
 
 // update
@@ -36,6 +44,7 @@ router.delete("/:id", (req, res) => {
 });
 
 // router.get("/seed", async (req, res) => {
+
 //   try {
 //     await Posts.deleteMany({});
 //     const newPosts = await Posts.create([
