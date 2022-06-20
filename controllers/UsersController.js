@@ -6,7 +6,6 @@ const { StatusCodes } = require("http-status-codes");
 
 const router = express.Router();
 
-
 // saltRounds for bcrypt!!!
 const saltRounds = bcrypt.genSaltSync(10);
 

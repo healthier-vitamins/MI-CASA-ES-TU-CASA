@@ -3,11 +3,13 @@ import CreatePostForm from "../components/showPost/CreatePostForm";
 
 function CreatePost() {
   const [entry, setEntry] = useState({
-    img: [""],
     title: "",
+    img: [""],
+    short_description: "",
     description: "",
     style: "",
     cost: "",
+    company_name: "",
     username: "",
   });
 

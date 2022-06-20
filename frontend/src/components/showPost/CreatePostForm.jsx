@@ -1,5 +1,4 @@
 import React from "react";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function CreatePostForm({ entry, setEntry }) {
@@ -7,11 +6,9 @@ function CreatePostForm({ entry, setEntry }) {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setEntry((prevEntry) => {
-          return {
-        ...prevEntry,
-        [name]: value 
-      };
+    setEntry({
+      ...entry,
+      [name]: value,
     });
   };
 
@@ -31,26 +28,16 @@ function CreatePostForm({ entry, setEntry }) {
       .then((response) => response.json())
       .then((data) => console.log(data));
     console.log("post submitted!", entry);
-    if ({status: "success"}) {
-     navigate("/show-post/:id")
+    if ({ status: "success" }) {
+      navigate("/show-post/:id");
     } else {
       return null;
-    } 
+    }
   };
 
   return (
     <div>
       <form>
-        <label htmlFor="img">Upload image</label>
-        <input
-          onChange={handleChange}
-          value={entry.img}
-          type="text"
-          name="img"
-          id="img"
-          placeholder="upload image"
-        ></input>
-        <p> add </p>
         <label htmlFor="title">Title</label>
         <input
           onChange={handleChange}
@@ -60,13 +47,33 @@ function CreatePostForm({ entry, setEntry }) {
           id="title"
           placeholder="title"
         ></input>
+        <br />
+        <label htmlFor="img">Upload image</label>
+        <input
+          onChange={handleChange}
+          value={entry.img}
+          type="text"
+          name="img"
+          id="img"
+          placeholder="upload image"
+        ></input>
+        <br />
         <label htmlFor="description">Description</label>
         <textarea
           onChange={handleChange}
           value={entry.description}
           name="description"
           id="description"
-          placeholder="description"
+          placeholder="description; 500 characters"
+        ></textarea>
+        <br />
+        <label htmlFor="short-description">Description</label>
+        <textarea
+          onChange={handleChange}
+          value={entry.short_description}
+          name="short_description"
+          id="short_description"
+          placeholder="Short description; 120 characters"
         ></textarea>
         <br />
         <label htmlFor="style">Style</label>
@@ -78,18 +85,17 @@ function CreatePostForm({ entry, setEntry }) {
           placeholder="style"
         ></input>
         <br />
-        <label htmlFor="total-cost">Total Cost</label>
+        <label htmlFor="cost">Total Cost</label>
         <input
           onChange={handleChange}
           value={entry.cost}
           name="cost"
           id="cost"
-          placeholder="total-cost"
+          placeholder="Cost"
         ></input>
         <br />
         <button type="submit" onClick={handleSubmit}>
-          {" "}
-          post your design!{" "}
+          post your design!
         </button>
       </form>
     </div>

@@ -6,7 +6,7 @@ const mongoose = require("mongoose");
 
 // controllers
 const PostsController = require("./controllers/PostsController");
-const ReviewsController = require("./controllers/ReviewsController");
+const CommentsController = require("./controllers/CommentsController");
 const UsersController = require("./controllers/UsersController");
 
 // express init
@@ -35,7 +35,7 @@ app.use(express.json());
 // dist init
 app.use(express.static("./frontend/dist"));
 app.use("/api/posts", PostsController);
-app.use("/api/reviews", ReviewsController);
+app.use("/api/reviews", CommentsController);
 app.use("/api/users", UsersController);
 
 // express init
