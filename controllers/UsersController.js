@@ -6,7 +6,6 @@ const { StatusCodes } = require("http-status-codes");
 
 const router = express.Router();
 
-
 // saltRounds for bcrypt!!!
 const saltRounds = bcrypt.genSaltSync(10);
 
@@ -93,7 +92,7 @@ router.post("/login", async (req, res) => {
         req.session.user = userLogin
         // console.log("login session", req.session.user)
         // res.status(StatusCodes.OK).send(user);
-        res.send({ status: "success", data: "welcome!!!!" });
+        res.send({ status: "success", data: userLogin });
       } else {
         res.send("password fail")
       }
