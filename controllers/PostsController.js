@@ -3,6 +3,13 @@ const { StatusCodes } = require("http-status-codes");
 const Posts = require("../models/Posts");
 const router = express.Router();
 
+
+// Posts.find()
+// .populate("company_name")
+//   .then(p => console.log(p))
+//   .catch(error => console.log(error))
+
+
 // index home page show posts
 router.get("/", async (req, res) => {
   try {
@@ -12,7 +19,7 @@ router.get("/", async (req, res) => {
         .status(StatusCodes.NOT_FOUND)
         .send({ status: "fail", data: "Posts not found" });
     } else {
-      res.status(StatusCodes.OK).send({ status: "ok", data: getAllPosts});
+      res.status(StatusCodes.OK).send({ status: "ok", data: getAllPosts });
     }
   } catch (error) {
     res.send(error);
@@ -24,11 +31,15 @@ router.get("/", async (req, res) => {
 router.post("/create", async (req, res) => {
   try {
     const createPost = await Posts.create(req.body);
-    res.status(StatusCodes.CREATED).send({status: "success", data: createPost})
+    res
+      .status(StatusCodes.CREATED)
+      .send({ status: "success", data: createPost });
   } catch (error) {
-    res.status(StatusCodes.NOT_FOUND).send({status: "fail", data: "Failed to create"})
+    res
+      .status(StatusCodes.NOT_FOUND)
+      .send({ status: "fail", data: "Failed to create" });
   }
- });
+});
 
 // update
 router.put("/:id", (req, res) => {

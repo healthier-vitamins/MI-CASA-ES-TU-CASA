@@ -27,31 +27,36 @@ function IndexHome() {
   if (Object.keys(allPosts).length < 1) {
     return "loading";
   } else {
-
     return (
       <>
-          <div className="index-container">
-        <div className="index-login">
-        {user.status === "success" ? <>username</> : 
-        <><Link to="/sign-up">Sign Up</Link><p>/</p><Link to="/login">Login</Link></> }
-        </div>
-        <div className="index-title">
-          {/* clip-text--no-textzone をクラスに追加すると黒なしになる*/}
-        <div className="clip-text">
-          HO & ME</div>
-          <p>Where the Ho & Me live together</p>
-        </div>
-        <div className="filtersearch">  
-          <FilterSearch filterBy={filterBy} setFilterBy={setFilterBy} />
-        </div>
+        <div className="index-container">
+          <div className="index-login">
+            {user.status === "success" ? (
+              <>username</>
+            ) : (
+              <>
+                <Link to="/sign-up">Sign Up</Link>
+                <p>/</p>
+                <Link to="/login">Login</Link>
+              </>
+            )}
+          </div>
+          <div className="index-title">
+            {/* clip-text--no-textzone をクラスに追加すると黒なしになる*/}
+            <div className="clip-text">HO & ME</div>
+            <p>Where the Ho & Me live together</p>
+          </div>
+          <div className="filtersearch">
+            <FilterSearch filterBy={filterBy} setFilterBy={setFilterBy} />
+          </div>
 
-        <div className="index-container"  >
-          {/* set up filter method to fetch remaining data regardless of search history. */}
-          {allPosts.map((ele, index) => {
-            return <PostCard post={ele} key={index} />
-          })}
+          <div className="index-container">
+            {/* set up filter method to fetch remaining data regardless of search history. */}
+            {allPosts.map((ele, index) => {
+              return <PostCard post={ele} key={index} />;
+            })}
+          </div>
         </div>
-      </div>
       </>
     );
   }
