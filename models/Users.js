@@ -8,8 +8,8 @@ const userSchema = mongoose.Schema({
   email: { type: String, required: true },
   profileImg: String,
   socialLink: String,
-  postCount: Number, //can remove if unnecessary
-  likeCount: Number, //can remove if unnecessary
+  postCount: [{ type: String }], 
+  likeCount: [{ type: String}],
 });
 
 module.exports = mongoose.model("User", userSchema);
