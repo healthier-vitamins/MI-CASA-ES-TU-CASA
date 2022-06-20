@@ -1,0 +1,130 @@
+.navbar {
+    margin-top: 1rem;
+    max-width: 800px;
+    text-align: left;
+    display: flex;  
+}  
+.index-login {
+    max-width: 200px;
+    float: right;
+    margin-right: 3rem;
+}
+*,
+  :before,
+  :after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+  
+  .index-title {
+    max-height: 300px;
+    text-align: center;
+    justify-content: center;
+    font-family: "Oswald", sans-serif;
+    /* background-color: rgb(17, 33, 54); */
+    color: #fff;
+
+  }
+  
+  /* Clip text element */
+  .clip-text {
+    font-size: 22vh;
+    font-weight: bold;
+    line-height: 0;
+    min-height: 280px;
+    min-width: 90vw;
+    position: relative;
+    display: inline-block;
+    line-height: 1;
+    /* margin:いる？ */
+    padding: 0.5em 0.75em;
+    text-align: center;
+    /* Color fallback */
+    color: #fff;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .clip-text:before,
+  .clip-text:after {
+    position: absolute;
+    content: "";
+  }
+  
+  /* Background */
+  .clip-text:before {
+    z-index: -2;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-image: inherit;
+  }
+  
+  /* Text Background (black zone) */
+  .clip-text:after {
+    position: absolute;
+    z-index: -1;
+    top: 0.125em;
+    right: 0.125em;
+    bottom: 0.125em;
+    left: 0.125em;
+    background-color: rgb(13, 23, 44);
+    opacity: 0.8;
+  }
+
+/* Change the background position to display letter when the black zone isn't here */
+ .clip-text--no-textzone:before {
+    background-position: -0.75em 0;
+      } 
+      
+ .clip-text--no-textzone:after {
+        content: none;
+      }
+      
+/* Use Background-size cover for photo background and no-repeat background */
+    .clip-text--cover,
+    .clip-text--cover:before {
+        background-repeat: no-repeat;
+        -webkit-background-size: cover;
+        background-size: cover;
+        background-position: 50% 50%;
+      }
+      
+    .clip-text {
+        background-image: url(https://i.imgur.com/woBZD95.jpeg);
+      }
+
+.index-filter {
+    text-align: center;
+    position: relative;
+    margin-top: 6rem;
+    margin-bottom: 3rem;
+    }
+
+.index-container {
+    justify-content: center;
+    margin-top: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.post-card {
+    margin: 1rem;
+    border-radius: 20px;
+    border: solid;
+    min-width: 25vw;
+    max-width: 25vw;
+    min-height: 30vw;
+    max-height: 30vw;
+    color:black
+}
+
+
+.index-card-img {
+    width: 200px;
+    height: 200px;
+}
+

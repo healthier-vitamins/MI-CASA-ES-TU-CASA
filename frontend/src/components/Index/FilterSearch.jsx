@@ -18,7 +18,6 @@ function FilterSearch({ filterBy, setFilterBy }) {
           e.preventDefault();
         }}
       >
-        <fieldset>
           <label htmlFor="select-categories">Categories: </label>
           <select
             name="categories"
@@ -50,7 +49,6 @@ function FilterSearch({ filterBy, setFilterBy }) {
             placeholder="Price"
             onChange={handleChange}
           ></input>
-        </fieldset>
       </form>
       <button onClick={handleSubmit}>Search</button>
     </div>
