@@ -1,11 +1,15 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useAtom } from "jotai";
 import { userAtom } from "../App.jsx";
+// import { useState } from "react";
 
 import "./Login.css";
+import { useState } from "react";
 
 function Login() {
+  // const [userID, setUserID] = useState({})
   const [user, setUser] = useAtom(userAtom);
+  const [data, setData] = useState({})
   const navigate = useNavigate();
 
   const handleSubmit = (event) => {
@@ -23,14 +27,18 @@ function Login() {
       body: JSON.stringify(loginInfo),
     })
     .then((response) => response.json())
-    .then((data) => {setUser(data)
-      console.log(data)
-      });
-  };
+    .then((data) => {setUser(data) 
+      setData(data.data)
+      // console.log(data.data)    
 
-  if (user.status === "success") {
-    navigate('/')
-  }
+    });
+};
+
+const id = data._id
+console.log("user", data._id)
+if (user.status === "success") {
+  navigate('/');
+}
     
   return (
     <div className="login-page">
