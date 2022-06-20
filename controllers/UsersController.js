@@ -74,54 +74,53 @@ router.get("/seed", async (req, res) => {
 
 // signup route
 router.post("/signup", async (req, res) => {
-  const { 
-    username, 
-    password, 
-    firstName, 
-    lastName, 
-    email, 
-    company_name, 
-    profileImg, 
-    socialLink
+  const {
+    username,
+    password,
+    firstName,
+    lastName,
+    email,
+    company_name,
+    profileImg,
+    socialLink,
   } = req.body;
-  console.log(req.body)
-  const newUser = await Users.findOne({ username })
+  console.log(req.body);
+  const newUser = await Users.findOne({ username });
   if (newUser === null) {
-     bcrypt.hash(password, saltRounds, function(err ,hash) {
-        let hashedPassword = hash
-        console.log(hashedPassword)
-    })
+    bcrypt.hash(password, saltRounds, function (err, hash) {
+      let hashedPassword = hash;
+      console.log(hashedPassword);
+    });
   } else {
-    console.log(error)
+    console.log(error);
   }
   try {
     const createUser = await Users.create(req.body);
   } catch (error) {
-    console.log(error)
-  };
-  res.send(req.body)
-})
+    console.log(error);
+  }
+  res.send(req.body);
+});
 
 // login
 router.post("/login", async (req, res) => {
   const { username, password } = req.body;
-  console.log(req.body)
+  console.log(req.body);
   const userLogin = await Users.findOne({ username });
-    if (userLogin === null) {
-      res 
-        .status(StatusCodes.NOT_FOUND)
-        .send({ status: "fail", data: "Username not found :(" });
+  if (userLogin === null) {
+    res
+      .status(StatusCodes.NOT_FOUND)
+      .send({ status: "fail", data: "Username not found :(" });
+  } else {
+    if (bcrypt.compareSync(password, userLogin.password)) {
+      req.session.user = userLogin;
+      // console.log("login session", req.session.user)
+      // res.status(StatusCodes.OK).send(user);
+      res.send({ status: "success", data: userLogin });
     } else {
-      if 
-        (bcrypt.compareSync(password, userLogin.password)) {
-        req.session.user = userLogin
-        // console.log("login session", req.session.user)
-        // res.status(StatusCodes.OK).send(user);
-        res.send({ status: "success", data: userLogin });
-      } else {
-        res.send("password fail")
-      }
+      res.send("password fail");
     }
+  }
 });
 
 // const isLoggedIn = (req, res, next) => {
