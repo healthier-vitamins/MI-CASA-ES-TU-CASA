@@ -13,6 +13,10 @@ function IndexHome() {
     price: "",
   });
 
+    // if (user.status === "success") {
+  //   return "No Holiday here"
+  // }
+
   useEffect(() => {
     fetch("/api/posts/")
       .then((response) => response.json())
@@ -28,7 +32,9 @@ function IndexHome() {
     return (
       <>
         <div className="index-login">
-          <Link to="/sign-up">Sign Up</Link>/<Link to="/login">Login</Link>
+        {/* if logged in show user name and link to user page */}
+        {/* {user.status === "success" ? "username" : } */}
+        <Link to="/sign-up">Sign Up</Link>/<Link to="/login">Login</Link>
         </div>
       <div className="index-container">
         <div className="index-title">
