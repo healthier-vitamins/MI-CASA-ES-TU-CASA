@@ -1,4 +1,3 @@
-const { application } = require("express");
 const express = require("express");
 const { StatusCodes } = require("http-status-codes");
 const Posts = require("../models/Posts");
@@ -21,6 +20,7 @@ router.get("/", async (req, res) => {
 });
 
 // create post
+//! in progress
 router.post("/create", async (req, res) => {
   try {
     const createPost = await Posts.create(req.body);
