@@ -4,11 +4,22 @@
     text-align: left;
     display: flex;  
 }  
+
 .index-login {
-    max-width: 200px;
     float: right;
-    margin-right: 3rem;
+    display: flex;
+    margin-left:auto;
+    max-width: 250px;
+    margin-right: 1rem;
 }
+
+.index-container {
+  justify-content: center;
+  margin-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+}
+
 *,
   :before,
   :after {
@@ -104,22 +115,15 @@
     margin-bottom: 3rem;
     }
 
-.index-container {
-    justify-content: center;
-    margin-top: 2rem;
-    display: flex;
-    flex-wrap: wrap;
-}
-
 .post-card {
     margin: 1rem;
     border-radius: 20px;
-    border: solid;
     min-width: 25vw;
     max-width: 25vw;
     min-height: 30vw;
     max-height: 30vw;
-    color:black
+    color:black;
+    box-shadow: 0 10px 25px rgba(92, 99, 105, .2);
 }
 
 

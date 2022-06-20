@@ -15,9 +15,9 @@ function CreatePostForm({ entry, setEntry }) {
     });
   };
 
-  const handleChangeName = (e) => {
-    setLastImg(e.target.value);
-  };
+  // const handleChangeName = (e) => {
+  //   setLastImg(e.target.value);
+  // };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -31,7 +31,11 @@ function CreatePostForm({ entry, setEntry }) {
       .then((response) => response.json())
       .then((data) => console.log(data));
     console.log("post submitted!", entry);
-    // navigate("/show-post/:id");
+    if ({status: "success"}) {
+     navigate("/show-post/:id")
+    } else {
+      return null;
+    } 
   };
 
   return (

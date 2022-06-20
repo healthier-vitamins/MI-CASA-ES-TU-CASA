@@ -4,9 +4,9 @@ const {Schema} = mongoose;
 const postSchema = Schema({
   img: [{type: String, required: true }],
   short_description: {type: String, required: true, maxLength: 120},
-  description: {type: String, required: true, maxLength: 250 },
+  description: {type: String, required: true, maxLength: 500 },
   style: {type: String, required: true },
-  cost: {type: Number, required: true}, 
+  cost: {type: Number}, 
   company_name: {type: Schema.Types.ObjectId, ref: "Users"},
   username: {type: Schema.Types.ObjectId, ref: "Users"},
   // comment_count: [{type: Schema.Types.ObjectId, ref: "Comments"}],

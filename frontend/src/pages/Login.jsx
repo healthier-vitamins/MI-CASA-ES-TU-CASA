@@ -15,7 +15,7 @@ function Login() {
       password: event.target.elements.password.value,
     }
     
-    fetch('api/users/login', {
+    fetch('/api/users/login', {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
