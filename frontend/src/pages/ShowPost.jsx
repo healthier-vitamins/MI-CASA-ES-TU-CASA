@@ -4,7 +4,7 @@ import ImageModal from "../components/showPost/ImageModal";
 import { useParams } from "react-router-dom";
 import DeleteModal from "../components/showPost/DeleteModal";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
-import "@splidejs/react-splide/css/skyblue";
+import '@splidejs/react-splide/css';
 
 function ShowPost() {
   const [showModal, setShowModal] = useState(false);
@@ -14,7 +14,7 @@ function ShowPost() {
 
   const toggleModal = () => {
     setShowModal((prev) => !prev);
-    console.log("showModal", showModal);
+    // console.log("showModal", showModal);
   };
 
   const { id } = useParams();
@@ -26,8 +26,8 @@ function ShowPost() {
       });
   }, []);
 
-  const handleDelete = () => {
-    console.log("you're gonna be deleted :(");
+  const toggleModalDelete = () => {
+    setDeleteModal(prev => !prev);
   };
 
   const handleEdit = () => {
@@ -47,6 +47,7 @@ function ShowPost() {
             setShowModal={setShowModal}
             imgId={imgId}
           />
+          <DeleteModal deleteModal={deleteModal} setDeleteModal={setDeleteModal} />
         </div>
         <div className={show.titlebar}>
           <a className={show.username} href="/profile/:id">
@@ -56,8 +57,10 @@ function ShowPost() {
         </div>
         <div className={show.imageswrapper}>
           <Splide options={{
-            perPage: 2,
+            perPage: 3,
             gap: "1rem",
+            arrows: false,
+            rewind: true,
           }}>
               {thisPost?.img.map((i, index) => (
             <SplideSlide key={index}>
@@ -111,10 +114,9 @@ function ShowPost() {
             <p className={show.editdelete} onClick={handleEdit}>
               edit this post
             </p>
-            <p className={show.editdelete} onClick={handleDelete}>
+            <p className={show.editdelete} onClick={toggleModalDelete}>
               delete this post
             </p>
-            <DeleteModal />
           </div>
         </div>
       </div>
