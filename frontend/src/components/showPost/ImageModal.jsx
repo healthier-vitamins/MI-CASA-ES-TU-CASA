@@ -1,9 +1,8 @@
 import React from 'react'
-import modal from "./ImageModal.module.css"
 
 //
 function ImageModal( { showModal, setShowModal, imgId } ) {
-  // console.log(imgId)
+  console.log(imgId)
     
     const toggleModal = () => {
         setShowModal(prev => !prev)
@@ -12,12 +11,12 @@ function ImageModal( { showModal, setShowModal, imgId } ) {
   return (
     <>
         {showModal ? (
-            <div className={modal.show}>
-                <img className={modal.bigImage} 
+            <div className="show-modal">
+                <img className="bigImage" 
                 src={imgId}
                 alt=""  
                 />
-              <span className={modal.closebutton}
+              <span className="close-button"
               onClick={toggleModal}>
                 close</span>  
             </div>

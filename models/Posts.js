@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const postSchema = Schema({
-  title: { type: String, required: true, unique: true },
+  title: { type: String, required: true },
   img: [{ type: String, required: true }],
   short_description: { type: String, required: true, maxLength: 120 },
   description: { type: String, required: true, maxLength: 500 },

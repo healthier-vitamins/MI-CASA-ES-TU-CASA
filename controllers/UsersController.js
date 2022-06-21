@@ -2,6 +2,8 @@ const express = require("express");
 const session = require("express-session");
 const bcrypt = require("bcrypt");
 const Users = require("../models/Users");
+const { StatusCodes } = require("http-status-codes");
+const { create } = require("../models/Users");
 
 const router = express.Router();
 
@@ -103,7 +105,9 @@ router.post("/login", async (req, res) => {
   console.log(req.body);
   const userLogin = await Users.findOne({ username });
   if (userLogin === null) {
-    res.send({ status: "fail", data: "Username not found :(" });
+    res
+      .status(StatusCodes.NOT_FOUND)
+      .send({ status: "fail", data: "Username not found :(" });
   } else {
     if (bcrypt.compareSync(password, userLogin.password)) {
       req.session.user = userLogin;
