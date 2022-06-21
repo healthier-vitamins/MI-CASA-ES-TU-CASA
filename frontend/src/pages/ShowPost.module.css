@@ -7,17 +7,31 @@
 .titlebar { 
     display: table; 
     width: 100%; 
+    min-height: 7vh;
+    max-height: 7vh;
     background-color:#649DA6; 
-}
-
-.title { 
-    display: table-cell; 
-    text-align: left; 
 }
 
 .username { 
     display: table-cell; 
+    text-align: left; 
+    font-size: 6vh;
+    justify-content: center;
+}
+
+.companyname {
+    display: table-cell; 
     text-align: right; 
+    font-size: 5vh;
+    justify-content: center;
+ }
+
+
+.username {
+    color: aliceblue;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-family: sans-serif;
 }
 
 .imageswrapper {
@@ -70,3 +84,8 @@
     border: solid;
     grid-area: commright;
 }
+
+.editdelete:hover {
+    cursor: pointer;
+    text-decoration: underline;
+ }
