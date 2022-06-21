@@ -3,19 +3,23 @@ import { useNavigate } from "react-router-dom";
 import { useState, useRef } from "react";
 import { userAtom } from "../../App.jsx";
 import { useAtom } from "jotai";
-import CSSModules from 'react-css-modules';
-import cStyle from "../../pages/CreatePost.module.css"
-import { useEffect } from "react";
+import CSSModules from "react-css-modules";
+import cStyle from "../../pages/CreatePost.module.css";
+import { set } from "mongoose";
+
 
 function CreatePostForm({ entry, setEntry }) {
+
   const imgRef = useRef(null);
 
-
+  const [img, setImg] = useState("");
   const [data, setData] = useState({});
   const navigate = useNavigate();
   const [user, setUser] = useAtom(userAtom);
-  const [buttonState, setButtonState] = useState(true);
-
+  const [buttonState, setButtonState] = useState({
+    post_button: true,
+    img_button: true
+  });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -25,30 +29,27 @@ function CreatePostForm({ entry, setEntry }) {
     });
   };
 
-  // const newArr = [];
-  const handleImgClick = () => {
+  const handleImgClick = (e) => {
     const newArr = entry.img;
-    newArr.push(imgRef.current.value);
+    newArr.push(img);
+    setImg("");
+
     setEntry({
       ...entry,
       img: newArr,
       ["company_name"]: user?.data?.company_name,
       ["username"]: user?.data?.username,
     });
-    console.log(entry.img)
+    console.log(entry.img);
     if (entry.img.length > 0) {
-      setButtonState(false)
-    } 
+      setButtonState({
+        ...buttonState,
+        post_button: false
+      });
+    }
   };
 
-
-
   const handleSubmit = () => {
-    // console.log(entry);
-    // console.log(user);
-    // console.log("アヴィ",user?.data)
-    // if (entry.username.length < 1 || entry.company_name.length < 1) {
-      
     fetch("/api/posts/create", {
       method: "POST",
       headers: {
@@ -58,7 +59,7 @@ function CreatePostForm({ entry, setEntry }) {
     })
       .then((response) => response.json())
       .then((data) => console.log(data.data));
-      console.log(buttonState);
+    console.log("button state: ", buttonState);
     // const id = data.data._id;
     // console.log("post submitted!", entry);
     //! if ({status: "success"}) {
@@ -120,18 +121,32 @@ function CreatePostForm({ entry, setEntry }) {
         <br />
         <label htmlFor="img">Upload image</label>
         <input
-          ref={imgRef}
+          // ref={imgRef}
           type="text"
           name="img"
           id="img"
           placeholder="Upload image"
+          value={img}
+          onChange={(e) => {
+            setImg(e.target.value);
+            console.log(img.length)
+            if (img.length > 10) {
+              setButtonState({
+                ...buttonState,
+                img_button: false
+              })
+            } else {
+              setButtonState({
+                ...buttonState,
+                img_button: true 
+              })
+            }
+          }}
         ></input>
-        <button onClick={handleImgClick}>Submit images</button>
+        <button disabled={buttonState.img_button} onClick={handleImgClick}>Submit images</button>
         <br />
         {/* {buttonState ? "you can upload ** more images" : "nn"} */}
-        <button type="submit"
-        disabled={buttonState}
-        onClick={handleSubmit}>
+        <button type="submit" disabled={buttonState.post_button} onClick={handleSubmit}>
           post your design!
         </button>
       </form>
