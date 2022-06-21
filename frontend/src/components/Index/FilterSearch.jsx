@@ -4,14 +4,23 @@ function FilterSearch({ filterBy, setFilterBy }) {
 
   const handleChange = (e) => {
     const value = e.target.value;
-    console.log("value", e);
+  
     setFilterBy({ ...filterBy, [e.target.name]: value });
   };
 
-  const handleSubmit = () => { 
-    console.log(filterBy)
-    // will need to send to fetch data
-  }
+
+  const handleSubmit = () => {
+    const {style, username, company_name, cost} = filterBy
+    fetch(`/api/posts/filter/${encodeURIComponent(style)}/${encodeURIComponent(username)}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    .then((response) => response.json())
+    .then((data) => console.log(data.data))
+  };
+  
 
 
   return (
@@ -21,37 +30,45 @@ function FilterSearch({ filterBy, setFilterBy }) {
           e.preventDefault();
         }}
       >
-          <label htmlFor="select-categories">Categories: </label>
-          <select
-            name="categories"
-            id="select-categories"
-            value={filterBy.categories}
-            onChange={handleChange}
-          >
-            <option value="minimalist">Minimalist</option>
-            <option value="industrial">Industrial</option>
-            <option value="modern">Modern</option>
-            <option value="scandinavian">Scandinavian</option>
-          </select>
-          <br />
-          <label htmlFor="select-username">Username: </label>
-          <input
-            name="username"
-            id="select-username"
-            value={filterBy.username}
-            placeholder="Username"
-            onChange={handleChange}
-          ></input>
-
-          <br />
-          <label htmlFor="select-price">Price: </label>
-          <input
-            name="price"
-            id="select-id"
-            value={filterBy.price}
-            placeholder="Price"
-            onChange={handleChange}
-          ></input>
+           <label htmlFor="select-style">Style: </label>
+        <select
+          name="style"
+          id="select-style"
+          value={filterBy.style}
+          onChange={handleChange}
+        >
+          <option value="minimalist">Minimalist</option>
+          <option value="industrial">Industrial</option>
+          <option value="modern">Modern</option>
+          <option value="scandinavian">Scandinavian</option>
+        </select>
+        <br />
+        <label htmlFor="select-username">Username: </label>
+        <input
+          name="username"
+          id="select-username"
+          value={filterBy.username}
+          placeholder="Username"
+          onChange={handleChange}
+        ></input>
+        <br />
+        <label htmlFor="company_name">Company Name:</label>
+        <input
+          name="company_name"
+          id="company_name"
+          value={filterBy.company_name}
+          placeholder={"Company Name"}
+          onChange={handleChange}
+        ></input>
+        <br />
+        <label htmlFor="select-price">Cost: </label>
+        <input
+          name="cost"
+          id="select-cost"
+          value={filterBy.cost}
+          placeholder="Cost"
+          onChange={handleChange}
+        ></input>
       </form>
       <button onClick={handleSubmit}>Search</button>
     </div>
