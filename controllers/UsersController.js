@@ -90,7 +90,7 @@ router.post("/signup", async (req, res) => {
       const createUser = await Users.create({ ...req.body, password:bcrypt.hashSync(password, saltRounds) });
       res.send({ status: "success", data: createUser})
     } catch (error) {
-      res.send(error);
+      res.send({ status: "fail", data: "something went wrong"});
     }
   } else {
     res.send("username taken");
