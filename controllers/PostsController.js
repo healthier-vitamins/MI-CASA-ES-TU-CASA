@@ -29,31 +29,41 @@ router.post("/create", async (req, res) => {
     const createPost = await Posts.create(req.body);
     res.send({ status: "created successfully", data: createPost });
   } catch (error) {
-    res.send({ status: "failed", data: "Failed to create", error: error});
+    res.send({ status: "failed", data: "Failed to create", error: error });
   }
 });
 
 // filter posts
 router.get("/filter/:style/:username", async (req, res) => {
-  const {style, username} = req.params
-  console.log(style, username)
+  const { style, username } = req.params;
+  console.log(style, username);
+  const filteredData = [];
+  const allData = [];
   try {
-    const filterPost = await Posts.find()
-      console.log(filterPost)
-    const queriedPosts = []
-    for (let post in filterPost) {
-      console.log("post", post)
-      if (post.username.toLowerCase() === username.toLowerCase()) {
-        queriedPosts.append(post)
-      }
-    }
-    console.log(queriedPosts)
+    const filterPost = await Posts.find();
+    console.log(filterPost);
+    const queryPosts = Object.keys(filterPost);
 
-    res.send({status: "filtered successfully", data: filterPost});
+    filteredData = filterPost.map((object) => object.data);
+    console.log(filtered);
   } catch (error) {
-    res.send({status: "failed filter", data: "Failed to filter", error: error})
+    // for (let i = 0; i < queryPosts.length; i++) {
+
+    // }}
+
+    // console.log("post", post)
+    // if (post.username.toLowerCase() === username.toLowerCase()) {
+    //   queriedPosts.append()
+    // console.log(queriedPosts)
+
+    // res.send({status: "filtered successfully", data: filterPost});
+    res.send({
+      status: "failed filter",
+      data: "Failed to filter",
+      error: error,
+    });
   }
-})
+});
 
 // update
 router.put("/:id", (req, res) => {
@@ -64,14 +74,14 @@ router.put("/:id", (req, res) => {
 
 router.delete("/:id", async (req, res) => {
   const { id } = req.params;
-  console.log("id", id) 
+  console.log("id", id);
   try {
     const deletePost = await Posts.findByIdAndRemove(id);
-    res.send( {status: "success", data: deletePost})
+    res.send({ status: "success", data: deletePost });
   } catch (error) {
-    res.send({status: "failed to delete", data: "failed to delete"})
+    res.send({ status: "failed to delete", data: "failed to delete" });
   }
-})
+});
 
 // router.get("/seed", async (req, res) => {
 
@@ -121,9 +131,6 @@ router.delete("/:id", async (req, res) => {
 //   }
 // });
 
-
-
-
 //show post
 router.get("/:id", async (req, res) => {
   const id = req.params.id;
@@ -132,10 +139,11 @@ router.get("/:id", async (req, res) => {
     if (post === null) {
       res.send({ status: "fail", data: "Post Not Found" });
     } else {
-      res.send({status: "success", data: post});
-    }} catch (error) {
-      res.send(error)
+      res.send({ status: "success", data: post, error: error });
     }
-})
+  } catch (error) {
+    res.send(error);
+  }
+});
 
 module.exports = router;
