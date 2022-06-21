@@ -38,7 +38,7 @@ router.get("/filter/:style/:username", async (req, res) => {
   const {style, username} = req.params
   console.log(style, username)
   try {
-    const filterPost = await Posts.find(req.body)
+    const filterPost = await Posts.find(username)
     res.send({status: "filtered successfully", data: filterPost});
   } catch (error) {
     res.send({status: "failed filter", data: "Failed to filter"})
