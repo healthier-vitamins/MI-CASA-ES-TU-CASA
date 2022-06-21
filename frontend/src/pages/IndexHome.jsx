@@ -32,7 +32,7 @@ function IndexHome() {
         <div className="index-container">
           <div className="index-login">
             {user.status === "success" ? (
-              <>username</>
+              <p>{user.data.username}</p>
             ) : (
               <>
                 <Link to="/sign-up">Sign Up</Link>
