@@ -5,14 +5,16 @@ import { userAtom } from "../../App.jsx";
 import { useAtom } from "jotai";
 import CSSModules from 'react-css-modules';
 import cStyle from "../../pages/CreatePost.module.css"
+import { useEffect } from "react";
 
 function CreatePostForm({ entry, setEntry }) {
   const imgRef = useRef(null);
 
-  // const [imgs, setImgs] = useState([])
+
   const [data, setData] = useState({});
   const navigate = useNavigate();
   const [user, setUser] = useAtom(userAtom);
+  const [buttonState, setButtonState] = useState(true);
 
 
   const handleChange = (e) => {
@@ -30,22 +32,23 @@ function CreatePostForm({ entry, setEntry }) {
     setEntry({
       ...entry,
       img: newArr,
+      ["company_name"]: user?.data?.company_name,
+      ["username"]: user?.data?.username,
     });
-    console.log(entry);
+    console.log(entry.img)
+    if (entry.img.length > 0) {
+      setButtonState(false)
+    } 
   };
+
+
 
   const handleSubmit = () => {
     // console.log(entry);
     // console.log(user);
-    console.log("アヴィ",user?.data)
+    // console.log("アヴィ",user?.data)
     // if (entry.username.length < 1 || entry.company_name.length < 1) {
       
-    setEntry({
-      ...entry,
-      ["company_name"]: user?.data.company_name,
-      ["username"]: "works",
-    });
-
     fetch("/api/posts/create", {
       method: "POST",
       headers: {
@@ -55,6 +58,7 @@ function CreatePostForm({ entry, setEntry }) {
     })
       .then((response) => response.json())
       .then((data) => console.log(data.data));
+      console.log(buttonState);
     // const id = data.data._id;
     // console.log("post submitted!", entry);
     //! if ({status: "success"}) {
@@ -124,7 +128,10 @@ function CreatePostForm({ entry, setEntry }) {
         ></input>
         <button onClick={handleImgClick}>Submit images</button>
         <br />
-        <button type="submit" onClick={handleSubmit}>
+        {/* {buttonState ? "you can upload ** more images" : "nn"} */}
+        <button type="submit"
+        disabled={buttonState}
+        onClick={handleSubmit}>
           post your design!
         </button>
       </form>
