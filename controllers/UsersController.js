@@ -30,7 +30,7 @@ router.get("/seed", async (req, res) => {
     const fixedUsers = await Users.create([
       {
         username: "joemama",
-        password: bcrypt.hashSync("12345678", saltRounds),
+        password: bcrypt.hashSync("123", saltRounds),
         firstName: "Joe",
         lastName: "Mama",
         email: "joemama@email.com",
@@ -42,7 +42,7 @@ router.get("/seed", async (req, res) => {
       },
       {
         username: "whatsupdog",
-        password: bcrypt.hashSync("12345678", saltRounds),
+        password: bcrypt.hashSync("123", saltRounds),
         firstName: "Up",
         lastName: "Dog",
         email: "whatsupdog@email.com",
@@ -54,7 +54,7 @@ router.get("/seed", async (req, res) => {
       },
       {
         username: "whatsamatterbaby",
-        password: bcrypt.hashSync("12345678", saltRounds),
+        password: bcrypt.hashSync("123", saltRounds),
         firstName: "Matter",
         lastName: "Baby",
         email: "matterbaby@email.com",
