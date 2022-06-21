@@ -32,7 +32,9 @@ function IndexHome() {
         <div className="index-container">
           <div className="index-login">
             {user.status === "success" ? (
-              <>username</>
+              <Link to={`/profile/${user.data._id}`}>
+              <p>{user.data.username}</p>
+              </Link>
             ) : (
               <>
                 <Link to="/sign-up">Sign Up</Link>

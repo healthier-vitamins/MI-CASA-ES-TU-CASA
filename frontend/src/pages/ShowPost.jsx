@@ -1,18 +1,31 @@
-import "./ShowPost.css"
-import { useState } from "react"
+import show from "./ShowPost.module.css"
+import { useState, useEffect } from "react"
 import ImageModal from "../components/showPost/ImageModal"
-import { Splide, SplideSlide } from '@splidejs/react-splide';
+import { useParams } from "react-router-dom";
+// import { Splide, SplideSlide } from '@splidejs/react-splide';
 
 
 function ShowPost() {
   const [showModal, setShowModal] = useState(false);
   const [imgId, setImgId] = useState("");
+  const [thisPost, setThisPost] = useState({});
 
   const toggleModal = () => {
     setShowModal((prev) => !prev);
     console.log("showModal", showModal);
   };
 
+  const { id } = useParams();
+  useEffect(() => {
+    fetch(`/api/posts/${id}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setThisPost(data.data);
+        console.log("k",thisPost)
+      });
+  }, []);
+
+  
   const imgs = [
       "https://i.imgur.com/woBZD95.jpeg",
       "https://i.imgur.com/k8BaoR8.jpeg",
@@ -22,7 +35,7 @@ function ShowPost() {
   ]
 
   return (
-    <div className="post-container">
+    <div className={show.container}>
       <div>
         <ImageModal 
         showModal={showModal} 
@@ -30,11 +43,11 @@ function ShowPost() {
         imgId={imgId}
          />
       </div>
-      <div className="titlebar">
-      <p className="title"> title </p>
-      <a className="username" href="/profile/:id">caitlikesdogs</a>
+      <div className={show.titlebar}>
+      {/* <p className="title"> title </p> */}
+      <a className={show.username} href="/profile/:id">{thisPost.username}</a>
       </div>
-      <div className="post-images-wrapper"> 
+      <div className={show.imageswrapper}> 
       {/* <Splide 
           options={{  
             perPage: 5,
@@ -44,8 +57,8 @@ function ShowPost() {
             gap: "10rem",
         }}
       > */}
-            <div className="post-images">
-            {imgs.map((i, index) => (
+            <div className={show.images}>
+            {thisPost.img.map((i, index) => (
             // <SplideSlide key={index}>
                 <img key={index}
                 src={i}
@@ -59,23 +72,20 @@ function ShowPost() {
                 </div>
          {/* </Splide> */}
          </div>
-      <div className="post-discription">
-        <div className="disc-left">
-          <p> style style style</p>
-          <p> total cost: </p>
+      <div className={show.discription}>
+        <div className={show.dleft}>
+          <p>{thisPost.style}</p>
+          <p> total cost: {thisPost.const}</p>
         </div>
-        <div className="disc-right">
+        <div className={show.dright}>
           <p>
-            {" "}
-            description description description description description
-            description description description description description
-            description{" "}
+          {thisPost.description}
           </p>
         </div>
       </div>
-      <div className="post-commentsandlikes">
-        <div className="show-comments">
-          <div className="comm-left">
+      <div className={show.commentsandlikes}>
+        <div className={show.comments}>
+          <div className={show.commleft}>
             comments:
             <p> this is beautiful! </p>
             <p>see all ### comments</p>
@@ -92,7 +102,7 @@ function ShowPost() {
             </form>
           </div>
         </div>
-        <div className="comm-right">
+        <div className={show.commright}>
           <p>### people liked this post</p>
             </div>
         </div>
