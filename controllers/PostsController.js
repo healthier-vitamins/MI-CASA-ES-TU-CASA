@@ -38,10 +38,20 @@ router.get("/filter/:style/:username", async (req, res) => {
   const {style, username} = req.params
   console.log(style, username)
   try {
-    const filterPost = await Posts.find(username)
+    const filterPost = await Posts.find()
+      console.log(filterPost)
+    const queriedPosts = []
+    for (let post in filterPost) {
+      console.log("post", post)
+      if (post.username.toLowerCase() === username.toLowerCase()) {
+        queriedPosts.append(post)
+      }
+    }
+    console.log(queriedPosts)
+
     res.send({status: "filtered successfully", data: filterPost});
   } catch (error) {
-    res.send({status: "failed filter", data: "Failed to filter"})
+    res.send({status: "failed filter", data: "Failed to filter", error: error})
   }
 })
 
