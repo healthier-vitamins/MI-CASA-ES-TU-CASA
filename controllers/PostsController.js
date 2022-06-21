@@ -1,21 +1,25 @@
 const express = require("express");
-
+const { StatusCodes } = require("http-status-codes");
 const Posts = require("../models/Posts");
 const router = express.Router();
+
 
 // Posts.find()
 // .populate("company_name")
 //   .then(p => console.log(p))
 //   .catch(error => console.log(error))
 
+
 // index home page show posts
 router.get("/", async (req, res) => {
   try {
     const getAllPosts = await Posts.find();
     if (getAllPosts === null) {
-      res.send({ status: "fail", data: "Posts not found" });
+      res
+        .status(StatusCodes.NOT_FOUND)
+        .send({ status: "fail", data: "Posts not found" });
     } else {
-      res.send({ status: "ok", data: getAllPosts });
+      res.status(StatusCodes.OK).send({ status: "ok", data: getAllPosts });
     }
   } catch (error) {
     res.send(error);
@@ -27,9 +31,13 @@ router.get("/", async (req, res) => {
 router.post("/create", async (req, res) => {
   try {
     const createPost = await Posts.create(req.body);
-    res.send({ status: "created successfully", data: createPost });
+    res
+      .status(StatusCodes.CREATED)
+      .send({ status: "success", data: createPost });
   } catch (error) {
-    res.send({ status: "failed", data: "Failed to create" });
+    res
+      .status(StatusCodes.NOT_FOUND)
+      .send({ status: "fail", data: "Failed to create" });
   }
 });
 
@@ -91,21 +99,9 @@ router.delete("/:id", (req, res) => {
 //   }
 // });
 
-
-
-
 //show post
-router.get("/:id", async (req, res) => {
-  const id = req.params.id;
-  try {
-    const post = await Posts.findById(id);
-    if (post === null) {
-      res.send({ status: "fail", data: "Post Not Found" });
-    } else {
-      res.send({status: "success", data: post});
-    }} catch (error) {
-      res.send(error)
-    }
-})
+router.get("/:id", (req, res) => {
+  res.send("post will be here");
+});
 
 module.exports = router;
