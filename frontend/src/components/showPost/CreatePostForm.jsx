@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { useState, useRef } from "react";
 import { userAtom } from "../../App.jsx";
 import { useAtom } from "jotai";
+import CSSModules from 'react-css-modules';
+import cStyle from "../../pages/CreatePost.module.css"
 
 function CreatePostForm({ entry, setEntry }) {
   const imgRef = useRef(null);
@@ -11,6 +13,7 @@ function CreatePostForm({ entry, setEntry }) {
   const [data, setData] = useState({});
   const navigate = useNavigate();
   const [user, setUser] = useAtom(userAtom);
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -34,12 +37,13 @@ function CreatePostForm({ entry, setEntry }) {
   const handleSubmit = () => {
     // console.log(entry);
     // console.log(user);
-
+    console.log("アヴィ",user?.data)
     // if (entry.username.length < 1 || entry.company_name.length < 1) {
+      
     setEntry({
       ...entry,
       ["company_name"]: user?.data.company_name,
-      ["username"]: user?.data._id,
+      ["username"]: "works",
     });
 
     fetch("/api/posts/create", {
@@ -61,7 +65,7 @@ function CreatePostForm({ entry, setEntry }) {
   };
 
   return (
-    <div>
+    <div className={cStyle.container}>
       <form onSubmit={(e) => e.preventDefault()}>
         <label htmlFor="title">Title</label>
         <input
