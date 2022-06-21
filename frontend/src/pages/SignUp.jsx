@@ -3,9 +3,8 @@ import { useAtom } from "jotai";
 import { userAtom } from "../App.jsx";
 
 function SignUp() {
-
   const [user, setUser] = useAtom(userAtom);
-  
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const signupInfo = {
@@ -26,50 +25,97 @@ function SignUp() {
       },
       body: JSON.stringify(signupInfo),
     })
-    .then((response) => response.json())
-    .then((data) => {
-      setUser(data);
-      console.log("signup data", data)
-    })
-
-  }
+      .then((response) => response.json())
+      .then((data) => {
+        setUser(data);
+        console.log("signup data", data);
+      });
+  };
 
   return (
-    <div>
-      <h2>Sign up</h2>
-      <div className="signup-container">
+    <div className="signup-page">
+      <div className="signup-form">
         <form onSubmit={handleSubmit}>
-          <input name="profileImg" placeholder="Image"></input>
-          {/* (use an imgur link lmao) */}
-          <label id="signup-img" htmlFor="img">Upload image placeholder </label>
-          <br />
-          <input required name="username" placeholder="Username"></input>
-          <label htmlFor="username">Username</label>
-          <br />
-          <input required name="password" placeholder="Password"></input>
-          <label htmlFor="password">Password</label>
-          <br />
-          <input required name="email" placeholder="Email"></input>
-          <label htmlFor="email">Email</label>
-          <br />
-          <input required name="firstName" placeholder="First name"></input>
-          <label htmlFor="first-name">First Name</label>
-          <input required name="lastName" placeholder="Last Name"></input>
-          <label htmlFor="last-name">Last Name</label>
-          <br />
-          <input name="company_name" placeholder="Company Name"></input>
-          <label htmlFor="company-name">Company Name</label>
-          <br />
-          <input name="socialLink" placeholder="Instagram link"></input>
-          <label htmlFor="socials">Instagram</label>
-          <br />
-          <button>Create an account!</button>
+          <h2>Sign up</h2>
+          <div className="signup-container">
+            <input
+              className="signup-input"
+              name="profileImg"
+              placeholder="Image"
+            />
+            {/* (use an imgur link lmao) */}
+            <label htmlFor="img">Upload image placeholder </label>
+          </div>
+          <div className="signup-container">
+            <input
+              required
+              className="signup-input"
+              name="username"
+              placeholder="Username"
+            />
+            <label className="signup-label" htmlFor="username">Username</label>
+          </div>
+          <div className="signup-container">
+            <input
+              required
+              className="signup-input"
+              name="password"
+              placeholder="Password"
+            />
+            <label className="signup-label" htmlFor="password">Password</label>
+          </div>
+          <div className="signup-container">
+            <input
+              required
+              className="signup-input"
+              name="email"
+              placeholder="Email"
+            />
+            <label className="signup-label" htmlFor="email">Email</label>
+          </div>
+          <div className="signup-container">
+            <input
+              required
+              className="signup-input"
+              name="firstName"
+              placeholder="First name"
+            />
+            <label className="signup-label" htmlFor="first-name">First Name</label>
+          </div>
+          <div className="signup-container">
+            <input
+              required
+              className="signup-input"
+              name="lastName"
+              placeholder="Last Name"
+            />
+            <label className="signup-label" htmlFor="last-name">Last Name</label>
+          </div>
+          <div className="signup-container">
+            <input
+              className="signup-input"
+              name="company_name"
+              placeholder="Company Name"
+            />
+            <label className="signup-label" htmlFor="company-name">Company Name</label>
+          </div>
+          <div className="signup-container">
+            <input
+              className="signup-input"
+              name="socialLink"
+              placeholder="Instagram link"
+            />
+            <label className="signup-label" htmlFor="socials">Instagram</label>
+          </div>
+          <button className="signup-button">
+            Create an account!
+            </button>
         </form>
+        <h4>Already have an account?</h4>
+        <Link id="login-link" to="/login">
+          Click here instead
+        </Link>
       </div>
-      <h4>Already have an account?</h4>
-      <Link id="login-link" to="/login">
-        Click here instead
-      </Link>
     </div>
   );
 }
