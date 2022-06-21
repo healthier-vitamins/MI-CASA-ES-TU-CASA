@@ -1,35 +1,69 @@
 import { Link } from "react-router-dom";
+import { useAtom } from "jotai";
+import { userAtom } from "../App.jsx";
 
 function SignUp() {
+
+  const [user, setUser] = useAtom(userAtom);
   
-  const handleClick = (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("click!");
-  };
+    const signupInfo = {
+      username: event.target.elements.username.value,
+      password: event.target.elements.password.value,
+      email: event.target.elements.email.value,
+      firstName: event.target.elements.firstName.value,
+      lastName: event.target.elements.lastName.value,
+      company_name: event.target.elements.company_name.value,
+      profileImg: event.target.elements.profileImg.value,
+      socialLink: event.target.elements.socialLink.value,
+    };
+
+    fetch("/api/users/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(signupInfo),
+    })
+    .then((response) => response.json())
+    .then((data) => {
+      setUser(data);
+      console.log("signup data", data)
+    })
+
+  }
+
   return (
     <div>
       <h2>Sign up</h2>
       <div className="signup-container">
-        <form>
-          <p id="signup-img">Upload image</p>
-          <label htmlFor="username">Username</label>
+        <form onSubmit={handleSubmit}>
+          <input name="profileImg" placeholder="Image"></input>
+          {/* (use an imgur link lmao) */}
+          <label id="signup-img" htmlFor="img">Upload image placeholder </label>
+          <br />
           <input required name="username" placeholder="Username"></input>
+          <label htmlFor="username">Username</label>
           <br />
-          <label htmlFor="password">Password</label>
           <input required name="password" placeholder="Password"></input>
+          <label htmlFor="password">Password</label>
           <br />
-          <label htmlFor="email">Email</label>
           <input required name="email" placeholder="Email"></input>
+          <label htmlFor="email">Email</label>
           <br />
+          <input required name="firstName" placeholder="First name"></input>
           <label htmlFor="first-name">First Name</label>
-          <input required name="firstname" placeholder="First name"></input>
+          <input required name="lastName" placeholder="Last Name"></input>
           <label htmlFor="last-name">Last Name</label>
-          <input name="lastname" placeholder="Last Name"></input>
           <br />
+          <input name="company_name" placeholder="Company Name"></input>
+          <label htmlFor="company-name">Company Name</label>
+          <br />
+          <input name="socialLink" placeholder="Instagram link"></input>
           <label htmlFor="socials">Instagram</label>
-          <input name="socials" placeholder="Instagram link"></input>
           <br />
-          <button onClick={handleClick}>Create an account!</button>
+          <button>Create an account!</button>
         </form>
       </div>
       <h4>Already have an account?</h4>
