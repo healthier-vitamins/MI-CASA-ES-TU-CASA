@@ -20,12 +20,11 @@ function ShowPost() {
     fetch(`/api/posts/${id}`)
       .then((response) => response.json())
       .then((data) => {
-        setThisPost(data.data);
-        console.log("k",thisPost)
       });
   }, []);
 
-  
+  console.log("k",thisPost)
+
   const imgs = [
       "https://i.imgur.com/woBZD95.jpeg",
       "https://i.imgur.com/k8BaoR8.jpeg",
@@ -58,7 +57,7 @@ function ShowPost() {
         }}
       > */}
             <div className={show.images}>
-            {thisPost.img.map((i, index) => (
+            {imgs.map((i, index) => (
             // <SplideSlide key={index}>
                 <img key={index}
                 src={i}
