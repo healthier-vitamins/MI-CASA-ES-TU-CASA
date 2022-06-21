@@ -1,5 +1,5 @@
 import { useState } from "react";
-import CreatePostForm from "../components/showPost/CreatePostForm";
+import CreatePostForm from "../components/createPost/CreatePostForm";
 import cStyle from "./CreatePost.module.css"
 
 function CreatePost() {
