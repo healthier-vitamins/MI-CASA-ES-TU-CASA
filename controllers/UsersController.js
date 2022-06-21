@@ -3,6 +3,7 @@ const session = require("express-session");
 const bcrypt = require("bcrypt");
 const Users = require("../models/Users");
 const { StatusCodes } = require("http-status-codes");
+const { create } = require("../models/Users");
 
 const router = express.Router();
 
@@ -85,21 +86,17 @@ router.post("/signup", async (req, res) => {
     socialLink,
   } = req.body;
   console.log(req.body);
-  const newUser = await Users.findOne({ username });
-  if (newUser === null) {
-    bcrypt.hash(password, saltRounds, function (err, hash) {
-      let hashedPassword = hash;
-      console.log(hashedPassword);
-    });
+  const duplicateUser = await Users.findOne({ username });
+  if (!duplicateUser) {
+    try {
+      const createUser = await Users.create({ ...req.body, password:bcrypt.hashSync(password, saltRounds) });
+      res.send({ status: "success", data: createUser})
+    } catch (error) {
+      res.send(error);
+    }
   } else {
-    console.log(error);
+    res.send("username taken");
   }
-  try {
-    const createUser = await Users.create(req.body);
-  } catch (error) {
-    console.log(error);
-  }
-  res.send(req.body);
 });
 
 // login
@@ -123,13 +120,18 @@ router.post("/login", async (req, res) => {
   }
 });
 
-// const isLoggedIn = (req, res, next) => {
-//   if (req.session.user) {
-//     return next();
-//   } else {
-//     res.send("login fail");
-//   }
-// }
+// log in authentication 
+const isLoggedIn = (req, res, next) => {
+  if (req.session.user) {
+    return next();
+  } else {
+    res.send("login fail");
+  }
+}
+
+router.get("/authorizedtest", isLoggedIn, async (req, res) => {
+  res.send(req.session.user)
+})
 
 //show user page
 router.get("/username/:id", async (req, res) => {
