@@ -47,7 +47,7 @@ function ShowPost() {
             setShowModal={setShowModal}
             imgId={imgId}
           />
-          <DeleteModal deleteModal={deleteModal} setDeleteModal={setDeleteModal} />
+          <DeleteModal deleteModal={deleteModal} setDeleteModal={setDeleteModal} thisPost={thisPost}/>
         </div>
         <div className={show.titlebar}>
           <a className={show.username} href="/profile/:id">
