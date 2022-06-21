@@ -1,14 +1,17 @@
 import Card from 'react-bootstrap/Card';
+import { Link } from 'react-router-dom';
+import card from "./PostCard.module.css"
+
 
 function PostCard({ post }) {
-  //  console.log("post1",post);
+
   return (
 
     <div>
-      <Card className="post-card">
+      <Card className={card.card}>
         <Card.Title>{post.username}</Card.Title>
         {/* insert link to post when click on the image */}
-      <Card.Img className="index-card-img" variant="top" src={post.img[0]} />
+      <Card.Img className={card.img} variant="top" src={post.img[0]} />
       <Card.Body>
         <Card.Text>
         {post.description}

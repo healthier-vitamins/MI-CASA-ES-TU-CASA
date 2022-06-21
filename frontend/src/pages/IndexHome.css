@@ -116,20 +116,5 @@
     margin-bottom: 3rem;
     }
 
-.post-card {
-    margin: 1rem;
-    border-radius: 20px;
-    min-width: 25vw;
-    max-width: 25vw;
-    min-height: 30vw;
-    max-height: 30vw;
-    color:black;
-    box-shadow: 0 10px 25px rgba(92, 99, 105, .2);
-}
 
-
-.index-card-img {
-    width: 200px;
-    height: 200px;
-}
 

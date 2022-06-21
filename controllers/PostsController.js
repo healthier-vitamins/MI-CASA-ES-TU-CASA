@@ -91,9 +91,21 @@ router.delete("/:id", (req, res) => {
 //   }
 // });
 
+
+
+
 //show post
-router.get("/:id", (req, res) => {
-  res.send("post will be here");
-});
+router.get("/:id", async (req, res) => {
+  const id = req.params.id;
+  try {
+    const post = await Posts.findById(id);
+    if (post === null) {
+      res.send({ status: "fail", data: "Post Not Found" });
+    } else {
+      res.send({status: "success", data: post});
+    }} catch (error) {
+      res.send(error)
+    }
+})
 
 module.exports = router;
