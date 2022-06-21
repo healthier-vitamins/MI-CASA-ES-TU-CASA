@@ -29,7 +29,7 @@ router.post("/create", async (req, res) => {
     const createPost = await Posts.create(req.body);
     res.send({ status: "created successfully", data: createPost });
   } catch (error) {
-    res.send({ status: "failed", data: "Failed to create" });
+    res.send({ status: "failed", data: "Failed to create", error: error});
   }
 });
 
