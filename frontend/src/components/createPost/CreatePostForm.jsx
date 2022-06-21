@@ -5,20 +5,17 @@ import { userAtom } from "../../App.jsx";
 import { useAtom } from "jotai";
 import CSSModules from "react-css-modules";
 import cStyle from "../../pages/CreatePost.module.css";
-import { set } from "mongoose";
-
 
 function CreatePostForm({ entry, setEntry }) {
-
-  const imgRef = useRef(null);
+  // const imgRef = useRef(null);
 
   const [img, setImg] = useState("");
-  const [data, setData] = useState({});
+  const [allData, setAllData] = useState({});
   const navigate = useNavigate();
   const [user, setUser] = useAtom(userAtom);
   const [buttonState, setButtonState] = useState({
     post_button: true,
-    img_button: true
+    img_button: true,
   });
 
   const handleChange = (e) => {
@@ -29,10 +26,14 @@ function CreatePostForm({ entry, setEntry }) {
     });
   };
 
-  const handleImgClick = (e) => {
+  const handleImgClick = () => {
     const newArr = entry.img;
     newArr.push(img);
     setImg("");
+    setButtonState({
+      ...buttonState,
+      img_button: true,
+    });
 
     setEntry({
       ...entry,
@@ -44,12 +45,49 @@ function CreatePostForm({ entry, setEntry }) {
     if (entry.img.length > 0) {
       setButtonState({
         ...buttonState,
-        post_button: false
+        post_button: false,
+      });
+    }
+  };
+
+  // const handleChangeAndPaste = (e) => {
+  //   if (e.clipboardData.getData("text")) {
+  //     console.log("pasted data");
+  //     setButtonState({
+  //       ...buttonState,
+  //       img_button: false,
+  //     });
+
+  // const inputTest = document.getElementById("#img")
+
+  // setTimeout(() => {
+  //   if (inputTest.matches(':-internal-autofill-selected')) {
+  //     setButtonState({
+  //       ...buttonState,
+  //       img_button: false
+  //     })
+  //     console.log("shifted button state")
+  //   }
+  // }, 500)
+
+  const handleImgChange = (e) => {
+    setImg(e.target.value);
+    console.log(img.length);
+    if (e.target.value.length > 10) {
+      setButtonState({
+        ...buttonState,
+        img_button: false,
+      });
+    } else {
+      setButtonState({
+        ...buttonState,
+        img_button: true,
       });
     }
   };
 
   const handleSubmit = () => {
+    console.log(entry);
     fetch("/api/posts/create", {
       method: "POST",
       headers: {
@@ -58,15 +96,20 @@ function CreatePostForm({ entry, setEntry }) {
       body: JSON.stringify(entry),
     })
       .then((response) => response.json())
-      .then((data) => console.log(data.data));
-    console.log("button state: ", buttonState);
+      .then((data) => console.log("data", data));
+
     // const id = data.data._id;
-    // console.log("post submitted!", entry);
-    //! if ({status: "success"}) {
-    // navigate(`/show-post/${id}`);
-    //! } else {
-    //!   return null;
-    //! }
+    console.log(allData);
+    if (allData?.status === "created successfully") {
+      navigate(`/show-post/${allData.data._id}`);
+    } else {
+      console.log(allData?.error);
+      setTimeout(() => {
+        return "Failed to create post";
+      }, 500);
+      navigate(`/create-post`);
+    }
+
   };
 
   return (
@@ -119,6 +162,7 @@ function CreatePostForm({ entry, setEntry }) {
           placeholder="Cost"
         ></input>
         <br />
+
         <label htmlFor="img">Upload image</label>
         <input
           // ref={imgRef}
@@ -127,26 +171,20 @@ function CreatePostForm({ entry, setEntry }) {
           id="img"
           placeholder="Upload image"
           value={img}
-          onChange={(e) => {
-            setImg(e.target.value);
-            console.log(img.length)
-            if (img.length > 10) {
-              setButtonState({
-                ...buttonState,
-                img_button: false
-              })
-            } else {
-              setButtonState({
-                ...buttonState,
-                img_button: true 
-              })
-            }
-          }}
+          // onPaste={handleChangeAndPaste}
+          onChange={handleImgChange}
         ></input>
-        <button disabled={buttonState.img_button} onClick={handleImgClick}>Submit images</button>
+        <button disabled={buttonState.img_button} onClick={handleImgClick}>
+          Submit images
+        </button>
+
         <br />
         {/* {buttonState ? "you can upload ** more images" : "nn"} */}
-        <button type="submit" disabled={buttonState.post_button} onClick={handleSubmit}>
+        <button
+          type="submit"
+          disabled={buttonState.post_button}
+          onClick={handleSubmit}
+        >
           post your design!
         </button>
       </form>
