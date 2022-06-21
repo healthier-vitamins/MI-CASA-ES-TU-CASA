@@ -29,7 +29,7 @@ router.post("/create", async (req, res) => {
     const createPost = await Posts.create(req.body);
     res.send({ status: "created successfully", data: createPost });
   } catch (error) {
-    res.send({ status: "failed", data: "Failed to create" });
+    res.send({ status: "failed", data: "Failed to create", error: error});
   }
 });
 
@@ -47,13 +47,21 @@ router.get("/filter/:style/:username", async (req, res) => {
 
 // update
 router.put("/:id", (req, res) => {
-  res.send("update");
+  const { id } = req.params;
 });
 
 // delete
-router.delete("/:id", (req, res) => {
-  res.send("delete");
-});
+
+router.delete("/:id", async (req, res) => {
+  const { id } = req.params;
+  console.log("id", id) 
+  try {
+    const deletePost = await Posts.findByIdAndRemove(id);
+    res.send( {status: "success", data: deletePost})
+  } catch (error) {
+    res.send({status: "failed to delete", data: "failed to delete"})
+  }
+})
 
 // router.get("/seed", async (req, res) => {
 
