@@ -15,6 +15,7 @@ function ShowPost() {
   const [deleteModal, setDeleteModal] = useState(false);
   const [imgId, setImgId] = useState("");
   const [thisPost, setThisPost] = useState({});
+  const [comments, setComments] = useState({})
 
   const toggleModal = () => {
     setShowModal((prev) => !prev);
@@ -25,10 +26,19 @@ function ShowPost() {
     fetch(`/api/posts/${id}`)
       .then((response) => response.json())
       .then((data) => {
-        setThisPost(data?.data);
+        setThisPost(data.data);
       });
-  }, []);
-
+    }, []);
+    
+    useEffect(() => {
+      fetch(`/api/comments/${id}`)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("heyyouthere",data)
+        setComments(data?.data);
+      });
+    }, []);
+    
   const toggleModalDelete = () => {
     setDeleteModal((prev) => !prev);
   };
@@ -120,7 +130,9 @@ function ShowPost() {
             <div className={show.commleft}>
               <CreateCommentForm thisPost={thisPost} />
                   comments:
-                  <p> this is beautiful! </p>
+                  {comments.map((c, index) => (
+                  <p key={index}>{c.comment} </p>
+                    ))}
                   <p>see all ### comments</p>
             </div>
           </div>
