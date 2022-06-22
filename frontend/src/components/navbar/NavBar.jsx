@@ -5,7 +5,6 @@ import nav from "./NavBar.module.css";
 
 function NavBar() {
   const [user, setUser] = useAtom(userAtom);
-
   const ShowCreatePost = () => {
     if (Object.keys(user).length > 0) {
       return <Link to="/create-post">Create Post</Link>;
