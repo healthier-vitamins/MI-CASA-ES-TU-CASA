@@ -22,12 +22,12 @@ router.get("/", async (req, res) => {
   }
 });
 
+/// FOR FILTER ///
 const filterCost = (post, cost) => {
   if (cost !== 0) {
-    
     // console.log("post's cost:", post.cost);
     if (post.cost <= cost && post.cost > 0) {
-      console.log("return cost", post)
+      console.log("return cost", post);
       return true;
     }
   }
@@ -35,10 +35,9 @@ const filterCost = (post, cost) => {
 
 const filterUsername = (post, usernameLower) => {
   if (usernameLower !== "") {
-    
     // console.log("post's username_lower:", post.username_lower);
     if (post.username_lower === usernameLower) {
-      console.log("return username", post)
+      console.log("return username", post);
 
       return true;
     }
@@ -47,26 +46,36 @@ const filterUsername = (post, usernameLower) => {
 
 const filterStyle = (post, styleLower) => {
   if (styleLower !== "") {
-    
     if (post.style_lower === styleLower) {
-      console.log("return style", post)
+      console.log("return style", post);
       return true;
     }
   }
-}
+};
 
 const filterCompanyName = (post, companyNameLower) => {
   if (companyNameLower !== "") {
-    
     if (post.company_name_lower === companyNameLower) {
-      console.log("return company", post)
+      console.log("return company", post);
       return true;
     }
   }
-}
+};
 
-const filterExcess = (post, index, cost, usernameLower, styleLower, companyNameLower, filteredData) => {
-  if ((post.cost > cost) || (post.username_lower !== usernameLower) || (post.style_lower !== styleLower) || (post.company_name_lower !== companyNameLower)) {
+const filterExcess = (
+  post,
+  index,
+  cost,
+  usernameLower,
+  styleLower,
+  companyNameLower
+) => {
+  if (
+    post.cost > cost ||
+    post.username_lower !== usernameLower ||
+    post.style_lower !== styleLower ||
+    post.company_name_lower !== companyNameLower
+  ) {
     return index;
   }
 };
@@ -75,8 +84,8 @@ const filterExcess = (post, index, cost, usernameLower, styleLower, companyNameL
 //   if (cost !== 0 && (post.cost <= cost && post.cost > 0)) {
 //     if (usernameLower !== )
 //   }
-
 // }
+///
 
 // create post
 //! in progress
@@ -107,21 +116,26 @@ router.get("/filter/search", async (req, res) => {
     // conditional logic to return data
     for (let post of filterPost) {
       if (
-      filterCost(post, cost) || 
-      filterUsername(post, usernameLower) ||
-      filterStyle(post, styleLower) ||
-      filterCompanyName(post, companyNameLower)
+        filterCost(post, cost) ||
+        filterUsername(post, usernameLower) ||
+        filterStyle(post, styleLower) ||
+        filterCompanyName(post, companyNameLower)
       ) {
-        filteredData.push(post)
+        filteredData.push(post);
       }
-      
     }
     for (let i = 0; i < filteredData.length; i++) {
+      let indexed = filterExcess(
+        filteredData[i],
+        i,
+        cost,
+        usernameLower,
+        styleLower,
+        companyNameLower,
+        filteredData
+      );
 
-        let indexed = filterExcess(filteredData[i], i, cost, usernameLower, styleLower, companyNameLower, filteredData);
-
-        filteredData.splice(indexed, 1)
-
+      filteredData.splice(indexed, 1);
     }
 
     console.log("filteredData:", filteredData);
