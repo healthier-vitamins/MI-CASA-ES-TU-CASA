@@ -7,7 +7,7 @@ function NavBar() {
   const [user, setUser] = useAtom(userAtom);
   const ShowCreatePost = () => {
     if (Object.keys(user).length > 0) {
-      return <Link to="/create-post">Create Post</Link>;
+      return <Link className={nav.text} to="/create-post">Create Post</Link>;
     } else {
       return null;
     }
@@ -15,19 +15,23 @@ function NavBar() {
 
   return (
     <div className={nav.navbar}>
-      <Link className={nav.home} to="/">H</Link>
-      <Link to="/sign-up/">Sign Up/Login</Link>
-      <Link to="/profile/:username/:id">Profile</Link>
-      <Link to="/show-post/:id">onClick event (ShowPost)</Link>
-      <ShowCreatePost />
+      <Link className={nav.home} to="/">
+        <span className={nav.perspectiveH}>H</span>
+        <span className={nav.perspectiveM}>M</span>
+      </Link>
+      <Link className={nav.text} to="/sign-up/">Sign Up/Login</Link>
+      <Link className={nav.text} to="/profile/:username/:id">Profile  </Link>
+      {/* <Link to="/show-post/:id">onClick event (ShowPost)</Link> */}
       <div className={nav.login}>
-            {user.status === "success" ? (
-              <Link to={`/profile/${user.data.username}/${user.data._id}`}>
-              <p>{user.data.username}</p>
+      <ShowCreatePost />
+            {Object.keys(user).length > 0 ? (
+              <Link className={nav.text} to={`/profile/${user.data.username}/${user.data._id}`}>
+              <p className={nav.text}>{user.data.username}</p>
               </Link>
             ) : (
               <>
-                <Link to="/sign-up">Sign Up</Link>/<Link to="/login">Login</Link>
+                <Link className={nav.text} 
+                to="/sign-up">Sign Up</Link>/<Link className={nav.text} to="/login">Login</Link>
               </>
             )}
           </div>
