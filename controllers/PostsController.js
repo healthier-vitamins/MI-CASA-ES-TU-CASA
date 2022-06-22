@@ -88,7 +88,6 @@ const filterExcess = (
 ///
 
 // create post
-//! in progress
 router.post("/create", async (req, res) => {
   try {
     const createPost = await Posts.create(req.body);

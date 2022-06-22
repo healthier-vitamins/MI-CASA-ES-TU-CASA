@@ -1,23 +1,24 @@
-function FilterSearch({ filterBy, setFilterBy }) {
-
-//! not completed
+function FilterSearch({ filterBy, setFilterBy, setAllPosts }) {
+  //! not completed
 
   const handleChange = (e) => {
     const value = e.target.value;
-  
+
     setFilterBy({ ...filterBy, [e.target.name]: value });
   };
 
-
   const handleSubmit = () => {
-    const {style, username, company_name, cost} = filterBy
-    fetch(`/api/posts/filter/search?style=${style}&username=${username}&cost=${cost}&company_name=${company_name}`)
-    // fetch(`/api/posts/filter/${encodeURIComponent(style)}/${encodeURIComponent(username)}/${encodeURIComponent(cost)}/${encodeURIComponent(company_name)}`)
-    .then((response) => response.json())
-    .then((data) => console.log(data))
+    const { style, username, company_name, cost } = filterBy;
+    fetch(
+      `/api/posts/filter/search?style=${style}&username=${username}&cost=${cost}&company_name=${company_name}`
+    )
+      // fetch(`/api/posts/filter/${encodeURIComponent(style)}/${encodeURIComponent(username)}/${encodeURIComponent(cost)}/${encodeURIComponent(company_name)}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setAllPosts(data.data)
+        console.log(data.data)
+      });
   };
-  
-
 
   return (
     <div className="index-filter">
@@ -26,7 +27,7 @@ function FilterSearch({ filterBy, setFilterBy }) {
           e.preventDefault();
         }}
       >
-           <label htmlFor="select-style">Style: </label>
+        <label htmlFor="select-style">Style: </label>
         <select
           name="style"
           id="select-style"
