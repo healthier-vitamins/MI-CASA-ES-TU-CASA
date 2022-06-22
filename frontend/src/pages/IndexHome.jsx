@@ -25,6 +25,8 @@ function IndexHome() {
       });
   }, []);
 
+  const userData = user.data
+
   if (Object.keys(allPosts).length < 1) {
     return "loading";
   } else {
@@ -33,8 +35,8 @@ function IndexHome() {
         <div className="index-container">
           <div className="index-login">
             {user.status === "success" ? (
-              <Link to={`/profile/${user.data._id}`}>
-              <p>{user.data.username}</p>
+              <Link to={`/profile/${userData.username}/${userData._id}`}>
+              <p>{userData.username}</p>
               </Link>
             ) : (
               <>
