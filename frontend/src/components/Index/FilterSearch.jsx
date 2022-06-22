@@ -11,14 +11,10 @@ function FilterSearch({ filterBy, setFilterBy }) {
 
   const handleSubmit = () => {
     const {style, username, company_name, cost} = filterBy
-    fetch(`/api/posts/filter/${encodeURIComponent(style)}/${encodeURIComponent(username)}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
+    fetch(`/api/posts/filter/search?style=${style}&username=${username}&cost=${cost}&company_name=${company_name}`)
+    // fetch(`/api/posts/filter/${encodeURIComponent(style)}/${encodeURIComponent(username)}/${encodeURIComponent(cost)}/${encodeURIComponent(company_name)}`)
     .then((response) => response.json())
-    .then((data) => console.log(data.data))
+    .then((data) => console.log(data))
   };
   
 

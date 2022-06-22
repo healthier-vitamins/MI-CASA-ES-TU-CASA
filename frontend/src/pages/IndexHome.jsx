@@ -11,7 +11,7 @@ function IndexHome() {
   const [allPosts, setAllPosts] = useState({});
   const [user, setUser] = useAtom(userAtom);
   const [filterBy, setFilterBy] = useState({
-    style: "minimalist",
+    style: "",
     username: "",
     company_name: "",
     cost: 0,
