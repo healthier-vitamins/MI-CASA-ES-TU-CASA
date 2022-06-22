@@ -7,7 +7,8 @@ import { userAtom } from "../App.jsx";
 import { useAtom } from "jotai";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
-import CreateCommentForm from "../components/createComment/CreateCommentForm";
+import CreateCommentForm from "../components/Comments/CreateCommentForm";
+import ShowComments from "../components/Comments/ShowComments";
 
 function ShowPost() {
   const [user, setUser] = useAtom(userAtom);
@@ -16,6 +17,7 @@ function ShowPost() {
   const [imgId, setImgId] = useState("");
   const [thisPost, setThisPost] = useState({});
   const [comments, setComments] = useState({})
+  const [allComments, setAllComments] = useState({})
 
   const toggleModal = () => {
     setShowModal((prev) => !prev);
@@ -129,11 +131,10 @@ function ShowPost() {
           <div className={show.comments}>
             <div className={show.commleft}>
               <CreateCommentForm thisPost={thisPost} />
-                  comments:
-                  {comments.map((c, index) => (
-                  <p key={index}>{c.comment} </p>
-                    ))}
-                  <p>see all ### comments</p>
+              <ShowComments 
+              comments={comments} 
+              allComments={allComments} 
+              setAllComments={setAllComments} />
             </div>
           </div>
           <div className={show.commright}>

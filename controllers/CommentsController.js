@@ -16,7 +16,7 @@ const Comments = require("../models/Comments");
 router.get("/:id", async(req, res) => {
   const postid = req.params.id;
   try {
-    const filteredComments = await Comments.find({ postId: postid})
+    const filteredComments = await Comments.find({ postId: postid })
     res.send({ status: "found" , data: filteredComments});
   } catch (error) {
     res.send(error)

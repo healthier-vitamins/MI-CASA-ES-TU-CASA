@@ -3,7 +3,7 @@ const {Schema} = mongoose;
 //{type: Schema.Types.ObjectId, ref: "Posts"}
 const commentSchema = Schema({
     comment: {type: String, required: true},
-    author: {type: Schema.Types.ObjectId, ref: "Users"},
+    author: String,
     postId: String,
 });
 
