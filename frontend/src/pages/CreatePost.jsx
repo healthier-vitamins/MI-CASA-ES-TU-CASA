@@ -9,9 +9,12 @@ function CreatePost() {
     short_description: "",
     description: "",
     style: "",
+    style_lower: "",
     cost: 0,
     company_name: "",
+    company_name_lower: "",
     username: "",
+    username_lower: "",
   });
 
   return (
