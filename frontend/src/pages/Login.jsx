@@ -1,10 +1,9 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useAtom } from "jotai";
 import { userAtom } from "../App.jsx";
-// import { useState } from "react";
+import { useState } from "react";
 
 import "./Login.css";
-import { useState } from "react";
 
 function Login() {
   // const [userID, setUserID] = useState({})
@@ -60,7 +59,7 @@ function Login() {
             <input
               className="login-input"
               name="password"
-              type="text"
+              type="password"
               placeholder="Password"
             />
             <label className="login-label" htmlFor="Password">
