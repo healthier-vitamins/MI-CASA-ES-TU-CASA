@@ -22,6 +22,62 @@ router.get("/", async (req, res) => {
   }
 });
 
+const filterCost = (post, cost) => {
+  if (cost !== 0) {
+    
+    // console.log("post's cost:", post.cost);
+    if (post.cost <= cost && post.cost > 0) {
+      console.log("return cost", post)
+      return true;
+    }
+  }
+};
+
+const filterUsername = (post, usernameLower) => {
+  if (usernameLower !== "") {
+    
+    // console.log("post's username_lower:", post.username_lower);
+    if (post.username_lower === usernameLower) {
+      console.log("return username", post)
+
+      return true;
+    }
+  }
+};
+
+const filterStyle = (post, styleLower) => {
+  if (styleLower !== "") {
+    
+    if (post.style_lower === styleLower) {
+      console.log("return style", post)
+      return true;
+    }
+  }
+}
+
+const filterCompanyName = (post, companyNameLower) => {
+  if (companyNameLower !== "") {
+    
+    if (post.company_name_lower === companyNameLower) {
+      console.log("return company", post)
+      return true;
+    }
+  }
+}
+
+const filterExcess = (post, index, cost, usernameLower, styleLower, companyNameLower, filteredData) => {
+  if ((post.cost > cost) || (post.username_lower !== usernameLower) || (post.style_lower !== styleLower) || (post.company_name_lower !== companyNameLower)) {
+    return index;
+  }
+};
+
+// const filterAll = (post, cost, usernameLower, styleLower, companyNameLower) => {
+//   if (cost !== 0 && (post.cost <= cost && post.cost > 0)) {
+//     if (usernameLower !== )
+//   }
+
+// }
+
 // create post
 //! in progress
 router.post("/create", async (req, res) => {
@@ -34,29 +90,44 @@ router.post("/create", async (req, res) => {
 });
 
 // filter posts
-router.get("/filter/:style/:username", async (req, res) => {
-  const { style, username } = req.params;
-  console.log(style, username);
+router.get("/filter/search", async (req, res) => {
+  // init all lowercase
+
+  const { style, username, company_name, cost } = req.query;
+  const styleLower = style.toLowerCase();
+  const usernameLower = username.toLowerCase();
+  const companyNameLower = company_name.toLowerCase();
+  // console.log("norm params:", cost, style, username, company_name);
+  // console.log("lower params:", styleLower, usernameLower, companyNameLower);
   const filteredData = [];
-  const allData = [];
+  // const allData = [];
   try {
     const filterPost = await Posts.find();
-    console.log(filterPost);
-    const queryPosts = Object.keys(filterPost);
 
-    filteredData = filterPost.map((object) => object.data);
-    console.log(filtered);
+    // conditional logic to return data
+    for (let post of filterPost) {
+      if (
+      filterCost(post, cost) || 
+      filterUsername(post, usernameLower) ||
+      filterStyle(post, styleLower) ||
+      filterCompanyName(post, companyNameLower)
+      ) {
+        filteredData.push(post)
+      }
+      
+    }
+    for (let i = 0; i < filteredData.length; i++) {
+
+        let indexed = filterExcess(filteredData[i], i, cost, usernameLower, styleLower, companyNameLower, filteredData);
+
+        filteredData.splice(indexed, 1)
+
+    }
+
+    console.log("filteredData:", filteredData);
+
+    res.send({ status: "filtered successfully", data: filteredData });
   } catch (error) {
-    // for (let i = 0; i < queryPosts.length; i++) {
-
-    // }}
-
-    // console.log("post", post)
-    // if (post.username.toLowerCase() === username.toLowerCase()) {
-    //   queriedPosts.append()
-    // console.log(queriedPosts)
-
-    // res.send({status: "filtered successfully", data: filterPost});
     res.send({
       status: "failed filter",
       data: "Failed to filter",
@@ -83,53 +154,26 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
-// router.get("/seed", async (req, res) => {
-
-//   try {
-//     await Posts.deleteMany({});
-//     const newPosts = await Posts.create([
-//       {
-//         img: "00img link or import from image download.",
-//         description: "00description",
-//         style: "00scandinavian/modern/minimalist/industrial",
-//         cost: 000000,
-//         userId: "00userId",
-//         commentCount: "00array of userIds. array.length to get count",
-//         likeCount: "00array of userIds. array.length to get count as well.",
-//       },
-//       {
-//         img: "11img link or import from image download.",
-//         description: "11description",
-//         style: "11scandinavian/modern/minimalist/industrial",
-//         cost: 111111,
-//         userId: "11userId",
-//         commentCount: "11array of userIds. array.length to get count",
-//         likeCount: "11array of userIds. array.length to get count as well.",
-//       },
-//       {
-//         img: "22img link or import from image download.",
-//         description: "22description",
-//         style: "22scandinavian/modern/minimalist/industrial",
-//         cost: 22222,
-//         userId: "22userId",
-//         commentCount: "22array of userIds. array.length to get count",
-//         likeCount: "22array of userIds. array.length to get count as well.",
-//       },
-//       {
-//         img: "22img link or import from image download.",
-//         description: "22description",
-//         style: "22scandinavian/modern/minimalist/industrial",
-//         cost: 22222,
-//         userId: "22userId",
-//         commentCount: "22array of userIds. array.length to get count",
-//         likeCount: "22array of userIds. array.length to get count as well.",
-//       },
-//     ]);
-//     res.send(newPosts);
-//   } catch (error) {
-//     res.send(error);
-//   }
-// });
+router.get("/seed", async (req, res) => {
+  try {
+    await Posts.deleteMany({});
+    // const newPosts = await Posts.create([
+    //   {
+    //     title: "welcome to mama",
+    //     img: "https://i.imgur.com/TwHkvE5.jpeg",
+    //     short_description: "mama is not so nice",
+    //     description: "mama is nice",
+    //     style: "scandinavian",
+    //     cost: 2000,
+    //     company_name: "MaMa",
+    //     username: ""
+    //   },
+    // ]);
+    res.send("deleted");
+  } catch (error) {
+    res.send(error);
+  }
+});
 
 //show post
 router.get("/:id", async (req, res) => {

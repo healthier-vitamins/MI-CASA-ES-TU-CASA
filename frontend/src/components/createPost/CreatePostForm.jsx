@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { userAtom } from "../../App.jsx";
 import { useAtom } from "jotai";
 import CSSModules from "react-css-modules";
@@ -30,22 +30,28 @@ function CreatePostForm({ entry, setEntry }) {
     const newArr = entry.img;
     newArr.push(img);
     setImg("");
-    setButtonState({
-      ...buttonState,
-      img_button: true,
-    });
+
+   
+
+    const usernameLower = entry.username.toLowerCase();
+    const companyNameLower = entry.company_name.toLowerCase();
+    const styleLower = entry.style.toLowerCase();
 
     setEntry({
       ...entry,
       img: newArr,
       ["company_name"]: user?.data?.company_name,
       ["username"]: user?.data?.username,
+      ["username_lower"]: usernameLower,
+      ["company_name_lower"]: companyNameLower,
+      ["style_lower"]: styleLower,
     });
     console.log(entry.img);
     if (entry.img.length > 0) {
       setButtonState({
         ...buttonState,
         post_button: false,
+        img_button: true,
       });
     }
   };
@@ -87,7 +93,8 @@ function CreatePostForm({ entry, setEntry }) {
   };
 
   const handleSubmit = () => {
-    console.log(entry);
+    // assignLowerValues();
+    console.log("entry during submit", entry);
     fetch("/api/posts/create", {
       method: "POST",
       headers: {
@@ -97,6 +104,26 @@ function CreatePostForm({ entry, setEntry }) {
     })
       .then((response) => response.json())
       .then((data) => console.log("data", data));
+
+    setEntry({
+      ...entry,
+      title: "",
+      img: [],
+      short_description: "",
+      description: "",
+      style: "",
+      style_lower: "",
+      cost: 0,
+      company_name: "",
+      company_name_lower: "",
+      username: "",
+      username_lower: "",
+    });
+    setButtonState({
+      ...buttonState,
+      post_button: true,
+      img_button: true,
+    });
 
     // const id = data.data._id;
     console.log(allData);
@@ -109,7 +136,6 @@ function CreatePostForm({ entry, setEntry }) {
       }, 500);
       navigate(`/create-post`);
     }
-
   };
 
   return (
