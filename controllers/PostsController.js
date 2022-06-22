@@ -139,7 +139,7 @@ router.get("/:id", async (req, res) => {
     if (post === null) {
       res.send({ status: "fail", data: "Post Not Found" });
     } else {
-      res.send({ status: "success", data: post, error: error });
+      res.send({ status: "success", data: post });
     }
   } catch (error) {
     res.send(error);

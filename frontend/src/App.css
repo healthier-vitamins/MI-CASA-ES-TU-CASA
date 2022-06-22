@@ -10,21 +10,9 @@ h1,h2,h3,h4,h5,h6 {
   margin: 3em 0 1em;
 }
 
-p,ul,ol {
+/* ul,ol {
   color: #1d1d1d;
   font-family: sans-serif;
-}
+} */
 
-/* navbarのものだからあとで全部消す */
-a {
-  display: inline-block;
-  padding: 0 5px 10px 5px;
-  color: #1d1d1d;
-  text-decoration: none;
-  text-transform: uppercase;
-  font-family: sans-serif;
-}
 
-a:hover {
-  text-decoration: underline;
-}

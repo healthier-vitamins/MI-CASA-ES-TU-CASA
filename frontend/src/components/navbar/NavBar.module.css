@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Potta+One&display=swap');
+
+.navbar {
+    margin-top: 1rem;
+    max-width: 800px;
+    max-height: 80px;
+    text-align: left;
+    display: flex; 
+    border: solid; 
+} 
+
+.home {
+    font-size: 80px;
+    font-family: 'Potta One', cursive;
+}
+
+.home:hover {
+    text-decoration: none;
+}
+
+a {
+    display: inline-block;
+    padding: 0 5px 10px 5px;
+    color: #1d1d1d;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-family: sans-serif;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+

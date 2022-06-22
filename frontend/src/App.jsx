@@ -21,7 +21,7 @@ function App() {
             <Route index element={<IndexHome />} />
             <Route path="/sign-up" element={<SignUp />} />
             <Route path="/create-post" element={<CreatePost />} />
-            <Route path="/profile/:id" element={<Profile />} />
+            <Route path="/profile/:username/:id" element={<Profile />} />
             <Route path="/show-post/:id" element={<ShowPost />} />
           </Route>
           <Route path="/login" element={<Login />} />
