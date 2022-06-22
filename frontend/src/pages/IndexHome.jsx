@@ -33,7 +33,7 @@ function IndexHome() {
     return (
       <>
         <div className={home.container}>
-          <div className={home.login}>
+          {/* <div className={home.login}>
             {user.status === "success" ? (
               <Link to={`/profile/${userData.username}/${userData._id}`}>
               <p>{userData.username}</p>
@@ -45,7 +45,7 @@ function IndexHome() {
                 <Link to="/login">Login</Link>
               </>
             )}
-          </div>
+          </div> */}
           <div className={home.title}>
             {/* clip-text--no-textzone をクラスに追加すると黒なしになる*/}
             <div className={home.cliptext}><p>HO & ME</p>
