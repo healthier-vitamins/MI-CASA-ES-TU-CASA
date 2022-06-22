@@ -2,61 +2,73 @@ import { useState } from "react";
 import { userAtom } from "../../App.jsx";
 import { useAtom } from "jotai";
 
-function CreateCommentForm( { thisPost, allComments, setAllComments }) {
+function CreateCommentForm({ thisPost, comments, setComments }) {
   const [user, setUser] = useAtom(userAtom);
-    const [comment, setComment] = useState({
-        comment: "",
-        author:"",
-        postId: ""
-    })
-     
-    const handleChange = (event) => {
-        const { value } = event.target;
-        // console.log(user, thisPost)
-        setComment({
-            ...comment,
-            ["comment"]: value,
-            ["author"]: user.data._id,
-            ["postId"]: thisPost._id
-        })
-    }
+  const [newComment, setNewComment] = useState({
+    comment: "",
+    author_username: "",
+    author_id: "",
+    postId: "",
+  });
 
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        // console.log(comment)
-        fetch("/api/comments/create", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(comment),
-        })
-          .then((response) => response.json())
-          .then((data) => setAllComments({...allComments, data: data})) ;
-        // if (data.status === "comment success") {
-        //   console.log(allComments)
-        // } else {
-        //   setTimeout(() => {
-        //     return "Failed to add comment";
-        //   }, 500);
-        // }
-    }
+  const handleChange = (event) => {
+    const { value } = event.target;
+    // console.log(user, thisPost)
+    setNewComment({
+      ...newComment,
+      ["comment"]: value,
+      ["author_username"]: user.data.username,
+      ["author_id"]: user.data._id,
+      ["postId"]: thisPost._id,
+    });
+  };
+
+  const handleSubmit = () => {
+    console.log(newComment);
+    fetch("/api/comments/create", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newComment),
+    })
+      .then((response) => response.json())
+      .then((data) => setComments([...comments, data.data]));
+    // console.log("comments:", comments)
+    setNewComment({
+      comment: "",
+      author_username: "",
+      author_id: "",
+      postId: "",
+    });
+  };
+
+  //! setComments([ ...comments, data.data ])
+
+  // if (data.status === "comment success") {
+  //   console.log(allComments)
+  // } else {
+  //   setTimeout(() => {
+  //     return "Failed to add comment";
+  //   }, 500);
+  // }
 
   return (
-    <div>
-      <form>
+    <div className="create-comment-container">
+      <h5>Create Comment</h5>
+      <form onSubmit={(e) => e.preventDefault()}>
         <textarea
           type="text"
-          id="comment"
-          name="comment"
+          id="create-comment"
+          name="create-comment"
           placeholder="add your comment"
           // value={}
           onChange={handleChange}
         />
-        <button
-        type="submit"
-        onClick={handleSubmit}
-        > add </button>
+        <button type="submit" onClick={handleSubmit}>
+          {" "}
+          add{" "}
+        </button>
       </form>
     </div>
   );
