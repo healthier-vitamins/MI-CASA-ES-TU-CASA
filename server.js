@@ -35,7 +35,7 @@ app.use(express.json());
 // dist init
 app.use(express.static("./frontend/dist"));
 app.use("/api/posts", PostsController);
-app.use("/api/reviews", CommentsController);
+app.use("/api/comments", CommentsController);
 app.use("/api/users", UsersController);
 
 // express init
