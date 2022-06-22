@@ -7,38 +7,58 @@
     margin-right: auto;
     margin-bottom: 0;
     display: table; 
-    /* border: solid;  */
+    color: #f2eddf; 
+    border-bottom: solid 1px; 
 } 
 
 .login {
     display:inline-flex;
     text-align: right;
     justify-content: right;
-    width: 30%;
+    width: 30%; 
     max-width: 30%;
     float: right;
     margin-right: 2rem;
+    margin-top: 3rem;
 }
 
 .home {
     display:table-cell;
-    font-size: 80px;
-    font-family: 'Secular One', sans-serif;
+    display: inline-block;
+    color: #f2eddf;
+    font-family: "Oswald", sans-serif;
+    font-weight: bold;
+    text-decoration: none;
 }
+
+.perspectiveH {
+    display: inline-block;       
+    font-size: 58pt;             
+    transform: perspective(65px) rotateY(33deg);  
+    margin-right: -0.3rem;
+                  
+  } 
+
+  .perspectiveM {
+    display: inline-block;       
+    font-size: 58pt;             
+    transform: perspective(65px) rotateY(335deg); 
+    margin-left: -1rem;           
+  }
 
 .home:hover {
     text-decoration: none;
 }
 
-a {
+.text {
     padding: 0px 5px 0px 5px;
-    color: #1d1d1d;
+    color: #f2eddf;
     text-decoration: none;
     text-transform: uppercase;
     font-family: sans-serif;
   }
   
-  a:hover {
+  .text:hover {
     text-decoration: underline;
   }
 

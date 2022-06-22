@@ -1,4 +1,9 @@
 .container {
+    margin: auto;
     justify-content: center;
     text-align: center;
+    background-color: antiquewhite;
+    border-radius: 15px;
+    width: 600px;
+    height: 400px;
 }

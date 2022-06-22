@@ -36,10 +36,9 @@ function IndexHome() {
           <div className={home.title}>
             {/* clip-text--no-textzone をクラスに追加すると黒なしになる*/}
             <div className={home.cliptext}><p>HO & ME</p>
-            <p className={home.smalltext}>Where the Ho & Me live together</p>
+            <p className={home.smalltext}>Where Ho & Me live together</p>
             </div>
           </div>
-
           {Object.keys(allPosts).length < 1 ? "loading" :
           <>
           <div className={home.filtersearch}>

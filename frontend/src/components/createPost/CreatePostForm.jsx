@@ -134,7 +134,7 @@ function CreatePostForm({ entry, setEntry }) {
       setTimeout(() => {
         return "Failed to create post";
       }, 500);
-      navigate(`/create-post`);
+      navigate("/create-post");
     }
   };
 
