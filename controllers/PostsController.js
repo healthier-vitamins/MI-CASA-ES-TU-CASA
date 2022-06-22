@@ -27,7 +27,7 @@ const filterCost = (post, cost) => {
   if (cost !== 0) {
     // console.log("post's cost:", post.cost);
     if (post.cost <= cost && post.cost > 0) {
-      console.log("return cost", post);
+      // console.log("return cost", post);
       return true;
     }
   }
@@ -37,8 +37,7 @@ const filterUsername = (post, usernameLower) => {
   if (usernameLower !== "") {
     // console.log("post's username_lower:", post.username_lower);
     if (post.username_lower === usernameLower) {
-      console.log("return username", post);
-
+      // console.log("return username", post);
       return true;
     }
   }
@@ -47,7 +46,7 @@ const filterUsername = (post, usernameLower) => {
 const filterStyle = (post, styleLower) => {
   if (styleLower !== "") {
     if (post.style_lower === styleLower) {
-      console.log("return style", post);
+      // console.log("return style", post);
       return true;
     }
   }
@@ -56,7 +55,7 @@ const filterStyle = (post, styleLower) => {
 const filterCompanyName = (post, companyNameLower) => {
   if (companyNameLower !== "") {
     if (post.company_name_lower === companyNameLower) {
-      console.log("return company", post);
+      // console.log("return company", post);
       return true;
     }
   }
@@ -133,7 +132,7 @@ router.get("/filter/search", async (req, res) => {
         companyNameLower,
         filteredData
       );
-
+      console.log("remove:", filteredData[indexed]);
       filteredData.splice(indexed, 1);
     }
 

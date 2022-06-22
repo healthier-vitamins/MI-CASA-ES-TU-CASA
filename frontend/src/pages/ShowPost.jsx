@@ -1,7 +1,7 @@
 import show from "./ShowPost.module.css";
 import { useState, useEffect } from "react";
 import ImageModal from "../components/showPost/ImageModal";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import DeleteModal from "../components/showPost/DeleteModal";
 import { userAtom } from "../App.jsx";
 import { useAtom } from "jotai";
@@ -16,8 +16,10 @@ function ShowPost() {
   const [deleteModal, setDeleteModal] = useState(false);
   const [imgId, setImgId] = useState("");
   const [thisPost, setThisPost] = useState({});
-  const [comments, setComments] = useState({})
-  const [allComments, setAllComments] = useState({})
+  const [comments, setComments] = useState({});
+
+  const navigate = useNavigate();
+  // const [allComments, setAllComments] = useState({});
 
   const toggleModal = () => {
     setShowModal((prev) => !prev);
@@ -30,17 +32,18 @@ function ShowPost() {
       .then((data) => {
         setThisPost(data.data);
       });
-    }, []);
-    
-    useEffect(() => {
-      fetch(`/api/comments/${id}`)
+  }, []);
+
+  useEffect(() => {
+    fetch(`/api/comments/${id}`)
       .then((response) => response.json())
       .then((data) => {
-        console.log("heyyouthere",data)
-        setComments(data?.data);
+        // console.log("heyyouthere", data);
+        setComments(data.data);
+        console.log("comments queried", data.data);
       });
-    }, []);
-    
+  }, []);
+
   const toggleModalDelete = () => {
     setDeleteModal((prev) => !prev);
   };
@@ -49,18 +52,43 @@ function ShowPost() {
     console.log("haven't created this function :(");
   };
 
-  const ShowDeletePost = () => { 
-    if (Object.keys(user).length > 0) {
-    if (user.data.username === thisPost.username ) {
+  const ShowDeletePost = () => {
+    console.log(
+      "do they match? authentication for delete button",
+      user,
+      thisPost
+    );
+    if (user.data) {
+      if (user.data.username === thisPost.username) {
+        console.log("delete button shall show");
+        return (
+          <p className={show.editdelete} onClick={toggleModalDelete}>
+            delete this post
+          </p>
+        );
+      } else {
+        return null;
+      }
+    }
+  };
+
+  const HideAddCommentField = () => {
+    if (!user.data) {
+      console.log("comment fioeld hidden")
       return (
-        <p className={show.editdelete} onClick={toggleModalDelete}>
-          delete this post
-        </p>
+        <>
+          <p>Login to comment!</p>
+          <button onClick={()=>navigate("/login")}>Login</button>
+        </>
       );
     } else {
-      return null;
+      return <CreateCommentForm
+        thisPost={thisPost}
+        comments={comments}
+        setComments={setComments}
+      />;
     }
-  }};
+  };
 
   if (Object.keys(thisPost).length < 1) {
     return "loading";
@@ -130,11 +158,10 @@ function ShowPost() {
         <div className={show.commentsandlikes}>
           <div className={show.comments}>
             <div className={show.commleft}>
-              <CreateCommentForm thisPost={thisPost} />
-              <ShowComments 
-              comments={comments} 
-              allComments={allComments} 
-              setAllComments={setAllComments} />
+              {/* only show when user is logged in */}
+              {/* if (user) */}
+              <HideAddCommentField />
+              <ShowComments comments={comments} />
             </div>
           </div>
           <div className={show.commright}>
