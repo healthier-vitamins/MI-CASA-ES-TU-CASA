@@ -5,7 +5,7 @@
     display: flex;  
 }  
 
-.index-login {
+.login {
     float: right;
     display: flex;
     margin-left:auto;
@@ -14,7 +14,7 @@
     margin-right: 1rem;
 }
 
-.index-container {
+.container {
   justify-content: center;
   margin-top: 2rem;
   display: flex;
@@ -29,7 +29,7 @@
     box-sizing: border-box;
   }
   
-  .index-title {
+  .title {
     max-height: 300px;
     text-align: center;
     justify-content: center;
@@ -40,7 +40,7 @@
   }
   
   /* Clip text element */
-  .clip-text {
+  .cliptext {
     font-size: 22vh;
     font-weight: bold;
     line-height: 0;
@@ -58,15 +58,19 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
+
+  .smalltext {
+    font-size: small;
+  }
   
-  .clip-text:before,
-  .clip-text:after {
+  .cliptext:before,
+  .cliptext:after {
     position: absolute;
     content: "";
   }
   
   /* Background */
-  .clip-text:before {
+  .cliptext:before {
     z-index: -2;
     top: 0;
     right: 0;
@@ -76,7 +80,7 @@
   }
   
   /* Text Background (black zone) */
-  .clip-text:after {
+  .cliptext:after {
     position: absolute;
     z-index: -1;
     top: 0.125em;
@@ -88,28 +92,28 @@
   }
 
 /* Change the background position to display letter when the black zone isn't here */
- .clip-text--no-textzone:before {
+ .cliptext--no-textzone:before {
     background-position: -0.75em 0;
       } 
       
- .clip-text--no-textzone:after {
+ .cliptext--no-textzone:after {
         content: none;
       }
       
 /* Use Background-size cover for photo background and no-repeat background */
-    .clip-text--cover,
-    .clip-text--cover:before {
+    .cliptext--cover,
+    .cliptext--cover:before {
         background-repeat: no-repeat;
         -webkit-background-size: cover;
         background-size: cover;
         background-position: 50% 50%;
       }
       
-    .clip-text {
+    .cliptext {
         background-image: url(https://i.imgur.com/woBZD95.jpeg);
       }
 
-.index-filter {
+.filtersearch {
     text-align: center;
     position: relative;
     margin-top: 6rem;

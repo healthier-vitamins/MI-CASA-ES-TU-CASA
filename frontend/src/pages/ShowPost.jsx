@@ -110,7 +110,7 @@ function ShowPost() {
           </div>
           <div className={show.commright}>
             <p>### people liked this post</p>
-            <p>like this post</p>
+            <p>like this post (icon) </p>
             <p className={show.editdelete} onClick={handleEdit}>
               edit this post
             </p>
