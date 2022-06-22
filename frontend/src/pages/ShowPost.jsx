@@ -7,6 +7,7 @@ import { userAtom } from "../App.jsx";
 import { useAtom } from "jotai";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
+import CreateCommentForm from "../components/createComment/CreateCommentForm";
 
 function ShowPost() {
   const [user, setUser] = useAtom(userAtom);
@@ -35,9 +36,6 @@ function ShowPost() {
   const handleEdit = () => {
     console.log("haven't created this function :(");
   };
-
-  console.log("tgus", thisPost)
-  console.log("tttt", user.data)
 
   const ShowDeletePost = () => { 
     if (Object.keys(user).length > 0) {
@@ -120,20 +118,10 @@ function ShowPost() {
         <div className={show.commentsandlikes}>
           <div className={show.comments}>
             <div className={show.commleft}>
-              comments:
-              <p> this is beautiful! </p>
-              <p>see all ### comments</p>
-              <form>
-                <textarea
-                  type="text"
-                  id="comment"
-                  name="comment"
-                  placeholder="add your comment"
-                  // value={}
-                  // onChange={}
-                />
-                <button> add </button>
-              </form>
+              <CreateCommentForm thisPost={thisPost} />
+                  comments:
+                  <p> this is beautiful! </p>
+                  <p>see all ### comments</p>
             </div>
           </div>
           <div className={show.commright}>
