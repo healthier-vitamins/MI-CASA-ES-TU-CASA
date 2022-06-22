@@ -43,7 +43,7 @@ function IndexHome() {
           {Object.keys(allPosts).length < 1 ? "loading" :
           <>
           <div className={home.filtersearch}>
-            <FilterSearch filterBy={filterBy} setFilterBy={setFilterBy} />
+            <FilterSearch filterBy={filterBy} setFilterBy={setFilterBy} setAllPosts={setAllPosts} />
           </div>
           <div className={home.container}>
             {/* set up filter method to fetch remaining data regardless of search history. */}
