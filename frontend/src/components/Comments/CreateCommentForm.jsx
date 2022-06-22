@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { userAtom } from "../../App.jsx";
 import { useAtom } from "jotai";
+import show from "../../pages/ShowPost.module.css";
 
 function CreateCommentForm({ thisPost, comments, setComments }) {
   const [user, setUser] = useAtom(userAtom);
@@ -54,10 +55,10 @@ function CreateCommentForm({ thisPost, comments, setComments }) {
   // }
 
   return (
-    <div className="create-comment-container">
+    <div className={show.commentcontainer}>
       <h5>Create Comment</h5>
       <form onSubmit={(e) => e.preventDefault()}>
-        <textarea
+        <textarea className={show.commentbox}
           type="text"
           id="create-comment"
           name="create-comment"
