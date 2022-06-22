@@ -35,8 +35,8 @@ p {
     max-height: 4rem;
     grid-column: 2 / 3;
     grid-row: 1 / 2;
-    margin-left: 188px;
-    margin-bottom: 8px;
+    margin-left: 0rem;
+    margin-bottom: -2.5rem;
   }
   
   .user-posts-likes {
@@ -49,7 +49,7 @@ p {
   max-height: 2rem;
   grid-column: 2 / 3;
   grid-row: 1 / 2;
-  margin-bottom: 30px;
+  margin-bottom: 2.5rem;
 }
   
 .user-posts-col-left {
