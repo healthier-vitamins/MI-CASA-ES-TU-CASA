@@ -5,17 +5,8 @@ import { useNavigate } from "react-router-dom";
 import m from "./DeleteModal.module.css";
 
 function DeleteModal({ deleteModal, setDeleteModal, thisPost }) {
-    const [posts, setPosts] = useState({})
     const navigate = useNavigate();
-     
-
-  useEffect(() => {
-    fetch("/api/posts/")
-      .then((response) => response.json())
-      .then((data) => setPosts(data.data));
-  }, []);
-    
-
+        
     const toggleModal = () => {
         setDeleteModal(false)
     }
@@ -25,8 +16,7 @@ function DeleteModal({ deleteModal, setDeleteModal, thisPost }) {
         fetch(`/api/posts/${id}`, { method: "DELETE"})
         .then((response) => response.json())
         .then((data) => {
-            console.log("ss", data)
-           setPosts(posts.filter((post) => posts._id !== id));
+            // console.log("ss", data)
            if (data.status === "success") {
             navigate("/")
         } else {
@@ -34,7 +24,6 @@ function DeleteModal({ deleteModal, setDeleteModal, thisPost }) {
         }
         });
     }
-
 
 
   return (

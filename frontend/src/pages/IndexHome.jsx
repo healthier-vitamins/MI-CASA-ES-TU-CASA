@@ -5,7 +5,7 @@ import FilterSearch from "../components/Index/FilterSearch";
 import PostCard from "../components/Index/PostCard";
 import { useAtom } from "jotai";
 import { userAtom } from "../App.jsx";
-import "./IndexHome.css";
+import home from "./IndexHome.module.css";
 
 function IndexHome() {
   const [allPosts, setAllPosts] = useState({});
@@ -25,16 +25,18 @@ function IndexHome() {
       });
   }, []);
 
+  const userData = user.data
+
   if (Object.keys(allPosts).length < 1) {
     return "loading";
   } else {
     return (
       <>
-        <div className="index-container">
-          <div className="index-login">
+        <div className={home.container}>
+          <div className={home.login}>
             {user.status === "success" ? (
-              <Link to={`/profile/${user.data._id}`}>
-              <p>{user.data.username}</p>
+              <Link to={`/profile/${userData.username}/${userData._id}`}>
+              <p>{userData.username}</p>
               </Link>
             ) : (
               <>
@@ -44,16 +46,17 @@ function IndexHome() {
               </>
             )}
           </div>
-          <div className="index-title">
+          <div className={home.title}>
             {/* clip-text--no-textzone をクラスに追加すると黒なしになる*/}
-            <div className="clip-text">HO & ME</div>
-            <p>Where the Ho & Me live together</p>
+            <div className={home.cliptext}><p>HO & ME</p>
+            <p className={home.smalltext}>Where the Ho & Me live together</p>
+            </div>
           </div>
-          <div className="filtersearch">
+          <div className={home.filtersearch}>
             <FilterSearch filterBy={filterBy} setFilterBy={setFilterBy} />
           </div>
 
-          <div className="index-container">
+          <div className={home.container}>
             {/* set up filter method to fetch remaining data regardless of search history. */}
             {allPosts.map((ele, index) => {
               return <PostCard post={ele} key={index} />;
