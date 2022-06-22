@@ -7,12 +7,12 @@ const postSchema = Schema({
   short_description: { type: String, required: true, maxLength: 120 },
   description: { type: String, required: true, maxLength: 500 },
   style: { type: String, required: true },
-  // style_lower: {type: String, required: true },
+  style_lower: {type: String, required: true },
   cost: { type: Number },
   company_name: { type: String},
-  // company_name_lower: {type: String },
+  company_name_lower: {type: String },
   username: { type: String},
-  // username_lower: {type: String}
+  username_lower: {type: String}
 });
 
 const Posts = mongoose.model("Posts", postSchema);
