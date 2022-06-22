@@ -2,34 +2,50 @@ const express = require("express");
 const router = express.Router();
 const Comments = require("../models/Comments");
 
-//create review
-router.post("/:id", (req, res) => {
-  res.send("post will be here");
+//create comment
+router.post("/create", async (req, res) => {
+  try {
+    const createComment = await Comments.create(req.body);
+    // res.send(createComment)
+    res.send({ status: "comment success", data: createComment });
+  } catch (error) {
+    res.send({ status: "comment failed", error: error})
+  }
 });
+
+// show comments
+// router.get("/", async(req, res) => {
+//   try {
+//     const filteredComments = await Comments.findById()
+//     res.send("comments will be here");
+//   } catch (error) {
+//     res.send(error)
+//   }
+// });
 
 // router.get("/seed", async (req, res) => {
 //   try {
-//     await Reviews.deleteMany({});
-//     const newReviews = await Reviews.create([
+//     await Comments.deleteMany({});
+//     const newReviews = await Comments.create([
 //       {
 //         comment: "this is sooooooooooooooooooooooooo great",
-//         username: "00userId.username",
-//         postId: "00postId._id-helps to link to post",
+//         username: "joemama",
+//         postId: "62b297b58f02eb2763431ca6",
 //       },
 //       {
 //         comment: "this is BAAAADADADADADADADADADADADADADADAD",
-//         username: "11userId.username",
-//         postId: "11postId._id-helps to link to post",
+//         username: "mikeox",
+//         postId: "62b297b58f02eb2763431ca6",
 //       },
 //       {
 //         comment: "this is OK???????? not too great",
-//         username: "22userId.username",
-//         postId: "22postId._id-helps to link to post",
+//         username: "whatsupdog",
+//         postId: "62b297dd8f02eb2763431ca8",
 //       },
 //       {
 //         comment: "FINE LA HORR",
-//         username: "33userId.username",
-//         postId: "33postId._id-helps to link to post",
+//         username: "whatsamatterbaby",
+//         postId: "62b297dd8f02eb2763431ca8",
 //       },
 //     ]);
 //     res.send(newReviews);

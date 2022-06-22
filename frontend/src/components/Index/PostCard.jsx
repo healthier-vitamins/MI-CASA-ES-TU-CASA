@@ -18,7 +18,7 @@ function PostCard({ post }) {
         Style: {post.style}
         Cost: {post.cost}
         </Card.Text>
-        <Card.Link href={`/show-post/${post._id}`}>Card Link</Card.Link>
+        <Link to={`/show-post/${post._id}`}>Card Link</Link>
       </Card.Body>
     </Card> 
     </div>
