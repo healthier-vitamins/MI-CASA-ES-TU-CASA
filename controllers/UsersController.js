@@ -111,7 +111,7 @@ router.post("/login", async (req, res) => {
       // res.status(StatusCodes.OK).send(user);
       res.send({ status: "success", data: userLogin });
     } else {
-      res.send("password fail");
+      res.send({ status: "error", data: "password fail" });
     }
   }
 });
@@ -130,13 +130,27 @@ router.get("/authorizedtest", isLoggedIn, async (req, res) => {
 })
 
 //show user page
-router.get("/username/:id", async (req, res) => {
+router.get("/:id", async (req, res) => {
   const { id } = req.params;
   try {
     const userId = await Users.findById(id);
     res.send(userId);
   } catch (error) {
     res.send(error);
+  }
+});
+
+// update users
+router.put("/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const updateUser = await Users.findByIdAndUpdate(id,
+      req.body,
+      {new : true }
+      );
+      res.send({ status: "success", data: updateUser})
+  } catch (error) {
+    res.send({ status: "error", data: "couldn't update"})
   }
 });
 

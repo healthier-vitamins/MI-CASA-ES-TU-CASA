@@ -1,9 +1,14 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAtom } from "jotai";
 import { userAtom } from "../App.jsx";
+import { useState } from "react";
+
+import "./SignUp.css"
 
 function SignUp() {
   const [user, setUser] = useAtom(userAtom);
+  const [data, setData] = useState({});
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -32,11 +37,16 @@ function SignUp() {
       });
   };
 
+  const id = data._id;
+  if (user.status === "success") {
+    navigate("/login");
+  }
+
   return (
     <div className="signup-page">
       <div className="signup-form">
-        <form onSubmit={handleSubmit}>
-          <h2>Sign up</h2>
+        <form onSubmit={handleSubmit} className="signup">
+          <h2>ho&me</h2>
           <div className="signup-container">
             <input
               className="signup-input"
@@ -44,7 +54,7 @@ function SignUp() {
               placeholder="Image"
             />
             {/* (use an imgur link lmao) */}
-            <label htmlFor="img">Upload image placeholder </label>
+            <label className="signup-label" htmlFor="img">Upload profile picture</label>
           </div>
           <div className="signup-container">
             <input
@@ -60,6 +70,7 @@ function SignUp() {
               required
               className="signup-input"
               name="password"
+              type="password"
               placeholder="Password"
             />
             <label className="signup-label" htmlFor="password">Password</label>
@@ -110,11 +121,13 @@ function SignUp() {
           <button className="signup-button">
             Create an account!
             </button>
-        </form>
+        <div className="login-redirect">
         <h4>Already have an account?</h4>
-        <Link id="login-link" to="/login">
-          Click here instead
+        <Link id="login-redirect-link" to="/login">
+          <button className="login-redirect-button">Login instead!</button>
         </Link>
+        </div>
+        </form>
       </div>
     </div>
   );

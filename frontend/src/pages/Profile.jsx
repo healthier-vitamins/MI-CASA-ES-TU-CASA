@@ -3,31 +3,51 @@ import { useEffect, useState } from "react";
 import "./Profile.css"
 
 function Profile() {
+    // set use profile data
     const { id } = useParams();
     const [ userProfile, setUserProfile ] = useState({});
 
+    // update
+    // const [num, setNum] = useState(-1);
+
     useEffect(() => {
-        fetch(`/api/users/username/${id}`)
+        fetch(`/api/users/${id}`)
         .then((response) => response.json())
         .then((data) => {setUserProfile(data)
             console.log(data)
         });
     }, []);
+
+    //! in progress
+    const handleEdit = () => {
+        console.log("click")
+    };
     
     return (
         <div className="user-profile"> 
-        <button>Edit</button>
+       
+        <button onClick={handleEdit}>Edit</button>
+        
+        {/* user profile details */}
         <div className="user-profile-header">
+
             <img className="profile-pic" src={userProfile.profileImg}/>
+
             <h2 className="profile-name">{userProfile.firstName} {userProfile.lastName}</h2>
+
             <h3 className="profile-user">(@{userProfile.username})</h3>
-                <img id="insta" src="https://i.imgur.com/36GYym5.png"/>
+            
+            <img id="insta" src="https://i.imgur.com/36GYym5.png"/>
+                {/* <i class="bi bi-instagram"></i> */}
+
             <div className="user-posts-likes">
                 <p>Number of posts: {userProfile.postCount}</p>
                 <p>Total likes: {userProfile.likeCount}</p>
             </div>
-            {/* <FontAwesomeIcon icon="fa-brands fa-instagram" /> */}
+
         </div>
+
+        {/* user's posts */}
         <div className="user-posts-col-left">
             <h4>{userProfile.username}'s Posts</h4>
             <div className="post-card">
@@ -43,6 +63,7 @@ function Profile() {
                 <Link className="profile-link" to="/show-post/:id">Read more</Link>
             </div>
         </div>
+        {/* user's likes */}
         <div className="user-liked-posts-col-right">
             <h4>{userProfile.username}'s Likes</h4>
             <div className="post-card">
