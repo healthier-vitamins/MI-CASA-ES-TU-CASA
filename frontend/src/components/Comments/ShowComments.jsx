@@ -1,14 +1,20 @@
 import React from "react";
 
-function ShowComments( { comments }) {
+function ShowComments({ comments }) {
   return (
-    <div>
-      comments:
+    <>
       {comments.length > 0
-        ? comments.map((c, index) => <p key={index}>{c.comment} </p>)
-        : "no comments yet"}
-      <p>see all {comments.length} comments</p>
-    </div>
+        ? comments.map((c, index) => {
+            return (
+              <div className="comment-box" key={index}>
+                <h5>Username: {c.author_username}</h5>
+                <p>Comment: {c.comment} </p>
+              </div>
+            );
+          })
+        : "No Comments"}
+      <p>See all {comments.length} comments</p>
+    </>
   );
 }
 

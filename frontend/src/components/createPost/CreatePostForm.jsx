@@ -6,6 +6,7 @@ import { useAtom } from "jotai";
 import CSSModules from "react-css-modules";
 import cStyle from "../../pages/CreatePost.module.css";
 
+
 function CreatePostForm({ entry, setEntry }) {
   // const imgRef = useRef(null);
 
@@ -31,11 +32,10 @@ function CreatePostForm({ entry, setEntry }) {
     newArr.push(img);
     setImg("");
 
-   
-
-    const usernameLower = entry.username.toLowerCase();
-    const companyNameLower = entry.company_name.toLowerCase();
-    const styleLower = entry.style.toLowerCase();
+    //! debug
+    const usernameLower = entry?.username.toLowerCase();
+    const companyNameLower = entry?.company_name.toLowerCase();
+    const styleLower = entry?.style.toLowerCase();
 
     setEntry({
       ...entry,
