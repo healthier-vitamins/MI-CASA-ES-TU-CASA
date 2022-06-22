@@ -2,6 +2,27 @@ const express = require("express");
 const router = express.Router();
 const Comments = require("../models/Comments");
 
+// show all comments (probably not needed, will remove later)
+// router.get("/", async(req, res) => {
+//   try {
+//     const allComments = await Comments.find()
+//     res.send(allComments);
+//   } catch (error) {
+//     res.send(error)
+//   }
+// });
+
+// show comments for the post
+router.get("/:id", async(req, res) => {
+  const postid = req.params.id;
+  try {
+    const filteredComments = await Comments.find({ postId: postid })
+    res.send({ status: "found" , data: filteredComments});
+  } catch (error) {
+    res.send(error)
+  }
+});
+
 //create comment
 router.post("/create", async (req, res) => {
   try {
@@ -13,15 +34,6 @@ router.post("/create", async (req, res) => {
   }
 });
 
-// show comments
-// router.get("/", async(req, res) => {
-//   try {
-//     const filteredComments = await Comments.findById()
-//     res.send("comments will be here");
-//   } catch (error) {
-//     res.send(error)
-//   }
-// });
 
 // router.get("/seed", async (req, res) => {
 //   try {
