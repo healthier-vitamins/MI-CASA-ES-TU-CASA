@@ -21,8 +21,6 @@
 
 .companyname {
     display: table-cell; 
-    text-align: right; 
-    font-size: 5vh;
     justify-content: center;
  }
 

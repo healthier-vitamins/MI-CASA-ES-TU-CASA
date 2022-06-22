@@ -50,10 +50,9 @@ function ShowPost() {
           <DeleteModal deleteModal={deleteModal} setDeleteModal={setDeleteModal} thisPost={thisPost}/>
         </div>
         <div className={show.titlebar}>
-          <a className={show.username} href="/profile/:id">
+          <a className={show.username} href={`/profile/${thisPost.username}/${id}`}>
             {thisPost.username}
           </a>
-          <p className={show.companyname}> {thisPost.company_name} </p>
         </div>
         <div className={show.imageswrapper}>
           <Splide options={{
@@ -84,6 +83,7 @@ function ShowPost() {
           <div className={show.dleft}>
             {/* <p>{thisPost.style}</p> */}
             <p> total cost: {thisPost.cost}</p>
+            <p className={show.companyname}> Interior Designer: {thisPost.company_name} </p>
           </div>
           <div className={show.dright}>
             <p>{thisPost.description}</p>
@@ -110,7 +110,7 @@ function ShowPost() {
           </div>
           <div className={show.commright}>
             <p>### people liked this post</p>
-            <p>like this post</p>
+            <p>like this post (icon) </p>
             <p className={show.editdelete} onClick={handleEdit}>
               edit this post
             </p>
