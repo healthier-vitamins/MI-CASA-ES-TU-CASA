@@ -2,7 +2,7 @@ import { useState } from "react";
 import { userAtom } from "../../App.jsx";
 import { useAtom } from "jotai";
 
-function CreateCommentForm( { thisPost }) {
+function CreateCommentForm( { thisPost, allComments, setAllComments }) {
   const [user, setUser] = useAtom(userAtom);
     const [comment, setComment] = useState({
         comment: "",
@@ -10,7 +10,6 @@ function CreateCommentForm( { thisPost }) {
         postId: ""
     })
      
-
     const handleChange = (event) => {
         const { value } = event.target;
         // console.log(user, thisPost)
@@ -24,7 +23,7 @@ function CreateCommentForm( { thisPost }) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        console.log(comment)
+        // console.log(comment)
         fetch("/api/comments/create", {
           method: "POST",
           headers: {
@@ -33,13 +32,12 @@ function CreateCommentForm( { thisPost }) {
           body: JSON.stringify(comment),
         })
           .then((response) => response.json())
-          .then((data) => console.log("comment", data));
+          .then((data) => setAllComments({...allComments, data: data})) ;
         // if (data.status === "comment success") {
-    
+        //   console.log(allComments)
         // } else {
-        //   console.log(allData?.error);
         //   setTimeout(() => {
-        //     return "Failed to create post";
+        //     return "Failed to add comment";
         //   }, 500);
         // }
     }
