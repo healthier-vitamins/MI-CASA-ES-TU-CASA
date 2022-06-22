@@ -16,7 +16,11 @@
     display: table-cell; 
     text-align: left; 
     font-size: 6vh;
+    font-family: sans-serif;
     justify-content: center;
+    color: aliceblue;
+    text-decoration: none;
+    text-transform: uppercase;
 }
 
 .companyname {
@@ -25,14 +29,8 @@
  }
 
 
-.username {
-    color: aliceblue;
-    text-decoration: none;
-    text-transform: uppercase;
-    font-family: sans-serif;
-}
-
 .imageswrapper {
+    margin: 0.5rem 0 0.5rem 0 ;
     display: flex;
     max-width: 110%;
     justify-content: center;
@@ -51,6 +49,7 @@
 
 .discription { 
     display: grid;
+    color:#f2eddf;
     grid-template-columns: 30% 70%; 
     grid-template-areas:
     "disc-left disc-right";
@@ -67,6 +66,7 @@
 }
 
 .commentsandlikes {
+    color:#f2eddf;
     display: grid;
     grid-template-columns: 70% 30%; 
     grid-template-areas:

@@ -9,8 +9,8 @@ function PostCard({ post }) {
 
     <div>
       <Card className={card.card}>
-        <Card.Title>{post.username}</Card.Title>
-        {/* insert link to post when click on the image */}
+        <Card.Title className={card.title}> {post.username}</Card.Title>
+        {/* insert link to post when click on the image? */}
       <Card.Img className={card.img} variant="top" src={post.img[0]} />
       <Card.Body>
         <Card.Text>
@@ -18,7 +18,7 @@ function PostCard({ post }) {
         Style: {post.style}
         Cost: {post.cost}
         </Card.Text>
-        <Link to={`/show-post/${post._id}`}>Card Link</Link>
+        <Link className={card.link} to={`/show-post/${post._id}`}>Card Link</Link>
       </Card.Body>
     </Card> 
     </div>

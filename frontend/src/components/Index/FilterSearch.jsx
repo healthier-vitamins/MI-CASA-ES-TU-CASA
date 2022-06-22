@@ -1,3 +1,5 @@
+import filter from "./FilterSearch.module.css"
+
 function FilterSearch({ filterBy, setFilterBy, setAllPosts }) {
   //! not completed
 
@@ -21,7 +23,7 @@ function FilterSearch({ filterBy, setFilterBy, setAllPosts }) {
   };
 
   return (
-    <div className="index-filter">
+    <div className={filter.container}>
       <form
         onSubmit={(e) => {
           e.preventDefault();
