@@ -1,5 +1,4 @@
 import React from "react";
-import { set } from "mongoose";
 import { useState } from "react";
 import show from "../../pages/ShowPost.module.css";
 import { userAtom } from "../../App.jsx";
@@ -31,7 +30,6 @@ const EditForm = ({ comment, editId, setComments, comments, setEditId }) => {
         console.log("comments:", comments);
       });
   };
-
 
   return (
     <>
