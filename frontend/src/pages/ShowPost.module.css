@@ -1,9 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@700&display=swap');
+
+
 .container {
     max-width: 80vw;
     margin: auto;
     line-height: 1.75;
     font-size: 1.25em;
 }
+
 .titlebar { 
     display: table; 
     width: 100%; 
@@ -18,7 +22,7 @@
     text-align: left; 
     padding-left: 1rem;
     font-size: 4vh;
-    font-family: sans-serif;
+    font-family: 'Lora', serif;
     justify-content: center;
     color:#f2eddf;
     text-decoration: none;
@@ -94,6 +98,10 @@
     grid-area: disc-right; 
 }
 
+.titletext {
+    font-weight: bold;
+}
+
 .commentsandlikes {
     color:#f2eddf;
     display: grid;
@@ -125,7 +133,7 @@
  }
 
  .usercomment {
-    border: solid;
+    border-style: dotted;
  }
 
 .deletebutton:hover {
