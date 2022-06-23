@@ -9,6 +9,7 @@ import home from "./IndexHome.module.css";
 
 function IndexHome() {
   const [allPosts, setAllPosts] = useState({});
+  const [titleState, setTitleState] = useState(false);
   const [user, setUser] = useAtom(userAtom);
   const [filterBy, setFilterBy] = useState({
     style: "",
@@ -16,7 +17,7 @@ function IndexHome() {
     company_name: "",
     cost: 0,
   });
-
+console.log(titleState);
   useEffect(() => {
     fetch("/api/posts/")
       .then((response) => response.json())
@@ -55,9 +56,14 @@ function IndexHome() {
     <>
       <div className={home.container}>
         <div className={home.title}>
-          {/* clip-text--no-textzone をクラスに追加すると黒なしになる*/}
-          <div className={home.cliptext}>
-            <p>HO & ME</p>
+          <div className={!titleState ? `${home.cliptext}` : `${home.cliptext} ${home.cliptextNoTextzone}` }>
+            <p>HO 
+              <span 
+              onMouseEnter={() => setTitleState(true)}
+              onMouseLeave={() => setTitleState(false)}>
+                &
+              </span> 
+              ME</p>
             <p className={home.smalltext}>Where Ho & Me live together</p>
           </div>
         </div>
