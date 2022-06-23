@@ -46,11 +46,12 @@ function SignUp() {
     <div className="signup-page">
       <div className="signup-form">
         <form onSubmit={handleSubmit} className="signup">
-          <h2>ho&me</h2>
+        <h2>HO&ME</h2>
           <div className="signup-container">
             <input
               className="signup-input"
               name="profileImg"
+              type="file"
               placeholder="Image"
             />
             {/* (use an imgur link lmao) */}

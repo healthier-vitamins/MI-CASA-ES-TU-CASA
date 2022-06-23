@@ -2,6 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAtom } from "jotai";
 import { userAtom } from "../App.jsx";
 import { useState } from "react";
+import NavBar from "../components/navbar/NavBar.jsx";
 
 import "./Login.css";
 
@@ -41,9 +42,10 @@ function Login() {
 
   return (
     <div className="login-page">
+      <NavBar />
       <div className="login-form">
         <form onSubmit={handleSubmit} className="login">
-          <h2>Login!</h2>
+        <h2>HO&ME</h2>
           <div className="login-container">
             <input
               className="login-input"
@@ -67,8 +69,8 @@ function Login() {
             </label>
           </div>
           <button className="login-button">Login</button>
-          <p>
-            Don't have an account? <Link to="/sign-up">Sign up here!</Link>
+          <p id="signup-redirect">
+            Don't have an account? <Link id="signup-redirect-link" to="/sign-up"> Sign up!</Link>
           </p>
         </form>
       </div>
