@@ -26,39 +26,46 @@ router.get("/", async (req, res) => {
 const filterCost = (post, cost) => {
   if (cost !== 0) {
     // console.log("post's cost:", post.cost);
+    // console.log("post's cost and query",post.cost, cost)
     if (post.cost <= cost && post.cost > 0) {
-      // console.log("return cost", post);
+      // console.log("return COOSTTT", post);
       return true;
     }
   }
+  return false;
 };
 
 const filterUsername = (post, usernameLower) => {
   if (usernameLower !== "") {
-    // console.log("post's username_lower:", post.username_lower);
+    // console.log("post's username and query",post.username_lower, usernameLower)
     if (post.username_lower === usernameLower) {
-      // console.log("return username", post);
+      // console.log("return USERNAMEMEE", post);
       return true;
     }
   }
+  return false;
 };
 
 const filterStyle = (post, styleLower) => {
   if (styleLower !== "") {
+    // console.log("post's style and query",post.style_lower, styleLower)
     if (post.style_lower === styleLower) {
-      // console.log("return style", post);
+      // console.log("return STYLLEE", post);
       return true;
     }
   }
+  return false;
 };
 
 const filterCompanyName = (post, companyNameLower) => {
   if (companyNameLower !== "") {
+    // console.log("post's company name and query company",post.company_name_lower, companyNameLower)
     if (post.company_name_lower === companyNameLower) {
-      // console.log("return company", post);
+      // console.log("return COMPAANNYY", post);
       return true;
     }
   }
+  return false;
 };
 
 const filterExcess = (
@@ -69,14 +76,66 @@ const filterExcess = (
   styleLower,
   companyNameLower
 ) => {
-  if (
-    post.cost > cost ||
-    post.username_lower !== usernameLower ||
-    post.style_lower !== styleLower ||
-    post.company_name_lower !== companyNameLower
-  ) {
+  // if (
+  //   post.cost > cost ||
+  //   post.username_lower !== usernameLower ||
+  //   post.style_lower !== styleLower ||
+  //   post.company_name_lower !== companyNameLower
+  // ) {
+  //   console.log("INDEX:", index);
+  //   console.log("post cost & cost:", post.cost, cost);
+  //   console.log(
+  //     "post username & username:",
+  //     post.username_lower,
+  //     usernameLower
+  //   );
+  //   console.log("post style & style:", post.style_lower, styleLower);
+  //   console.log(
+  //     "post companyname & companyname:",
+  //     post.company_name_lower,
+  //     companyNameLower
+  //   );
+  //   return index;
+  // }
+  // console.log("INDEX:", index);
+  //   console.log("post cost & cost:", post.cost, cost);
+  //   console.log(
+  //     "post username & username:",
+  //     post.username_lower,
+  //     usernameLower
+  //   );
+  //   console.log("post style & style:", post.style_lower, styleLower);
+  //   console.log(
+  //     "post companyname & companyname:",
+  //     post.company_name_lower,
+  //     companyNameLower
+  //   );
+
+  if (post.cost > cost) {
+    console.log("COST FAILED:", post.cost, cost);
+    console.log("failed index:", index);
     return index;
   }
+  if (post.username_lower !== usernameLower) {
+    console.log("username FAILED:", post.username_lower, usernameLower);
+    console.log("failed index:", index);
+    return index;
+  }
+  if (post.style_lower !== styleLower) {
+    console.log("style FAILED:", post.style_lower, styleLower);
+    console.log("failed index:", index);
+    return index;
+  }
+  if (post.company_name_lower !== companyNameLower) {
+    console.log(
+      "company name FAILED:",
+      post.company_name_lower,
+      companyNameLower
+    );
+    console.log("failed index:", index);
+    return index;
+  }
+  return -1;
 };
 
 // const filterAll = (post, cost, usernameLower, styleLower, companyNameLower) => {
@@ -122,27 +181,42 @@ router.get("/filter/search", async (req, res) => {
         filteredData.push(post);
       }
     }
-    for (let i = 0; i < filteredData.length; i++) {
-      let indexed = filterExcess(
-        filteredData[i],
-        i,
-        cost,
-        usernameLower,
-        styleLower,
-        companyNameLower,
-        filteredData
-      );
-      console.log("remove:", filteredData[indexed]);
-      filteredData.splice(indexed, 1);
+    console.log("filteredData before excess", filteredData);
+    // for (let j = 0; j < filteredData.length; j++) {
+    let indexed;
+    const lengthOfFilter = filteredData.length;
+    console.log(lengthOfFilter);
+    for (let i = 0; i < lengthOfFilter; i++) {
+      for (let j = 0; j < filteredData.length; j++) {
+        indexed = filterExcess(
+          filteredData[j],
+          j,
+          cost,
+          usernameLower,
+          styleLower,
+          companyNameLower
+        );
+        if (indexed >= 0) {
+          console.log("remove:", filteredData[indexed]);
+          filteredData.splice(indexed, 1);
+        } else {
+          console.log(filteredData);
+        }
+      }
     }
+    console.log("filteredData AFTER EXCESS:", filteredData);
+    // }
 
-    console.log("filteredData:", filteredData);
+    if (filteredData.length === 0) {
+      filteredData.push("No posts found");
+      console.log(filteredData);
+    }
 
     res.send({ status: "filtered successfully", data: filteredData });
   } catch (error) {
     res.send({
       status: "failed filter",
-      data: "Failed to filter",
+      data: [],
       error: error,
     });
   }

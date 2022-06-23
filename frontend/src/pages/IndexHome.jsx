@@ -21,11 +21,11 @@ function IndexHome() {
     fetch("/api/posts/")
       .then((response) => response.json())
       .then((data) => {
-        setAllPosts(data.data);
+        setAllPosts(data);
       });
   }, []);
 
-  const userData = user.data
+  // const userData = user.data;
 
   const returnTop = () => {
     window.scrollTo({
@@ -34,36 +34,57 @@ function IndexHome() {
     });
   };
 
-
   // if (Object.keys(allPosts).length < 1) {
   //   return "loading";
   // } else {
-    return (
-      <>
-        <div className={home.container}>
-          <div className={home.title}>
-            {/* clip-text--no-textzone をクラスに追加すると黒なしになる*/}
-            <div className={home.cliptext}><p>HO & ME</p>
-            <p className={home.smalltext}>Where Ho & Me live together</p>
-            </div>
-          </div>
-          {Object.keys(allPosts).length < 1 ? "loading" :
-          <>
-          <div className={home.filtersearch}>
-            <FilterSearch filterBy={filterBy} setFilterBy={setFilterBy} setAllPosts={setAllPosts} />
-          </div>
-          <div className={home.container}>
-            {/* set up filter method to fetch remaining data regardless of search history. */}
-            {allPosts.map((ele, index) => {
-              return <PostCard post={ele} key={index} />;
-            })}
-          </div>
-          </>
-          }
-        </div>
-        <button className={home.topbutton} onClick={returnTop}>Return to Top</button>
-      </>
-    );
+
+  const EmptyFilterResult = () => {
+    // console.log(allPosts?.data);
+    if (allPosts.data) {
+      if (allPosts?.data[0] === "No posts found") {
+        return (<p>"No posts found"</p>);
+      } else {
+        return allPosts?.data.map((ele, index) => {
+          return <PostCard post={ele} key={index} />;
+        });
+      }
+    }
   }
+
+  return (
+    <>
+      <div className={home.container}>
+        <div className={home.title}>
+          {/* clip-text--no-textzone をクラスに追加すると黒なしになる*/}
+          <div className={home.cliptext}>
+            <p>HO & ME</p>
+            <p className={home.smalltext}>Where Ho & Me live together</p>
+          </div>
+        </div>
+        {Object.keys(allPosts).length < 1 ? (
+          "loading"
+        ) : (
+          <>
+            <div className={home.filtersearch}>
+              <FilterSearch
+                filterBy={filterBy}
+                setFilterBy={setFilterBy}
+                setAllPosts={setAllPosts}
+              />
+            </div>
+            <EmptyFilterResult />
+          </>
+        )}
+        <div className={home.container}>
+          {/* set up filter method to fetch remaining data regardless of search history. */}
+          <EmptyFilterResult />
+        </div>
+      </div>
+      <button className={home.topbutton} onClick={returnTop}>
+        Return to Top
+      </button>
+    </>
+  );
+}
 
 export default IndexHome;
