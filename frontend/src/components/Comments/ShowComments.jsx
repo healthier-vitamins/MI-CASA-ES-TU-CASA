@@ -2,6 +2,8 @@ import React from "react";
 import { set } from "mongoose";
 import { useState } from "react";
 import show from "../../pages/ShowPost.module.css";
+import { userAtom } from "../../App.jsx";
+import { useAtom } from "jotai";
 
 const EditForm = ({ comment, editId, setComments, comments, setEditId }) => {
   const [commentInput, setCommentInput] = useState("");
@@ -30,6 +32,7 @@ const EditForm = ({ comment, editId, setComments, comments, setEditId }) => {
       });
   };
 
+
   return (
     <>
       <textarea onChange={(e) => setCommentInput(e.target.value)}>
@@ -39,6 +42,43 @@ const EditForm = ({ comment, editId, setComments, comments, setEditId }) => {
     </>
   );
 };
+
+const ShowEditDeleteButtons = ({comment, setEditId, editId}) => {
+  const [user, setUser] = useAtom(userAtom);
+  
+  const handleClick = (id) => {
+    setEditId(id);
+  };
+
+  if (user.data) {
+    console.log("same thing yo", comment)
+    if (user.data.username === comment?.author_username) {
+      return (
+        <>
+          <p
+            className={show.deletebutton}
+            onClick={() => {
+              handleClick(comment._id);
+            }}
+          >
+            edit
+          </p>
+          <p
+            className={show.deletebutton}
+            onClick={() => {
+              handleDelete(comment._id);
+            }}
+          >
+            delete
+          </p>
+        </>
+      );
+    } else {
+      return null;
+    }
+  }
+};
+
 
 function ShowComments({ comments, setComments }) {
   const [editId, setEditId] = useState("");
@@ -73,22 +113,7 @@ function ShowComments({ comments, setComments }) {
                   <p>Comment: {comment.comment} </p>
                 )}
                 <p>Username: {comment.author_username}</p>
-                <p
-                  className={show.deletebutton}
-                  onClick={() => {
-                    handleClick(comment._id);
-                  }}
-                >
-                  edit
-                </p>
-                <p
-                  className={show.deletebutton}
-                  onClick={() => {
-                    handleDelete(comment._id);
-                  }}
-                >
-                  delete
-                </p>
+                <ShowEditDeleteButtons comment={comment} editId={editId} setEditId={setEditId} />
               </div>
             );
           })

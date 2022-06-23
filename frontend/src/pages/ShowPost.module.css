@@ -7,28 +7,42 @@
 .titlebar { 
     display: table; 
     width: 100%; 
-    min-height: 5vh;
-    max-height: 5vh;
+    min-height: 4vh;
+    max-height: 4vh;
     background-color:#649DA6;
     justify-content: center;
 }
 
 .username { 
-    display: table-cell; 
+    /* display: table-cell;  */
     text-align: left; 
+    padding-left: 1rem;
     font-size: 4vh;
     font-family: sans-serif;
     justify-content: center;
-    color: aliceblue;
+    color:#f2eddf;
     text-decoration: none;
     text-transform: uppercase;
 }
 
-.likes {
-    font-size: 3vh;
-    display: table-cell; 
+.likesheart {
+    color:#f2eddf;
+    font-size: 3.5vh;
+    /* display: table-cell;  */
+    float: right;
+    margin-right: 1rem;
+    /* padding-top: 1rem; */
+    justify-content: center;
+}
+.likesnum {
+    color:#f2eddf;
+    font-size: 2vh;
+    margin-right: 1rem;
+    padding-bottom: 0;
+    /* display: table-cell;  */
     float: right;
     justify-content: center;
+
 }
 
 .companyname {
@@ -38,7 +52,7 @@
 
 
 .imageswrapper {
-    border: solid #649DA6;
+    /* border: solid #649DA6; */
     min-width: 90vw;
     max-width: 90vw; 
     margin-top: 0.5rem;
@@ -69,13 +83,13 @@
 }
 
 .dleft { 
-    border: solid;
+    border-style: dotted;
     padding-left: 1rem;
     grid-area: disc-left; 
 }
 
 .dright { 
-    border: solid;
+    border-style: dotted;
     padding-left: 1rem;
     grid-area: disc-right; 
 }
@@ -90,12 +104,12 @@
 
 .commleft {
     padding-left: 1rem;
-    border: solid;
+    border-style: dotted;
     grid-area: commleft;
 }
 
 .commright {
-    border: solid;
+    border-style: dotted;
     padding-left: 1rem;
     grid-area: commright;
 }

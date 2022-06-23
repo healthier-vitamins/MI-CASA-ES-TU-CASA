@@ -139,10 +139,10 @@ function ShowPost() {
             > 
             {thisPost.username}
             </a>
-            <div className={show.likes}>
+            <div className={show.likesheart}>
             <i className="bi bi-suit-heart-fill"
-            onClick={handleLike}></i>
-            <p className={show.likes}>####</p>
+            onClick={handleLike}></i><br/>            
+            <p className={show.likesnum}>####</p>
             </div>
         </div>
         <div className={show.imageswrapper}>
@@ -197,10 +197,6 @@ function ShowPost() {
             </div>
           </div>  
           <div className={show.commright}>
-
-            <p>### people liked this post</p>
-           
-
             <ShowEditDeleteLikeButtons />
 
           </div>
