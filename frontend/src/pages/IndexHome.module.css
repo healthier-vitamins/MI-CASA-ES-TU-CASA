@@ -49,6 +49,13 @@
     margin: auto;
   }
 
+  .empty {
+    min-width: 200px;
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
   .smalltext {
     font-size: small;
   }
