@@ -9,6 +9,8 @@ import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
 import CreateCommentForm from "../components/Comments/CreateCommentForm";
 import ShowComments from "../components/Comments/ShowComments";
+import 'bootstrap-icons/font/bootstrap-icons.css';
+
 
 function ShowPost() {
   const [user, setUser] = useAtom(userAtom);
@@ -100,6 +102,10 @@ function ShowPost() {
     }
   };
 
+  const handleLike = () => {
+    console.log("Mr, please use this when you do edit")
+  }
+
   if (Object.keys(thisPost).length < 1) {
     return "loading";
   } else {
@@ -121,9 +127,13 @@ function ShowPost() {
           <a
             className={show.username}
             href={`/profile/${thisPost.username}/${thisPost.userId}`}
-          >
+            > 
             {thisPost.username}
-          </a>
+            </a>
+            <div className={show.likes}>
+            <i className="bi bi-suit-heart-fill"></i>
+            <p className={show.likes}>####</p>
+            </div>
         </div>
         <div className={show.imageswrapper}>
           <Splide
@@ -156,13 +166,14 @@ function ShowPost() {
         <div className={show.discription}>
           <div className={show.dleft}>
             {/* <p>{thisPost.style}</p> */}
-            <p> total cost: {thisPost.cost}</p>
+            <p> total cost: S${thisPost.cost}</p>
             <p className={show.companyname}>
               {" "}
               Designer: {thisPost.company_name}{" "}
             </p>
           </div>
           <div className={show.dright}>
+            <p>{thisPost.title}</p>
             <p>{thisPost.description}</p>
           </div>
         </div>
@@ -176,8 +187,6 @@ function ShowPost() {
             </div>
           </div>
           <div className={show.commright}>
-            <p>### people liked this post</p>
-            <p>like this post (icon) </p>
             <p className={show.editdelete} onClick={handleEdit}>
               edit this post
             </p>
