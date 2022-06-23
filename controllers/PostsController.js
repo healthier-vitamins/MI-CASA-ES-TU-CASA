@@ -276,4 +276,15 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+// show post for user profile page
+router.get("/prof/:id", async (req, res) => {
+  const id= req.params.id;
+  try {
+    const user = await Posts.findById(id);
+    res.send({status: "found user", data: user.username})
+  } catch (error) {
+    res.send({ status: "error", data: "couldn't find any posts made by this user"})
+  }
+})
+
 module.exports = router;
