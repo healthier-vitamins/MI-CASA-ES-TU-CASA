@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import UserPosts from "../components/Profile/UserPosts";
 import UserLikes from "../components/Profile/UserLikes";
@@ -21,53 +21,50 @@ function Profile() {
 
   //user's posts
   const { username } = useParams();
-  const [ userPosts, setUserPosts] = useState([]);
+  const [userPosts, setUserPosts] = useState([]);
 
   useEffect(() => {
-      fetch(`/api/posts/prof/${username}`)
+    fetch(`/api/posts/prof/${username}`)
       .then((response) => response.json())
-      .then((data) => {setUserPosts(data.data)
-          console.log(data.data)
+      .then((data) => {
+        setUserPosts(data.data);
+        console.log(data.data);
       });
   }, []);
 
-  //! in progress
-  const handleEdit = () => {
-    console.log("click");
-  };
-
   return (
     <div className="user-profile">
-      <button onClick={handleEdit}>Edit</button>
+      {/* <button onClick={handleEdit}>Edit</button> */}
 
       {/* user profile details */}
-      <div className="user-profile-header">
+      <h1 className="profile-user">{userProfile.username}</h1>
+
+      <div className="user-profile-header-1">
         <img className="profile-pic" src={userProfile.profileImg} />
 
-        <h2 className="profile-name">
-          {userProfile.firstName} {userProfile.lastName}
-        </h2>
-
-        <h3 className="profile-user">(@{userProfile.username})</h3>
-
-        {/* <img id="insta" src="https://i.imgur.com/36GYym5.png"/>
-                <i class="bi bi-instagram"></i> */}
-
-        <div className="user-posts-likes">
-          <p>Number of posts: {userProfile.postCount}</p>
-          <p>Total likes: {userProfile.likeCount}</p>
+        <div className="user-profile-header-2">
+          <h2 className="profile-name">
+            {userProfile.firstName} {userProfile.lastName}
+          </h2>
+          <h3>Number of posts: {userPosts.length}</h3>
+          <h3>
+            Get in touch: {userProfile.email}
+          </h3>
         </div>
       </div>
 
-      {/* user's posts */}
-      <div className="user-posts-col-left">
-      <UserPosts userPosts={userPosts}  />
-      <h4>{userProfile.username}'s Posts</h4>
-      </div>
+    <hr />
 
+      {/* user's posts */}
+    <h2 className="profile-user">{userProfile.username}'s posts</h2>
+      <UserPosts userPosts={userPosts} />
+    
 
       {/* user's likes */}
-      <UserLikes />
+      {/* <div className="user-liked-posts">
+        <h3>{userProfile.username}'s' likes</h3>
+        <UserLikes />
+      </div> */}
     </div>
   );
 }
