@@ -11,8 +11,9 @@ const postSchema = Schema({
   cost: { type: Number, required: true },
   company_name: { type: String},
   company_name_lower: {type: String },
-  username: { type: String},
-  username_lower: {type: String}
+  username: { type: String },
+  username_lower: {type: String },
+  userId: {type: String, required: true}
 });
 
 const Posts = mongoose.model("Posts", postSchema);

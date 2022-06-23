@@ -44,6 +44,16 @@ function ShowPost() {
       });
   }, []);
 
+  useEffect(() => {
+    fetch(`/api/users/`)
+      .then((response) => response.json())
+      .then((data) => {
+        // console.log("heyyouthere", data);
+        setComments(data.data);
+        console.log("comments queried", data.data);
+      });
+  }, []);
+
   const toggleModalDelete = () => {
     setDeleteModal((prev) => !prev);
   };
@@ -110,7 +120,7 @@ function ShowPost() {
         <div className={show.titlebar}>
           <a
             className={show.username}
-            href={`/profile/${thisPost.username}/${id}`}
+            href={`/profile/${thisPost.username}/${thisPost.userId}`}
           >
             {thisPost.username}
           </a>
@@ -118,8 +128,9 @@ function ShowPost() {
         <div className={show.imageswrapper}>
           <Splide
             options={{
-              perPage: 2,
-              gap: "1rem",
+              perPage: 4,
+              // gap: "0.5rem",
+              overflow: "hidden",
               arrows: false,
               rewind: true,
             }}
@@ -161,7 +172,7 @@ function ShowPost() {
               {/* only show when user is logged in */}
               {/* if (user) */}
               <HideAddCommentField />
-              <ShowComments comments={comments} />
+              <ShowComments comments={comments} setComments={setComments} />
             </div>
           </div>
           <div className={show.commright}>
