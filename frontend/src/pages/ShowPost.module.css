@@ -7,15 +7,16 @@
 .titlebar { 
     display: table; 
     width: 100%; 
-    min-height: 7vh;
-    max-height: 7vh;
-    background-color:#649DA6; 
+    min-height: 5vh;
+    max-height: 5vh;
+    background-color:#649DA6;
+    justify-content: center;
 }
 
 .username { 
     display: table-cell; 
     text-align: left; 
-    font-size: 6vh;
+    font-size: 4vh;
     font-family: sans-serif;
     justify-content: center;
     color: aliceblue;

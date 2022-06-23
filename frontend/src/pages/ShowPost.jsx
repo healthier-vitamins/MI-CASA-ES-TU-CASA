@@ -41,8 +41,8 @@ function ShowPost() {
       .then((response) => response.json())
       .then((data) => {
         // console.log("heyyouthere", data);
-        setComments(data.data);
-        console.log("comments queried", data.data);
+         setComments(data.data);
+        console.log("comments queried", data);
       });
   }, []);
 
@@ -140,7 +140,8 @@ function ShowPost() {
             {thisPost.username}
             </a>
             <div className={show.likes}>
-            <i className="bi bi-suit-heart-fill"></i>
+            <i className="bi bi-suit-heart-fill"
+            onClick={handleLike}></i>
             <p className={show.likes}>####</p>
             </div>
         </div>
@@ -194,7 +195,7 @@ function ShowPost() {
               <HideAddCommentField />
               <ShowComments comments={comments} setComments={setComments} />
             </div>
-          </div>
+          </div>  
           <div className={show.commright}>
 
             <p>### people liked this post</p>
