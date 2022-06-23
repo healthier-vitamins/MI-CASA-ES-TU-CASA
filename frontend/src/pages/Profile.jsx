@@ -1,5 +1,7 @@
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import UserPosts from "../components/Profile/UserPosts";
+import UserLikes from "../components/Profile/UserLikes";
 import "./Profile.css"
 
 function Profile() {
@@ -37,8 +39,8 @@ function Profile() {
 
             <h3 className="profile-user">(@{userProfile.username})</h3>
             
-            <img id="insta" src="https://i.imgur.com/36GYym5.png"/>
-                {/* <i class="bi bi-instagram"></i> */}
+            {/* <img id="insta" src="https://i.imgur.com/36GYym5.png"/>
+                <i class="bi bi-instagram"></i> */}
 
             <div className="user-posts-likes">
                 <p>Number of posts: {userProfile.postCount}</p>
@@ -48,37 +50,9 @@ function Profile() {
         </div>
 
         {/* user's posts */}
-        <div className="user-posts-col-left">
-            <h4>{userProfile.username}'s Posts</h4>
-            <div className="post-card">
-                <img className="post-placeholder-img" src="https://i.imgur.com/TL68x25.jpg"/>
-                <p className="post-card-title">title: i love my wife</p>
-                <p>short-description: chaos and disorder</p>
-                <Link className="profile-link" to="/show-post/:id">Read more</Link>
-            </div>
-            <div className="post-card">
-                <img className="post-placeholder-img" src="https://i.imgur.com/TL68x25.jpg"/>
-                <p className="post-card-title">title: i eat children</p>
-                <p>short-description: yum yum</p>
-                <Link className="profile-link" to="/show-post/:id">Read more</Link>
-            </div>
-        </div>
+        <UserPosts />
         {/* user's likes */}
-        <div className="user-liked-posts-col-right">
-            <h4>{userProfile.username}'s Likes</h4>
-            <div className="post-card">
-                <img className="post-placeholder-img" src="https://i.imgur.com/TL68x25.jpg"/>
-                <p className="post-card-title">title: i am hungry</p>
-                <p>short-description: starving no yums</p>
-                <Link className="profile-link" to="/show-post/:id">Read more</Link>
-            </div>
-            <div className="post-card">
-                <img className="post-placeholder-img" src="https://i.imgur.com/TL68x25.jpg"/>
-                <p className="post-card-title">title: kimye house</p>
-                <p>short-description: before the divorce</p>
-                <Link className="profile-link" to="/show-post/:id">Read more</Link>
-            </div>
-        </div>
+        <UserLikes />
         </div>
     )
 }
