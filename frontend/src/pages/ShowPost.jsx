@@ -1,12 +1,12 @@
 import show from "./ShowPost.module.css";
 import { useState, useEffect } from "react";
-import ImageModal from "../components/showPost/ImageModal";
 import { useNavigate, useParams } from "react-router-dom";
-import DeleteModal from "../components/showPost/DeleteModal";
 import { userAtom } from "../App.jsx";
 import { useAtom } from "jotai";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
+import ImageModal from "../components/showPost/ImageModal";
+import DeleteModal from "../components/showPost/DeleteModal";
 import CreateCommentForm from "../components/Comments/CreateCommentForm";
 import ShowComments from "../components/Comments/ShowComments";
 
@@ -62,7 +62,7 @@ function ShowPost() {
     console.log("haven't created this function :(");
   };
 
-  const ShowDeletePost = () => {
+  const ShowEditDeleteLikeButtons = () => {
     console.log(
       "do they match? authentication for delete button",
       user,
@@ -72,9 +72,16 @@ function ShowPost() {
       if (user.data.username === thisPost.username) {
         console.log("delete button shall show");
         return (
-          <p className={show.editdelete} onClick={toggleModalDelete}>
-            delete this post
-          </p>
+          // edit and delete button to only show when the author is logged in.
+          <>
+            <p className={show.editdelete} onClick={handleEdit}>
+              edit this post
+            </p>
+            <p className={show.editdelete} onClick={toggleModalDelete}>
+              delete this post
+            </p>
+            
+          </>
         );
       } else {
         return null;
@@ -84,19 +91,21 @@ function ShowPost() {
 
   const HideAddCommentField = () => {
     if (!user.data) {
-      console.log("comment fioeld hidden")
+      console.log("comment fioeld hidden");
       return (
         <>
           <p>Login to comment!</p>
-          <button onClick={()=>navigate("/login")}>Login</button>
+          <button onClick={() => navigate("/login")}>Login</button>
         </>
       );
     } else {
-      return <CreateCommentForm
-        thisPost={thisPost}
-        comments={comments}
-        setComments={setComments}
-      />;
+      return (
+        <CreateCommentForm
+          thisPost={thisPost}
+          comments={comments}
+          setComments={setComments}
+        />
+      );
     }
   };
 
@@ -177,11 +186,9 @@ function ShowPost() {
           </div>
           <div className={show.commright}>
             <p>### people liked this post</p>
-            <p>like this post (icon) </p>
-            <p className={show.editdelete} onClick={handleEdit}>
-              edit this post
-            </p>
-            <ShowDeletePost />
+           
+
+            <ShowEditDeleteLikeButtons />
           </div>
         </div>
       </div>
