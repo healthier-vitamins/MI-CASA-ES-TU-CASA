@@ -34,7 +34,6 @@ function CreatePostForm({ entry, setEntry }) {
     });
   };
 
-
   const handleImgClick = () => {
     const newArr = entry.img;
     newArr.push(img);
@@ -52,7 +51,7 @@ function CreatePostForm({ entry, setEntry }) {
       ["style_lower"]: styleLower,
       ["userId"]: user?.data?._id,
     });
-    console.log(entry.img);
+    // console.log(entry.img);
     if (entry.img.length > 0) {
       setButtonState({
         ...buttonState,
@@ -62,29 +61,9 @@ function CreatePostForm({ entry, setEntry }) {
     }
   };
 
-  // const handleChangeAndPaste = (e) => {
-  //   if (e.clipboardData.getData("text")) {
-  //     console.log("pasted data");
-  //     setButtonState({
-  //       ...buttonState,
-  //       img_button: false,
-  //     });
-
-  // const inputTest = document.getElementById("#img")
-
-  // setTimeout(() => {
-  //   if (inputTest.matches(':-internal-autofill-selected')) {
-  //     setButtonState({
-  //       ...buttonState,
-  //       img_button: false
-  //     })
-  //     console.log("shifted button state")
-  //   }
-  // }, 500)
-
   const handleImgChange = (e) => {
     setImg(e.target.value);
-    console.log(img.length);
+    // console.log(img.length);
     if (e.target.value.length > 10) {
       setButtonState({
         ...buttonState,
@@ -99,8 +78,7 @@ function CreatePostForm({ entry, setEntry }) {
   };
 
   const handleSubmit = () => {
-    // assignLowerValues();
-    // console.log("entry during submit", entry);
+
     fetch("/api/posts/create", {
       method: "POST",
       headers: {
@@ -112,24 +90,13 @@ function CreatePostForm({ entry, setEntry }) {
       .then((data) => {
         
         if (data?.error) {
-          console.log(data?.error)
+          // console.log(data?.error)
           alert(`Failed to create post: ${data?.error?._message}`)
           navigate("/create-post")
         } else {
           navigate(`/show-post/${data?.data._id}`)
         }
       });
-
-      // const id = data.data._id;
-     
-      // if (allData?.status === "created successfully") {
-      //   navigate(`/show-post/${allData.data._id}`);
-      // } else {
-      //   console.log(allData?.error);
-      //   setTimeout(() => {
-      //     return "Failed to create post";
-      //   }, 500);
-      //   navigate("/create-post");
 
     setEntry({
       ...entry,
