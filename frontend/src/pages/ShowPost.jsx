@@ -228,7 +228,7 @@ function ShowPost() {
           {/* EDIT MODE */}
           {editMode ? (
             <>
-              <p>Title:</p>
+              <p className>Title:</p>
               <input
                 value={thisPost.title}
                 onChange={(e) =>
@@ -245,7 +245,7 @@ function ShowPost() {
             </>
           ) : (
             <div className={show.dright}>
-              <p>{thisPost.title}</p>
+              <p className={show.titletext}>{thisPost.title}</p>
               <p>{thisPost.description}</p>
             </div>
           )}
