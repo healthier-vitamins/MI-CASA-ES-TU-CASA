@@ -8,7 +8,7 @@ const userSchema = Schema({
   lastName:{ type: String, required: true },
   email: { type: String, required: true },
   company_name: { type: String },
-  profileImg: String,
+  profileImg: { type: String, default: 'https://i.imgur.com/526HXOf.jpg' },
   socialLink: String,
   postCount: [{ type: Schema.Types.ObjectId, ref: "Posts" }], 
   likeCount: [{ type: Schema.Types.ObjectId, ref: "Posts"}],

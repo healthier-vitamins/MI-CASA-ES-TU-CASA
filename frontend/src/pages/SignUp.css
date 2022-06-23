@@ -1,5 +1,5 @@
 .signup-page {
-    margin: 0;
+    margin: 2rem;
     padding: 0;
 }
 
@@ -13,7 +13,7 @@
 
 .signup {
     background-color: white;
-    width: 600px;
+    width: 500px;
     border-radius: 8px;
     padding: 20px 40px;
     box-shadow: 0 10px 25px rgba(92, 99, 105, .2);
@@ -21,11 +21,11 @@
 
 .signup h2 {
     font-size: 40px;
+    margin-top: 30px;
+    margin-bottom: 50px;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 30px;
-    margin-bottom: 50px;
 }
 
 .signup-container {
@@ -71,7 +71,7 @@
     margin-left: auto;
     padding: 15px 30px;
     border: none;
-    background-color: #efb272;
+    background-color: #467599;
     color: #F9F9F9;
     border-radius: 6px;
     cursor: pointer;
@@ -80,7 +80,7 @@
 }
 
 .signup-button:hover {
-    background-color: #F1BE87;
+    background-color: #64849c;
     transform: translateY(-2px);
 }
 
@@ -90,11 +90,11 @@
     z-index: 10;
     font-size: 14px;
     font-weight: 600;
-    color: #F1BE87;
+    color: #467599;
   }
 
 .signup-input:focus {
-    border: 2px solid #F1BE87;
+    border: 2px solid #467599;
   }
 
 .signup-input:not(:placeholder-shown)+ .signup-label {
@@ -109,7 +109,7 @@
     display: block;
     padding: 15px 30px;
     border: none;
-    background-color: #efb272;
+    background-color: #467599;
     color: #F9F9F9;
     border-radius: 6px;
     cursor: pointer;
@@ -118,7 +118,10 @@
 }
 
 .login-redirect-button:hover {
-    background-color: #F1BE87;
+    background-color: #64849c;
     transform: translateY(-2px);
 }
 
+#login-redirect-link {
+    text-decoration: none;
+}
