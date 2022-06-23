@@ -34,6 +34,32 @@ router.post("/create", async (req, res) => {
   }
 });
 
+// delete comment
+router.delete("/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const deleteComment = await Comments.findByIdAndRemove(id);
+    res.send({ status: "comment deleted", data: deleteComment });
+  } catch (error) {
+    res.send({ status: "delete failed", error: error})
+  }
+});
+
+// edit comment
+router.put("/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const editComment = await Comments.findByIdAndUpdate(
+      id,
+      req.body,
+      { new: true }
+    );
+    res.send({ status: "success:", data: editComment });
+  } catch (error) {
+    res.send({ status: "edit failed", error: error});
+  }
+});
+
 
 // router.get("/seed", async (req, res) => {
 //   try {
