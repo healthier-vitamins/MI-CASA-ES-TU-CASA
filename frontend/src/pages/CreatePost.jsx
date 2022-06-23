@@ -6,7 +6,7 @@ function CreatePost() {
   const [entry, setEntry] = useState({
     title: "",
     img: [],
-    short_description: "",
+
     description: "",
     style: "",
     style_lower: "",
