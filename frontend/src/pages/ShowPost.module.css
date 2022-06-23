@@ -30,12 +30,13 @@
 
 
 .imageswrapper {
-    border: solid;
+    border: solid #649DA6;
+    min-width: 90vw;
+    max-width: 90vw; 
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
     display: flex;
-    min-width: 90vw;
-    /* max-width: 90vw; */
+    right: 6%;
     justify-content: center;
     text-align: center;
     position: relative;
@@ -100,3 +101,12 @@
     padding-left: 1rem;  
     width: 30vw;
  }
+
+ .usercomment {
+    border: solid;
+ }
+
+.deletebutton:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}

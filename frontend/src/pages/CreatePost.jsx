@@ -15,11 +15,12 @@ function CreatePost() {
     company_name_lower: "",
     username: "",
     username_lower: "",
+    usrId: ""
   });
 
   return (
     <div className={cStyle.container}>
-      <h2>Add your design</h2>
+      <h2 className={cStyle.title}>Add your design</h2>
       <CreatePostForm entry={entry} setEntry={setEntry} />
     </div>
   );
