@@ -76,8 +76,7 @@ function IndexHome() {
           </>
         )}
         <div className={home.container}>
-          {/* set up filter method to fetch remaining data regardless of search history. */}
-          <EmptyFilterResult />
+
         </div>
       </div>
       <button className={home.topbutton} onClick={returnTop}>

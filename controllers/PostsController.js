@@ -112,27 +112,27 @@ const filterExcess = (
   //   );
 
   if (post.cost > cost) {
-    console.log("COST FAILED:", post.cost, cost);
-    console.log("failed index:", index);
+    // console.log("COST FAILED:", post.cost, cost);
+    // console.log("failed index:", index);
     return index;
   }
   if (post.username_lower !== usernameLower) {
-    console.log("username FAILED:", post.username_lower, usernameLower);
-    console.log("failed index:", index);
+    // console.log("username FAILED:", post.username_lower, usernameLower);
+    // console.log("failed index:", index);
     return index;
   }
   if (post.style_lower !== styleLower) {
-    console.log("style FAILED:", post.style_lower, styleLower);
-    console.log("failed index:", index);
+    // console.log("style FAILED:", post.style_lower, styleLower);
+    // console.log("failed index:", index);
     return index;
   }
   if (post.company_name_lower !== companyNameLower) {
-    console.log(
-      "company name FAILED:",
-      post.company_name_lower,
-      companyNameLower
-    );
-    console.log("failed index:", index);
+    // console.log(
+    //   "company name FAILED:",
+    //   post.company_name_lower,
+    //   companyNameLower
+    // );
+    // console.log("failed index:", index);
     return index;
   }
   return -1;
@@ -185,7 +185,7 @@ router.get("/filter/search", async (req, res) => {
     // for (let j = 0; j < filteredData.length; j++) {
     let indexed;
     const lengthOfFilter = filteredData.length;
-    console.log(lengthOfFilter);
+    // console.log(lengthOfFilter);
     for (let i = 0; i < lengthOfFilter; i++) {
       for (let j = 0; j < filteredData.length; j++) {
         indexed = filterExcess(
@@ -197,19 +197,19 @@ router.get("/filter/search", async (req, res) => {
           companyNameLower
         );
         if (indexed >= 0) {
-          console.log("remove:", filteredData[indexed]);
+          // console.log("remove:", filteredData[indexed]);
           filteredData.splice(indexed, 1);
         } else {
-          console.log(filteredData);
+          // console.log(filteredData);
         }
       }
     }
-    console.log("filteredData AFTER EXCESS:", filteredData);
+    // console.log("filteredData AFTER EXCESS:", filteredData);
     // }
 
     if (filteredData.length === 0) {
       filteredData.push("No posts found");
-      console.log(filteredData);
+      // console.log(filteredData);
     }
 
     res.send({ status: "filtered successfully", data: filteredData });
@@ -278,13 +278,16 @@ router.get("/:id", async (req, res) => {
 
 // show post for user profile page
 router.get("/prof/:id", async (req, res) => {
-  const id= req.params.id;
+  const id = req.params.id;
   try {
     const user = await Posts.findById(id);
-    res.send({status: "found user", data: user.userId})
+    res.send({ status: "found user", data: user.userId });
   } catch (error) {
-    res.send({ status: "error", data: "couldn't find any posts made by this user"})
+    res.send({
+      status: "error",
+      data: "couldn't find any posts made by this user",
+    });
   }
-})
+});
 
 module.exports = router;
