@@ -25,6 +25,7 @@ function CreateCommentForm({ thisPost, comments, setComments }) {
   };
 
   const handleSubmit = () => {
+
     fetch("/api/comments/create", {
       method: "POST",
       headers: {
@@ -34,10 +35,9 @@ function CreateCommentForm({ thisPost, comments, setComments }) {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("comments:", data.data)
         setComments([...comments, data.data])
       });
-    //  console.log("comments:", comments)
+     console.log("comments:", comments)
     setNewComment({
       comment: "",
       author_username: "",
