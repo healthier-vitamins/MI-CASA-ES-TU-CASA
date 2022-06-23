@@ -127,7 +127,7 @@ function CreatePostForm({ entry, setEntry }) {
       <div className={cStyle.form}>
       <form onSubmit={(e) => e.preventDefault()}>
         <label htmlFor="title">Title</label>
-        <input
+        <input className={cStyle.input}
           onChange={handleChange}
           value={entry.title}
           name="title"
@@ -136,27 +136,18 @@ function CreatePostForm({ entry, setEntry }) {
           placeholder="Title"
         ></input>
         <br />
-        <label htmlFor="description">Description</label>
-        <textarea
-          onChange={handleChange}
-          value={entry.description}
-          name="description"
-          id="description"
-          placeholder="description; 500 characters"
-        ></textarea>
-        <br />
         {/* <label htmlFor="company_name">Company Name</label>
         <textarea
-          onChange={handleChange}
-          value={entry.company_name}
-          name="company_name"
-          id="company_name"
-          placeholder="Company Name"
+        onChange={handleChange}
+        value={entry.company_name}
+        name="company_name"
+        id="company_name"
+        placeholder="Company Name"
         ></textarea> 
         <br />
       */}
         <label htmlFor="style">Style</label>
-        <input
+        <input className={cStyle.input}
           onChange={handleChange}
           value={entry.style}
           name="style"
@@ -165,7 +156,7 @@ function CreatePostForm({ entry, setEntry }) {
         ></input>
         <br />
         <label htmlFor="cost">Total Cost</label>
-        <input
+        <input className={cStyle.input}
           onChange={handleChange}
           value={entry.cost}
           type="number"
@@ -174,9 +165,17 @@ function CreatePostForm({ entry, setEntry }) {
           placeholder="Cost"
         ></input>
         <br />
-
+      <label htmlFor="description">Description</label>
+      <textarea className={cStyle.textarea}
+        onChange={handleChange}
+        value={entry.description}
+        name="description"
+        id="description"
+        placeholder="description; 500 characters"
+      ></textarea>
+      <br />
         <label htmlFor="img">Upload image</label>
-        <input
+        <input className={cStyle.input}
           // ref={imgRef}
           type="text"
           name="img"
@@ -189,7 +188,6 @@ function CreatePostForm({ entry, setEntry }) {
         <button disabled={buttonState.img_button} onClick={handleImgClick}>
           Submit images
         </button>
-
         <br />
         {/* {buttonState ? "you can upload ** more images" : "nn"} */}
         <button className={cStyle.postbutton}

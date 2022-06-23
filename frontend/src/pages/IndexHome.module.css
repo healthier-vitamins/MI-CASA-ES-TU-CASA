@@ -56,6 +56,16 @@
     flex-wrap: wrap;
   }
 
+.card_container {
+  width: 85vw;
+  /* background-color: rgb(42, 38, 38); */
+  border-radius: 15px;
+  box-shadow: 0 15px 35px 0 rgba(41, 75, 116, 0.5);
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+
+}
   .smalltext {
     font-size: small;
   }
