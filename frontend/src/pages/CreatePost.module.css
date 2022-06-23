@@ -1,9 +1,22 @@
 .container {
     margin: auto;
     justify-content: center;
-    text-align: center;
     background-color: antiquewhite;
     border-radius: 15px;
     width: 600px;
     height: 400px;
 }
+
+.title {
+   text-align: center; 
+   padding: 2rem;
+}
+
+.form {
+    padding-left: 3rem;
+}
+
+/* .postbutton {
+    margin: auto;
+    text-align: center; 
+} */

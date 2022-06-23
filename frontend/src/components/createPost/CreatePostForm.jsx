@@ -140,6 +140,7 @@ function CreatePostForm({ entry, setEntry }) {
 
   return (
     <div className={cStyle.container}>
+      <div className={cStyle.form}>
       <form onSubmit={(e) => e.preventDefault()}>
         <label htmlFor="title">Title</label>
         <input
@@ -206,7 +207,7 @@ function CreatePostForm({ entry, setEntry }) {
 
         <br />
         {/* {buttonState ? "you can upload ** more images" : "nn"} */}
-        <button
+        <button className={cStyle.postbutton}
           type="submit"
           disabled={buttonState.post_button}
           onClick={handleSubmit}
@@ -214,6 +215,7 @@ function CreatePostForm({ entry, setEntry }) {
           post your design!
         </button>
       </form>
+    </div>
     </div>
   );
 }
