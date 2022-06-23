@@ -93,7 +93,7 @@ function IndexHome() {
             </div>
           </>
         )}
-        <div className={home.container}>
+        <div className={home.card_container}>
         <EmptyFilterResult />
         </div>
       </div>

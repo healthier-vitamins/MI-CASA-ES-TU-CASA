@@ -1,5 +1,5 @@
 import Card from 'react-bootstrap/Card';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import card from "./PostCard.module.css"
 import { useAtom } from "jotai";
 import { userAtom } from "../../App.jsx";
@@ -7,7 +7,7 @@ import { userAtom } from "../../App.jsx";
 
 function PostCard({ post }) {
   const [user, setUser] = useAtom(userAtom);
-
+  const navigate = useNavigate();
   return (
 
     <div>
@@ -22,7 +22,10 @@ function PostCard({ post }) {
         Style: {post.style} <br/>
         Cost: {post.cost}
         </Card.Text>
-        <Link className={card.link} to={`/show-post/${post._id}`}>check this design</Link>
+        <button className={card.button} 
+        onClick={() => navigate(`/show-post/${post._id}`)}>
+          check this design
+        </button>
       </Card.Body>
     </Card> 
     </div>
