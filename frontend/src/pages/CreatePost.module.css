@@ -4,7 +4,7 @@
     background-color: antiquewhite;
     border-radius: 15px;
     width: 600px;
-    height: 400px;
+    height: 500px;
 }
 
 .title {
@@ -14,9 +14,37 @@
 
 .form {
     padding-left: 3rem;
+    padding-right:3rem;
+    text-align: center;
+    justify-content: center;
 }
 
-/* .postbutton {
+.input {
     margin: auto;
-    text-align: center; 
-} */
+    display: block;
+    justify-content: center;
+    width: 250px;
+    height: 25px;
+}
+
+.textarea {
+    margin: auto;
+    display: block;
+    justify-content: center;
+    width: 350px;
+    height: 60px;
+}
+
+
+.postbutton {
+    display: block;
+    margin-left: 33%;
+    padding: 15px 30px;
+    border: none;
+    background-color: #467599;
+    color: #F9F9F9;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 40px;
+}
