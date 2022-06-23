@@ -9,7 +9,7 @@ function UserPosts({ userPosts }) {
     <div className="user-posts">
     { userPosts?.map((userPosts) => (
       <div className="post-card">
-      <img className="post-placeholder-img" src={userPosts.img}/>
+      <img className="post-placeholder-img" src={userPosts.img[0]}/>
       <p className="post-card-title">{userPosts.title}</p>
       <p id="description">{userPosts.short_description}</p>
       <Link className="profile-link" to={`/show-post/${userPosts._id}`}>Read more</Link>
