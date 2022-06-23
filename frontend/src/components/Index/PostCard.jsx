@@ -18,7 +18,7 @@ function PostCard({ post }) {
       <Card.Img className={card.img} variant="top" src={post.img[0]} />
       <Card.Body>
         <Card.Text>
-        {post.description} <br/><br/>
+        {post.title} <br/><br/>
         Style: {post.style} <br/>
         Cost: {post.cost}
         </Card.Text>

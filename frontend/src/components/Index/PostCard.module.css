@@ -4,7 +4,7 @@
     min-width: 25vw;
     max-width: 25vw;
     min-height: 30vw;
-    max-height: 30vw;
+    /* max-height: 30vw; */
     text-align: center;
     justify-content: center;
     color:rgb(63, 63, 65);
