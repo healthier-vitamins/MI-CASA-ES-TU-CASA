@@ -222,13 +222,50 @@ router.get("/filter/search", async (req, res) => {
   }
 });
 
-// update
-router.put("/:id", (req, res) => {
+//! update
+router.put("/:id", async (req, res) => {
   const { id } = req.params;
+  // console.log("TIHIIISDIIID:", req)
+  const {
+    title,
+    img,
+    description,
+    style,
+    style_lower,
+    cost,
+    company_name,
+    company_name_lower,
+    username,
+    username_lower,
+    userId,
+  } = req.body;
+  // console.log("cost", cost)
+
+  try {
+    const updatePost = await Posts.findByIdAndUpdate(
+      id,
+      {
+        ["title"]: title,
+        ["img"]: img,
+        ["description"]: description,
+        ["style"]: style,
+        ["style_lower"]: style_lower,
+        ["cost"]: cost,
+        ["company_name"]: company_name,
+        ["company_name_lower"]: company_name_lower,
+        ["username"]: username,
+        ["username_lower"]: username_lower,
+        ["userId"]: userId,
+      },
+      { new: true }
+    );
+    res.send({ status: "editted successfully", data: updatePost });
+  } catch (error) {
+    res.send({ status: "failed to update", error: error });
+  }
 });
 
 // delete
-
 router.delete("/:id", async (req, res) => {
   const { id } = req.params;
   console.log("id", id);
@@ -278,11 +315,11 @@ router.get("/:id", async (req, res) => {
 
 // show post for user profile page
 router.get("/prof/:username", async (req, res) => {
-  const username= req.params.username;
+  const username = req.params.username;
   try {
-    const user = await Posts.find({username});
+    const user = await Posts.find({ username });
     console.log(user);
-    res.send({status: " found user", data: user})
+    res.send({ status: " found user", data: user });
   } catch (error) {
     res.send({
       status: "error",
