@@ -23,6 +23,13 @@
     text-transform: uppercase;
 }
 
+.likes {
+    font-size: 3vh;
+    display: table-cell; 
+    float: right;
+    justify-content: center;
+}
+
 .companyname {
     display: table-cell; 
     justify-content: center;
