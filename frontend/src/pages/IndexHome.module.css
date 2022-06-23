@@ -45,6 +45,10 @@
     -webkit-text-fill-color: transparent;
   }
 
+  p {
+    margin: auto;
+  }
+
   .smalltext {
     font-size: small;
   }
@@ -78,11 +82,11 @@
   }
 
 /* Change the background position to display letter when the black zone isn't here */
- .cliptext--no-textzone:before {
+ .cliptextNoTextzone:before {
     background-position: -0.75em 0;
       } 
       
- .cliptext--no-textzone:after {
+ .cliptextNoTextzone:after {
         content: none;
       }
       
