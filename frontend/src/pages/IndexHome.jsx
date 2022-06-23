@@ -17,7 +17,7 @@ function IndexHome() {
     company_name: "",
     cost: 0,
   });
-console.log(titleState);
+  console.log(titleState);
   useEffect(() => {
     fetch("/api/posts/")
       .then((response) => response.json())
@@ -43,27 +43,40 @@ console.log(titleState);
     // console.log(allPosts?.data);
     if (allPosts.data) {
       if (allPosts?.data[0] === "No posts found") {
-        return (<p>"No posts found"</p>);
+        return (
+          <div className={home.empty}>
+            <p>No posts found</p>
+          </div>
+        );
       } else {
         return allPosts?.data.map((ele, index) => {
           return <PostCard post={ele} key={index} />;
         });
       }
     }
-  }
+  };
 
   return (
     <>
       <div className={home.container}>
         <div className={home.title}>
-          <div className={!titleState ? `${home.cliptext}` : `${home.cliptext} ${home.cliptextNoTextzone}` }>
-            <p>HO 
-              <span 
-              onMouseEnter={() => setTitleState(true)}
-              onMouseLeave={() => setTitleState(false)}>
+          <div
+            className={
+              !titleState
+                ? `${home.cliptext}`
+                : `${home.cliptext} ${home.cliptextNoTextzone}`
+            }
+          >
+            <p>
+              HO
+              <span
+                onMouseEnter={() => setTitleState(true)}
+                onMouseLeave={() => setTitleState(false)}
+              >
                 &
-              </span> 
-              ME</p>
+              </span>
+              ME
+            </p>
             <p className={home.smalltext}>Where Ho & Me live together</p>
           </div>
         </div>
@@ -78,11 +91,10 @@ console.log(titleState);
                 setAllPosts={setAllPosts}
               />
             </div>
-            <EmptyFilterResult />
           </>
         )}
         <div className={home.container}>
-
+        <EmptyFilterResult />
         </div>
       </div>
       <button className={home.topbutton} onClick={returnTop}>

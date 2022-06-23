@@ -41,8 +41,20 @@ const EditForm = ({ comment, editId, setComments, comments, setEditId }) => {
   );
 };
 
-const ShowEditDeleteButtons = ({comment, setEditId, editId}) => {
+const ShowEditDeleteButtons = ({comment, setEditId, editId, comments, setComments}) => {
   const [user, setUser] = useAtom(userAtom);
+
+  const handleDelete = (id) => {
+    fetch(`/api/comments/${id}`, { method: "DELETE" })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.status === "comment deleted") {
+          setComments(comments.filter((c) => c._id !== id));
+        } else {
+          return null;
+        }
+      });
+  };
   
   const handleClick = (id) => {
     setEditId(id);
@@ -81,18 +93,6 @@ const ShowEditDeleteButtons = ({comment, setEditId, editId}) => {
 function ShowComments({ comments, setComments }) {
   const [editId, setEditId] = useState("");
 
-  const handleDelete = (id) => {
-    fetch(`/api/comments/${id}`, { method: "DELETE" })
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.status === "comment deleted") {
-          setComments(comments.filter((c) => c._id !== id));
-        } else {
-          return null;
-        }
-      });
-  };
-
   return (
     <>
       {comments.length > 0
@@ -111,7 +111,12 @@ function ShowComments({ comments, setComments }) {
                   <p>Comment: {comment.comment} </p>
                 )}
                 <p>Username: {comment.author_username}</p>
-                <ShowEditDeleteButtons comment={comment} editId={editId} setEditId={setEditId} />
+                <ShowEditDeleteButtons 
+                comment={comment} editId={editId} 
+                setEditId={setEditId} 
+                comments={comments}
+                setComments={setComments}
+                />
               </div>
             );
           })
