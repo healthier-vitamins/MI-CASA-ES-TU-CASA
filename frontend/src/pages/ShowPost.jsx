@@ -118,7 +118,7 @@ function ShowPost() {
         <div className={show.imageswrapper}>
           <Splide
             options={{
-              perPage: 3,
+              perPage: 2,
               gap: "1rem",
               arrows: false,
               rewind: true,
@@ -129,7 +129,7 @@ function ShowPost() {
                 <img
                   key={index}
                   src={i}
-                  width={"280px"}
+                  width={"250px"}
                   height={"220px"}
                   alt=""
                   onClick={(handleclick) => {

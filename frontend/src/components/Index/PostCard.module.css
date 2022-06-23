@@ -14,14 +14,24 @@
 }
 
 .title {
-    font-size: 5vh;
     padding-top: 1rem;
+}
+.titletext {
+    font-size: 2vw;
+    font-weight: bold;
+    text-decoration: none;
+    color: rgb(63, 63, 65);
+
+}
+.titletext:hover {
+    text-decoration: underline;
 }
 
 .img {
     width: 200px;
     height: 200px;
     margin-top: 1rem;
+    border-radius: 5px;
 }
 
 link {

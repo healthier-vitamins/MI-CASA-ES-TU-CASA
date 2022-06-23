@@ -30,10 +30,14 @@
 
 
 .imageswrapper {
-    margin: 0.5rem 0 0.5rem 0 ;
+    border: solid;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
     display: flex;
-    max-width: 110%;
+    min-width: 90vw;
+    /* max-width: 90vw; */
     justify-content: center;
+    text-align: center;
     position: relative;
 }
 
@@ -57,11 +61,13 @@
 
 .dleft { 
     border: solid;
+    padding-left: 1rem;
     grid-area: disc-left; 
 }
 
 .dright { 
     border: solid;
+    padding-left: 1rem;
     grid-area: disc-right; 
 }
 
@@ -74,16 +80,23 @@
 }
 
 .commleft {
+    padding-left: 1rem;
     border: solid;
     grid-area: commleft;
 }
 
 .commright {
     border: solid;
+    padding-left: 1rem;
     grid-area: commright;
 }
 
 .editdelete:hover {
     cursor: pointer;
     text-decoration: underline;
+ }
+
+ .commentbox {
+    padding-left: 1rem;  
+    width: 30vw;
  }
