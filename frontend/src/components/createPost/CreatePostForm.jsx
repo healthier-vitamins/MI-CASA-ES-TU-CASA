@@ -50,6 +50,7 @@ function CreatePostForm({ entry, setEntry }) {
       ["username_lower"]: user?.data?.username.toLowerCase(),
       ["company_name_lower"]: user?.data?.company_name.toLowerCase(),
       ["style_lower"]: styleLower,
+      ["userId"]: user?.data?._id,
     });
     console.log(entry.img);
     if (entry.img.length > 0) {
@@ -143,6 +144,7 @@ function CreatePostForm({ entry, setEntry }) {
       company_name_lower: "",
       username: "",
       username_lower: "",
+      userId: "",
     });
     setButtonState({
       ...buttonState,

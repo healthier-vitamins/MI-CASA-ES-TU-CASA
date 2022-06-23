@@ -13,7 +13,7 @@ function PostCard({ post }) {
     <div>
       <Card className={card.card}>
       <Card.Title className={card.title}> 
-      <a className={card.titletext} href={`/profile/${post.username}/${user._id}`}>{post.username}</a>
+      <a className={card.titletext} href={`/profile/${post.username}/${post.userId}`}>{post.username}</a>
       </Card.Title>
       <Card.Img className={card.img} variant="top" src={post.img[0]} />
       <Card.Body>

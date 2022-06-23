@@ -15,6 +15,7 @@ function CreatePost() {
     company_name_lower: "",
     username: "",
     username_lower: "",
+    usrId: ""
   });
 
   return (

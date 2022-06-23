@@ -45,6 +45,21 @@ router.delete("/:id", async (req, res) => {
   }
 });
 
+// edit comment
+router.put("/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const editComment = await Comments.findByIdAndUpdate(
+      id,
+      req.body,
+      { new: true }
+    );
+    res.send({ status: "success:", data: editComment });
+  } catch (error) {
+    res.send({ status: "edit failed", error: error});
+  }
+});
+
 
 // router.get("/seed", async (req, res) => {
 //   try {

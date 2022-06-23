@@ -120,7 +120,7 @@ function ShowPost() {
         <div className={show.titlebar}>
           <a
             className={show.username}
-            href={`/profile/${thisPost.username}/${id}`}
+            href={`/profile/${thisPost.username}/${thisPost.userId}`}
           >
             {thisPost.username}
           </a>
