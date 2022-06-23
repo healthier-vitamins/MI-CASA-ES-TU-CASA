@@ -277,11 +277,12 @@ router.get("/:id", async (req, res) => {
 });
 
 // show post for user profile page
-router.get("/prof/:id", async (req, res) => {
-  const id = req.params.id;
+router.get("/prof/:username", async (req, res) => {
+  const username= req.params.username;
   try {
-    const user = await Posts.findById(id);
-    res.send({ status: "found user", data: user.userId });
+    const user = await Posts.find({username});
+    console.log(user);
+    res.send({status: " found user", data: user})
   } catch (error) {
     res.send({
       status: "error",
