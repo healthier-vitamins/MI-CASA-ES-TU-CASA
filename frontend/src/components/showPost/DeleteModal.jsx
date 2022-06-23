@@ -1,4 +1,4 @@
-import { set } from 'mongoose';
+
 import React from 'react'
 import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
@@ -16,7 +16,7 @@ function DeleteModal({ deleteModal, setDeleteModal, thisPost }) {
         fetch(`/api/posts/${id}`, { method: "DELETE"})
         .then((response) => response.json())
         .then((data) => {
-            // console.log("ss", data)
+
            if (data.status === "success") {
             navigate("/")
         } else {
