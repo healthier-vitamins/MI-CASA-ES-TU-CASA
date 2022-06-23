@@ -7,7 +7,7 @@ function NavBar() {
   const [user, setUser] = useAtom(userAtom);
   const ShowCreatePost = () => {
     if (Object.keys(user).length > 0) {
-      return <Link className={nav.text} to="/create-post">Create Post</Link>;
+      return <Link className={nav.text} to="/create-post">Create New Post</Link>;
     } else {
       return null;
     }

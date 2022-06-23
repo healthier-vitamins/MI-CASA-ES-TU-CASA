@@ -27,6 +27,14 @@ function IndexHome() {
 
   const userData = user.data
 
+  const returnTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
+
   // if (Object.keys(allPosts).length < 1) {
   //   return "loading";
   // } else {
@@ -53,6 +61,7 @@ function IndexHome() {
           </>
           }
         </div>
+        <button className={home.topbutton} onClick={returnTop}>Return to Top</button>
       </>
     );
   }

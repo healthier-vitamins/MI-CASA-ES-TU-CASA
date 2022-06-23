@@ -7,8 +7,8 @@ function ShowComments({ comments }) {
         ? comments.map((c, index) => {
             return (
               <div className="comment-box" key={index}>
-                <h5>Username: {c.author_username}</h5>
                 <p>Comment: {c.comment} </p>
+                <p>Username: {c.author_username}</p>
               </div>
             );
           })
