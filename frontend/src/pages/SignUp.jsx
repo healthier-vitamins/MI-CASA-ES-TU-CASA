@@ -51,7 +51,7 @@ function SignUp() {
             <input
               className="signup-input"
               name="profileImg"
-              type="file"
+              type="text"
               placeholder="Image"
             />
             {/* (use an imgur link lmao) */}
