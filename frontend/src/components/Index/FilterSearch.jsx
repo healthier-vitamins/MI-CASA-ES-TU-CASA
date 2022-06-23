@@ -17,8 +17,8 @@ function FilterSearch({ filterBy, setFilterBy, setAllPosts }) {
       // fetch(`/api/posts/filter/${encodeURIComponent(style)}/${encodeURIComponent(username)}/${encodeURIComponent(cost)}/${encodeURIComponent(company_name)}`)
       .then((response) => response.json())
       .then((data) => {
-        setAllPosts(data.data)
-        console.log(data.data)
+        setAllPosts(data)
+        console.log("DATAAAAAAAA", data)
       });
   };
 
