@@ -5,19 +5,26 @@ import { userAtom } from "../../App.jsx";
 import { useAtom } from "jotai";
 import CSSModules from "react-css-modules";
 import cStyle from "../../pages/CreatePost.module.css";
-
+import { useEffect } from "react";
 
 function CreatePostForm({ entry, setEntry }) {
   // const imgRef = useRef(null);
 
   const [img, setImg] = useState("");
-  const [allData, setAllData] = useState({});
+  // const [allData, setAllData] = useState({});
   const navigate = useNavigate();
   const [user, setUser] = useAtom(userAtom);
   const [buttonState, setButtonState] = useState({
     post_button: true,
     img_button: true,
   });
+  // let usernameLower, companyNameLower;
+  //! debug
+  // useEffect(() => {
+  //  usernameLower = entry?.username.toLowerCase();
+  //  companyNameLower = entry?.company_name.toLowerCase();
+  //  console.log(usernameLower, companyNameLower)
+  // }, [])
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -27,14 +34,12 @@ function CreatePostForm({ entry, setEntry }) {
     });
   };
 
+
   const handleImgClick = () => {
     const newArr = entry.img;
     newArr.push(img);
     setImg("");
-
-    //! debug
-    const usernameLower = entry?.username.toLowerCase();
-    const companyNameLower = entry?.company_name.toLowerCase();
+   
     const styleLower = entry?.style.toLowerCase();
 
     setEntry({
@@ -42,8 +47,8 @@ function CreatePostForm({ entry, setEntry }) {
       img: newArr,
       ["company_name"]: user?.data?.company_name,
       ["username"]: user?.data?.username,
-      ["username_lower"]: usernameLower,
-      ["company_name_lower"]: companyNameLower,
+      ["username_lower"]: user?.data?.username.toLowerCase(),
+      ["company_name_lower"]: user?.data?.company_name.toLowerCase(),
       ["style_lower"]: styleLower,
     });
     console.log(entry.img);
@@ -94,7 +99,7 @@ function CreatePostForm({ entry, setEntry }) {
 
   const handleSubmit = () => {
     // assignLowerValues();
-    console.log("entry during submit", entry);
+    // console.log("entry during submit", entry);
     fetch("/api/posts/create", {
       method: "POST",
       headers: {
@@ -103,7 +108,27 @@ function CreatePostForm({ entry, setEntry }) {
       body: JSON.stringify(entry),
     })
       .then((response) => response.json())
-      .then((data) => console.log("data", data));
+      .then((data) => {
+        
+        if (data?.error) {
+          console.log(data?.error)
+          alert(`Failed to create post: ${data?.error?._message}`)
+          navigate("/create-post")
+        } else {
+          navigate(`/show-post/${data?.data._id}`)
+        }
+      });
+
+      // const id = data.data._id;
+     
+      // if (allData?.status === "created successfully") {
+      //   navigate(`/show-post/${allData.data._id}`);
+      // } else {
+      //   console.log(allData?.error);
+      //   setTimeout(() => {
+      //     return "Failed to create post";
+      //   }, 500);
+      //   navigate("/create-post");
 
     setEntry({
       ...entry,
@@ -125,17 +150,7 @@ function CreatePostForm({ entry, setEntry }) {
       img_button: true,
     });
 
-    // const id = data.data._id;
-    console.log(allData);
-    if (allData?.status === "created successfully") {
-      navigate(`/show-post/${allData.data._id}`);
-    } else {
-      console.log(allData?.error);
-      setTimeout(() => {
-        return "Failed to create post";
-      }, 500);
-      navigate("/create-post");
-    }
+    
   };
 
   return (
@@ -161,15 +176,16 @@ function CreatePostForm({ entry, setEntry }) {
           placeholder="description; 500 characters"
         ></textarea>
         <br />
-        <label htmlFor="short-description">Short Description</label>
+        {/* <label htmlFor="company_name">Company Name</label>
         <textarea
           onChange={handleChange}
-          value={entry.short_description}
-          name="short_description"
-          id="short_description"
-          placeholder="Short description; 120 characters"
-        ></textarea>
+          value={entry.company_name}
+          name="company_name"
+          id="company_name"
+          placeholder="Company Name"
+        ></textarea> 
         <br />
+      */}
         <label htmlFor="style">Style</label>
         <input
           onChange={handleChange}

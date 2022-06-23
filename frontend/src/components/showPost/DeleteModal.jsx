@@ -25,7 +25,6 @@ function DeleteModal({ deleteModal, setDeleteModal, thisPost }) {
         });
     }
 
-
   return (
       <>
       {deleteModal ? (
