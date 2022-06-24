@@ -112,7 +112,7 @@ const filterExcess = (
   //   );
   if (cost !== 0) {
     if (post.cost > cost) {
-      console.log("COST FAILED:", post.cost, cost);
+      // console.log("COST FAILED:", post.cost, cost);
       // console.log("failed index:", index);
       return index;
     }
@@ -120,7 +120,7 @@ const filterExcess = (
 
   if ( usernameLower !== "") {
     if (post.username_lower !== usernameLower) {
-      console.log("username FAILED:", post.username_lower, usernameLower);
+      // console.log("username FAILED:", post.username_lower, usernameLower);
       // console.log("failed index:", index);
       return index;
     }
@@ -128,18 +128,18 @@ const filterExcess = (
 
   if (styleLower !== "" ) {
     if (post.style_lower !== styleLower) {
-      console.log("style FAILED:", post.style_lower, styleLower);
+      // console.log("style FAILED:", post.style_lower, styleLower);
       // console.log("failed index:", index);
       return index;
     }
   }
   if (companyNameLower !== "") {
     if (post.company_name_lower !== companyNameLower) {
-      console.log(
-        "company name FAILED:",
-        post.company_name_lower,
-        companyNameLower
-      );
+      // console.log(
+      //   "company name FAILED:",
+      //   post.company_name_lower,
+      //   companyNameLower
+      // );
       // console.log("failed index:", index);
       return index;
     }
@@ -172,9 +172,9 @@ router.get("/filter/search", async (req, res) => {
   const styleLower = style.toLowerCase();
   const usernameLower = username.toLowerCase();
   const companyNameLower = company_name.toLowerCase();
-  const parsedCost = parseInt(cost);
-  console.log("norm params:", cost, style, username, company_name);
-  console.log("lower params:", styleLower, usernameLower, companyNameLower);
+  const parsedCost = parseFloat(cost);
+  // console.log("norm params:", cost, style, username, company_name);
+  // console.log("lower params:", styleLower, usernameLower, companyNameLower);
   const filteredData = [];
   // const allData = [];
   try {
