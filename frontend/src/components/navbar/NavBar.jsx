@@ -20,7 +20,7 @@ function NavBar() {
   const ShowProfileLink = () => {
     
     if (user?.data?.username) {
-      return <Link className={nav.text} to={`/profile/:username/${user?.data?._id}`}>
+      return <Link className={nav.text} to={`/profile/${user?.data?.username}/${user?.data?._id}`}>
         Profile{" "}
       </Link>;
     } else {

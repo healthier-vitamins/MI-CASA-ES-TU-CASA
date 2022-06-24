@@ -1,15 +1,14 @@
-import filter from "./FilterSearch.module.css"
+import filter from "./FilterSearch.module.css";
 
 function FilterSearch({ filterBy, setFilterBy, setAllPosts }) {
-  //! not completed
-
   const handleChange = (e) => {
     const value = e.target.value;
-
     setFilterBy({ ...filterBy, [e.target.name]: value });
+
   };
 
   const handleSubmit = () => {
+    console.log(filterBy)
     const { style, username, company_name, cost } = filterBy;
     fetch(
       `/api/posts/filter/search?style=${style}&username=${username}&cost=${cost}&company_name=${company_name}`
@@ -17,8 +16,8 @@ function FilterSearch({ filterBy, setFilterBy, setAllPosts }) {
       // fetch(`/api/posts/filter/${encodeURIComponent(style)}/${encodeURIComponent(username)}/${encodeURIComponent(cost)}/${encodeURIComponent(company_name)}`)
       .then((response) => response.json())
       .then((data) => {
-        setAllPosts(data)
-        console.log("DATAAAAAAAA", data)
+        setAllPosts(data);
+        console.log("DATAAAAAAAA", data);
       });
   };
 
@@ -30,17 +29,12 @@ function FilterSearch({ filterBy, setFilterBy, setAllPosts }) {
         }}
       >
         <label htmlFor="select-style">Style: </label>
-        <select
+        <input
           name="style"
-          id="select-style"
+          id="style"
           value={filterBy.style}
           onChange={handleChange}
-        >
-          <option value="minimalist">Minimalist</option>
-          <option value="industrial">Industrial</option>
-          <option value="modern">Modern</option>
-          <option value="scandinavian">Scandinavian</option>
-        </select>
+        ></input>
         <br />
         <label htmlFor="select-username">Username: </label>
         <input
