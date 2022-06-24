@@ -2,9 +2,11 @@ import { useState } from "react";
 import { userAtom } from "../../App.jsx";
 import { useAtom } from "jotai";
 import show from "../../pages/ShowPost.module.css";
+import { set } from "mongoose";
 
 function CreateCommentForm({ thisPost, comments, setComments }) {
   const [user, setUser] = useAtom(userAtom);
+  const [message, setMessage] = useState(false)
   const [newComment, setNewComment] = useState({
     comment: "",
     author_username: "",
@@ -13,8 +15,8 @@ function CreateCommentForm({ thisPost, comments, setComments }) {
   });
 
   const handleChange = (event) => {
+    setMessage(false)
     const { value } = event.target;
-    // console.log(user, thisPost)
     setNewComment({
       ...newComment,
       ["comment"]: value,
@@ -23,9 +25,16 @@ function CreateCommentForm({ thisPost, comments, setComments }) {
       ["postId"]: thisPost._id,
     });
   };
+//   $('#form').submit(function() {
+//     if ($.trim($("#email").val()) === "" || $.trim($("#user_name").val()) === "") {
+//         alert('you did not fill out one of the fields');
+//         return false;
+//     }
+// });
+
 
   const handleSubmit = () => {
-
+    if (newComment.comment.trim > 1) {
     fetch("/api/comments/create", {
       method: "POST",
       headers: {
@@ -44,6 +53,9 @@ function CreateCommentForm({ thisPost, comments, setComments }) {
       author_id: "",
       postId: "",
     });
+  } else {
+    setMessage(true);
+  }
   };
 
   //! setComments([ ...comments, data.data ])
@@ -56,10 +68,13 @@ function CreateCommentForm({ thisPost, comments, setComments }) {
   //   }, 500);
   // }
 
+
   return (
     <div className={show.commentcontainer}>
-      <h5>Create Comment</h5>
+      <h5>Add Comment</h5>
       <form onSubmit={(e) => e.preventDefault()}>
+        {message ? <p className={show.message}>**comment cannot be empty</p> : <></>}
+        
         <textarea className={show.commentbox}
           type="text"
           id="create-comment"
@@ -70,7 +85,7 @@ function CreateCommentForm({ thisPost, comments, setComments }) {
         />
         <button type="submit" onClick={handleSubmit}>
           {" "}
-          add{" "}
+          post{" "}
         </button>
       </form>
     </div>
