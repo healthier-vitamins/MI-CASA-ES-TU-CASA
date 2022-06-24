@@ -1,6 +1,6 @@
 import filter from "./FilterSearch.module.css";
 
-function FilterSearch({ filterBy, setFilterBy, setAllPosts }) {
+function FilterSearch({ filterBy, reload, setFilterBy, setAllPosts, allPosts, setReloadFilter }) {
   const handleChange = (e) => {
     const value = e.target.value;
     setFilterBy({ ...filterBy, [e.target.name]: value });
@@ -8,7 +8,7 @@ function FilterSearch({ filterBy, setFilterBy, setAllPosts }) {
   };
 
   const handleSubmit = () => {
-    console.log(filterBy)
+    // console.log(filterBy)
     const { style, username, company_name, cost } = filterBy;
     fetch(
       `/api/posts/filter/search?style=${style}&username=${username}&cost=${cost}&company_name=${company_name}`
@@ -20,6 +20,26 @@ function FilterSearch({ filterBy, setFilterBy, setAllPosts }) {
         console.log("DATAAAAAAAA", data);
       });
   };
+
+  const handleClear = () => {
+    setFilterBy({
+      style: "",
+      username: "",
+      company_name: "",
+      cost: "",
+    })
+
+    fetch("/api/posts/")
+    .then((res) => res.json())
+    .then((data) => {
+      setAllPosts(data)
+      // setReloadFilter(true)
+      // reload()
+    })
+    // setAllPosts(allPosts)
+    // setReloadFilter(true)
+    
+  }
 
   return (
     <div className={filter.container}>
@@ -64,6 +84,7 @@ function FilterSearch({ filterBy, setFilterBy, setAllPosts }) {
         ></input>
       </form>
       <button onClick={handleSubmit}>Search</button>
+      <button onClick={handleClear}>Clear Search</button>
     </div>
   );
 }
