@@ -17,7 +17,7 @@ function IndexHome() {
     company_name: "",
     cost: 0,
   });
-  console.log(titleState);
+  // console.log(titleState);
   useEffect(() => {
     fetch("/api/posts/")
       .then((response) => response.json())
@@ -55,6 +55,8 @@ function IndexHome() {
       }
     }
   };
+
+  // console.log("user ATOM", user?.data)
 
   return (
     <>
