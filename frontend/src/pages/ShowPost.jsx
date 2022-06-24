@@ -165,7 +165,7 @@ function ShowPost() {
         </div>
         <div className={show.discription}>
           <div className={show.dleft}>
-            {/* <p>{thisPost.style}</p> */}
+            <p>style: {thisPost.style}</p>
             {/* EDIT MODE */}
             {editMode ? (
               <>
