@@ -11,6 +11,7 @@ import CreateCommentForm from "../components/Comments/CreateCommentForm";
 import ShowComments from "../components/Comments/ShowComments";
 import EditPost from "../components/showPost/EditPost";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import EditModeForImgs from "../components/showPost/EditModeForImgs";
 
 function ShowPost() {
   const [user, setUser] = useAtom(userAtom);
@@ -20,12 +21,12 @@ function ShowPost() {
   const [thisPost, setThisPost] = useState({});
   const [comments, setComments] = useState({});
   const [editMode, setEditMode] = useState(false);
-  const [editImg, setEditImg] = useState({
-    imgArr: [],
-    prevImgArr: [],
-  });
-
+  const [imgArr, setImgArr] = useState([]);
   const navigate = useNavigate();
+
+  const [revertChanges, setRevertChanges] = useState({})
+
+  const newArr = imgArr;
 
   const toggleModal = () => {
     setShowModal((prev) => !prev);
@@ -78,6 +79,11 @@ function ShowPost() {
               setEditMode={setEditMode}
               thisPost={thisPost}
               setThisPost={setThisPost}
+              imgArr={imgArr}
+              setImgArr={setImgArr}
+              newArr={newArr}
+              setRevertChanges={setRevertChanges}
+              revertChanges={revertChanges}
             />
             <p className={show.editdelete} onClick={toggleModalDelete}>
               delete this post
@@ -113,57 +119,7 @@ function ShowPost() {
     console.log("Mr, please use this when you do edit");
   };
 
-  const EditModeForImgs = () => {
-    if (!editMode) {
-      return (
-        <Splide
-          options={{
-            perPage: 4,
-            // gap: "0.5rem",
-            overflow: "hidden",
-            arrows: false,
-            rewind: true,
-          }}
-        >
-          {thisPost?.img.map((i, index) => (
-            <SplideSlide key={index}>
-              <img
-                key={index}
-                src={i}
-                width={"250px"}
-                height={"220px"}
-                alt=""
-                onClick={() => {
-                  setImgId(i);
-                  toggleModal();
-                }}
-              />
-            </SplideSlide>
-          ))}
-        </Splide>
-      );
-    } 
-    else if (editMode) {
-      //! 
-      // useEffect(() => {
-      //   setEditImg({
-      //     ...editImg,
-      //     ["prevImgArr"]: thisPost?.img,
-      //   });
-      //   console.log("previous img arr", editImg.prevImgArr);
-      // }, []);
-      return (
-        <>
-          <p>Images:</p>
-          <input
-            value={editImg}
-            onChange={(e) => setEditImg(e.target.value)}
-          ></input>
-          {/* <button>Add image</button> */}
-        </>
-      );
-    }
-  };
+  
 
   if (Object.keys(thisPost).length < 1) {
     return "loading";
@@ -197,7 +153,15 @@ function ShowPost() {
         </div>
         <div className={show.imageswrapper}>
           <div className={show.images}></div>
-          <EditModeForImgs />
+          <EditModeForImgs
+          thisPost={thisPost}
+          setThisPost={setThisPost}
+          setImgId={setImgId}
+          toggleModal={toggleModal}
+          editMode={editMode}
+          newArr={newArr}
+
+          />
         </div>
         <div className={show.discription}>
           <div className={show.dleft}>
@@ -236,12 +200,12 @@ function ShowPost() {
                 }
               ></input>
               <p>Description:</p>
-              <input
+              <textarea
                 value={thisPost.description}
                 onChange={(e) =>
                   setThisPost({ ...thisPost, ["description"]: e.target.value })
                 }
-              ></input>
+              ></textarea>
             </>
           ) : (
             <div className={show.dright}>
