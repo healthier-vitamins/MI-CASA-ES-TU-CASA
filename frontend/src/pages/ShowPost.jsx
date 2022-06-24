@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { userAtom } from "../App.jsx";
 import { useAtom } from "jotai";
-import { Splide, SplideSlide } from "@splidejs/react-splide";
+// import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css";
 import ImageModal from "../components/showPost/ImageModal";
 import DeleteModal from "../components/showPost/DeleteModal";
@@ -24,9 +24,10 @@ function ShowPost() {
   const [imgArr, setImgArr] = useState([]);
   const navigate = useNavigate();
 
-  const [revertChanges, setRevertChanges] = useState({})
+  const [revertChanges, setRevertChanges] = useState({});
 
   const newArr = imgArr;
+  const { id } = useParams();
 
   const toggleModal = () => {
     setShowModal((prev) => !prev);
@@ -40,7 +41,6 @@ function ShowPost() {
       .then((data) => setThisPost(data.data));
   }, []);
 
-  const { id } = useParams();
   useEffect(() => {
     fetch(`/api/comments/${id}`)
       .then((response) => response.json())
@@ -50,6 +50,7 @@ function ShowPost() {
         console.log("comments queried", data);
       });
   }, []);
+
 
   //! seems like a duplicate of the above
   // useEffect(() => {
@@ -116,10 +117,8 @@ function ShowPost() {
   };
 
   const handleLike = () => {
-    console.log("Mr, please use this when you do edit");
+    console.log("like button")
   };
-
-  
 
   if (Object.keys(thisPost).length < 1) {
     return "loading";
@@ -145,22 +144,23 @@ function ShowPost() {
           >
             {thisPost.username}
           </a>
-          <div className={show.likesheart}>
-            <i className="bi bi-suit-heart-fill" onClick={handleLike}></i>
-            <br />
-            <p className={show.likesnum}>####</p>
-          </div>
+          {!user.data?.username ? null : (
+            <div className={show.likesheart}>
+              <i className="bi bi-suit-heart-fill" onClick={handleLike}></i>
+              <br />
+              <p className={show.likesnum}>0</p>
+            </div>
+          )}
         </div>
         <div className={show.imageswrapper}>
           <div className={show.images}></div>
           <EditModeForImgs
-          thisPost={thisPost}
-          setThisPost={setThisPost}
-          setImgId={setImgId}
-          toggleModal={toggleModal}
-          editMode={editMode}
-          newArr={newArr}
-
+            thisPost={thisPost}
+            setThisPost={setThisPost}
+            setImgId={setImgId}
+            toggleModal={toggleModal}
+            editMode={editMode}
+            newArr={newArr}
           />
         </div>
         <div className={show.discription}>
