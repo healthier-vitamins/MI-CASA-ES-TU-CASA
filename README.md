@@ -86,6 +86,10 @@ The following pages and functions become available when logged in
 * CreatePost Page: this is where users can upload their own interior design portfolio if they are designers or they can share their own home renovation works if they are just home-owners
 * ShowPost Page: users will now be able to leave comments on other user's posts. If they are viewing their own post, they will be given the options to edit and delete
 
+### WIP
+* Like button
+* Edit user profiles
+
 
 
 
