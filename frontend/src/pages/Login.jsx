@@ -30,12 +30,12 @@ function Login() {
       .then((data) => {
         setUser(data);
         setData(data.data);
-        console.log("data.data", data.data);
+        console.log("atom!!!", data.data);
       });
   };
 
   const id = data._id;
-  console.log("user", data._id);
+  // console.log("user", data._id);
   if (user.status === "success") {
     navigate("/");
   }
