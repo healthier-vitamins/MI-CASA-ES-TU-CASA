@@ -15,8 +15,9 @@ function IndexHome() {
     style: "",
     username: "",
     company_name: "",
-    cost: 0,
+    cost: "",
   });
+  const [reloadFilter, setReloadFilter] = useState(false);
   // console.log(titleState);
   useEffect(() => {
     fetch("/api/posts/")
@@ -39,6 +40,10 @@ function IndexHome() {
   //   return "loading";
   // } else {
 
+  const reload = () => {
+    setReloadFilter(true);
+  };
+
   const EmptyFilterResult = () => {
     // console.log(allPosts?.data);
     if (allPosts.data) {
@@ -53,6 +58,20 @@ function IndexHome() {
           return <PostCard post={ele} key={index} />;
         });
       }
+    }
+  };
+
+  const ClearFilterReload = () => {
+    console.log("allposts", allPosts);
+    console.log("reload filter", reloadFilter);
+    if (reloadFilter === true) {
+      console.log("ran?");
+      setReloadFilter(false);
+      return allPosts.map((ele, index) => {
+        return <PostCard post={ele} key={index} />;
+      });
+    } else {
+      return <EmptyFilterResult />;
     }
   };
 
@@ -83,7 +102,7 @@ function IndexHome() {
           </div>
         </div>
         {Object.keys(allPosts).length < 1 ? (
-          "loading"
+          "Loading"
         ) : (
           <>
             <div className={home.filtersearch}>
@@ -91,12 +110,15 @@ function IndexHome() {
                 filterBy={filterBy}
                 setFilterBy={setFilterBy}
                 setAllPosts={setAllPosts}
+                allPosts={allPosts}
+                setReloadFilter={setReloadFilter}
+                reload={reload}
               />
             </div>
           </>
         )}
         <div className={home.card_container}>
-        <EmptyFilterResult />
+          <EmptyFilterResult />
         </div>
       </div>
       <button className={home.topbutton} onClick={returnTop}>
