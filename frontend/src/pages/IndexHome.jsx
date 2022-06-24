@@ -61,19 +61,19 @@ function IndexHome() {
     }
   };
 
-  const ClearFilterReload = () => {
-    console.log("allposts", allPosts);
-    console.log("reload filter", reloadFilter);
-    if (reloadFilter === true) {
-      console.log("ran?");
-      setReloadFilter(false);
-      return allPosts.map((ele, index) => {
-        return <PostCard post={ele} key={index} />;
-      });
-    } else {
-      return <EmptyFilterResult />;
-    }
-  };
+  // const ClearFilterReload = () => {
+  //   console.log("allposts", allPosts);
+  //   console.log("reload filter", reloadFilter);
+  //   if (reloadFilter === true) {
+  //     console.log("ran?");
+  //     setReloadFilter(false);
+  //     return allPosts.map((ele, index) => {
+  //       return <PostCard post={ele} key={index} />;
+  //     });
+  //   } else {
+  //     return <EmptyFilterResult />;
+  //   }
+  // };
 
   // console.log("user ATOM", user?.data)
 
