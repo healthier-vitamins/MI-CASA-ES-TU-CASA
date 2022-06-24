@@ -276,6 +276,13 @@ router.put("/:id", async (req, res) => {
   }
 });
 
+// router.put("/like/:username", async (req, res) => {
+//   const {username} = req.params;
+  // try {
+    // const updateLike = await Posts.findB
+  // }
+// })
+
 // delete
 router.delete("/:id", async (req, res) => {
   const { id } = req.params;
