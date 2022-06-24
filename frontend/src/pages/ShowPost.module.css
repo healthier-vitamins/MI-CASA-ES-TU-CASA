@@ -100,6 +100,7 @@
 
 .titletext {
     font-weight: bold;
+    text-decoration: underline;
 }
 
 .commentsandlikes {
