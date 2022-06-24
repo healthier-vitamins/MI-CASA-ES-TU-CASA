@@ -48,6 +48,9 @@ function Profile() {
           </h2>
           <h3>Number of posts: {userPosts.length}</h3>
           <h3>
+            Company: {userProfile.company_name}
+          </h3>
+          <h3>
             Get in touch: {userProfile.email}
           </h3>
         </div>
