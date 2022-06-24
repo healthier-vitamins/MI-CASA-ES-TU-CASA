@@ -1,8 +1,10 @@
 # HO&ME 
-Where the Ho & Me Live Together
+where the Ho & Me Live Together
 
 ## Overview
 A community sharing app for users to browse interior design ideas and for designers to share their work.
+
+Check it out here: https://ho-and-me-project3.herokuapp.com/
 
 This app was created using the following: 
 - React
@@ -75,24 +77,21 @@ Frontend
 ```
 ### User Stories
 Without logging in, the following pages are available 
-
-Index Page: this is the main page where users can see all the posts that have been uploaded to the app. 
-
-
-ShowPost Page: the details of the posts will be here! This is where users can see the whole post, including a more detailed description of the design and inspiration, and more images can be viewed here too.
+* Index Page: this is the main page where users can see all the posts that have been uploaded to the app. 
+* ShowPost Page: the details of the posts will be here! This is where users can see the whole post, including a more detailed description of the design and inspiration, and more images can be viewed here too. Users will also be able to see the comments made on the posts to see any feedback or any suggestions to improve. 
+* Profile Page: users can check the profile page of any user from their posts to see their full collection of posts as well as the company they are from (if they are a designer)
 
 
-Users will also be able to see the comments made on the posts to see any feedback or any suggestions to improve. 
+The following pages and functions become available when logged in
+* CreatePost Page: this is where users can upload their own interior design portfolio if they are designers or they can share their own home renovation works if they are just home-owners
+* ShowPost Page: users will now be able to leave comments on other user's posts. If they are viewing their own post, they will be given the options to edit and delete
+
+### WIP
+* Like button
+* Edit user profiles
 
 
-Profile Page: users can check the profile page of any user from their posts to see their full collection of posts as well as the company they are from (if they are a designer)
 
-
-The following pages become available when logged in
-
-CreatePost Page: this is where users can upload their own interior design portfolio if they are designers or they can share their own home renovation works if they are just home-owners
-
-ShowPost Page: users will now be able to leave comments on other user's posts. If they are viewing their own post, they will be given the options to edit and delete. 
 
 
 
