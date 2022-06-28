@@ -4,7 +4,7 @@ where the Ho & Me Live Together
 ## Overview
 A community sharing app for users to browse interior design ideas and for designers to share their work.
 
-Check it out here: https://ho-and-me-project3.herokuapp.com/
+Check it out here: https://mi-casa-es-tu-casa.herokuapp.com/
 
 This app was created using the following: 
 - React
