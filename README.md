@@ -1,5 +1,5 @@
 # MI CASA ES TU CASA
-<em>My house is your house</em>
+<em>My house is your house~</em>
 
 ## Overview
 A community sharing app for users to browse interior design ideas and for designers to share their work.
