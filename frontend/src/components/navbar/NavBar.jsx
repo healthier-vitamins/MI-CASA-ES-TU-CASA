@@ -19,7 +19,7 @@ function NavBar() {
 
   //! extra profile link (not needed)
   // const ShowProfileLink = () => {
-    
+
   //   if (user?.data?.username) {
   //     return <Link className={nav.text} to={`/profile/${user?.data?.username}/${user?.data?._id}`}>
   //       Profile{" "}
@@ -28,7 +28,14 @@ function NavBar() {
   //     return null
   //   }
   // };
-  
+
+  const LogoutButton = () => {
+    function handleLogout() {
+      setUser(false);
+    }
+    return <button onClick={handleLogout}>Logout</button>;
+  };
+
   return (
     <div className={nav.navbar}>
       <Link className={nav.home} to="/">
@@ -44,13 +51,16 @@ function NavBar() {
       <div className={nav.login}>
         <ShowCreatePost />
         {/* Object.keys(user).length > 0 */}
-        { user?.data?.username ? (
-          <Link
-            className={nav.text}
-            to={`/profile/${user.data.username}/${user.data._id}`}
-          >
-            <p className={nav.text}>{user.data.username}</p>
-          </Link>
+        {user?.data?.username ? (
+          <>
+            <Link
+              className={nav.text}
+              to={`/profile/${user.data.username}/${user.data._id}`}
+            >
+              <p className={nav.text}>{user.data.username}</p>
+            </Link>
+            <LogoutButton />
+          </>
         ) : (
           <>
             <Link className={nav.text} to="/sign-up">
