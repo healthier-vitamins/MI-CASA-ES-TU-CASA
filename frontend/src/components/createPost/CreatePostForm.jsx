@@ -3,9 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { userAtom } from "../../App.jsx";
 import { useAtom } from "jotai";
-import CSSModules from "react-css-modules";
 import cStyle from "../../pages/CreatePost.module.css";
-import { useEffect } from "react";
 
 function CreatePostForm({ entry, setEntry }) {
   // const imgRef = useRef(null);

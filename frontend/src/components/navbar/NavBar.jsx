@@ -17,16 +17,17 @@ function NavBar() {
     }
   };
 
-  const ShowProfileLink = () => {
+  //! extra profile link (not needed)
+  // const ShowProfileLink = () => {
     
-    if (user?.data?.username) {
-      return <Link className={nav.text} to={`/profile/${user?.data?.username}/${user?.data?._id}`}>
-        Profile{" "}
-      </Link>;
-    } else {
-      return null
-    }
-  };
+  //   if (user?.data?.username) {
+  //     return <Link className={nav.text} to={`/profile/${user?.data?.username}/${user?.data?._id}`}>
+  //       Profile{" "}
+  //     </Link>;
+  //   } else {
+  //     return null
+  //   }
+  // };
   
   return (
     <div className={nav.navbar}>
@@ -34,10 +35,11 @@ function NavBar() {
         <span className={nav.perspectiveH}>H</span>
         <span className={nav.perspectiveM}>M</span>
       </Link>
-      <Link className={nav.text} to="/sign-up/">
+      {/* extra link on homepage (not needed) */}
+      {/* <Link className={nav.text} to="/sign-up/">
         Sign Up/Login
-      </Link>
-      <ShowProfileLink />
+      </Link> */}
+      {/* <ShowProfileLink /> */}
 
       <div className={nav.login}>
         <ShowCreatePost />
