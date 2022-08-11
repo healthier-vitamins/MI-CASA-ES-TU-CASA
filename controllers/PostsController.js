@@ -76,40 +76,7 @@ const filterExcess = (
   styleLower,
   companyNameLower
 ) => {
-  // if (
-  //   post.cost > cost ||
-  //   post.username_lower !== usernameLower ||
-  //   post.style_lower !== styleLower ||
-  //   post.company_name_lower !== companyNameLower
-  // ) {
-  //   console.log("INDEX:", index);
-  //   console.log("post cost & cost:", post.cost, cost);
-  //   console.log(
-  //     "post username & username:",
-  //     post.username_lower,
-  //     usernameLower
-  //   );
-  //   console.log("post style & style:", post.style_lower, styleLower);
-  //   console.log(
-  //     "post companyname & companyname:",
-  //     post.company_name_lower,
-  //     companyNameLower
-  //   );
-  //   return index;
-  // }
-  // console.log("INDEX:", index);
-  //   console.log("post cost & cost:", post.cost, cost);
-  //   console.log(
-  //     "post username & username:",
-  //     post.username_lower,
-  //     usernameLower
-  //   );
-  //   console.log("post style & style:", post.style_lower, styleLower);
-  //   console.log(
-  //     "post companyname & companyname:",
-  //     post.company_name_lower,
-  //     companyNameLower
-  //   );
+ 
   if (cost !== 0) {
     if (post.cost > cost) {
       // console.log("COST FAILED:", post.cost, cost);
