@@ -5,6 +5,7 @@ import show from "../../pages/ShowPost.module.css";
 
 function CreateCommentForm({ thisPost, comments, setComments }) {
   const [user, setUser] = useAtom(userAtom);
+  // const [message, setMessage] = useState(false)
   const [newComment, setNewComment] = useState({
     comment: "",
     author_username: "",
@@ -13,8 +14,8 @@ function CreateCommentForm({ thisPost, comments, setComments }) {
   });
 
   const handleChange = (event) => {
+    // setMessage(false)
     const { value } = event.target;
-    // console.log(user, thisPost)
     setNewComment({
       ...newComment,
       ["comment"]: value,
@@ -23,31 +24,40 @@ function CreateCommentForm({ thisPost, comments, setComments }) {
       ["postId"]: thisPost._id,
     });
   };
+  //   $('#form').submit(function() {
+  //     if ($.trim($("#email").val()) === "" || $.trim($("#user_name").val()) === "") {
+  //         alert('you did not fill out one of the fields');
+  //         return false;
+  //     }
+  // });
 
   const handleSubmit = () => {
-
-    fetch("/api/comments/create", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newComment),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setComments([...comments, data.data])
+    if (newComment.comment) {
+      fetch("/api/comments/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newComment),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          setComments([...comments, data.data]);
+        });
+      console.log("comments:", comments);
+      setNewComment({
+        comment: "",
+        author_username: "",
+        author_id: "",
+        postId: "",
       });
-     console.log("comments:", comments)
-    setNewComment({
-      comment: "",
-      author_username: "",
-      author_id: "",
-      postId: "",
-    });
+    } else {
+      //   setMessage(true);
+      window.alert("Comment cannot be empty")
+    }
   };
 
   //! setComments([ ...comments, data.data ])
-
   // if (data.status === "comment success") {
   //   console.log(allComments)
   // } else {
@@ -58,19 +68,22 @@ function CreateCommentForm({ thisPost, comments, setComments }) {
 
   return (
     <div className={show.commentcontainer}>
-      <h5>Create Comment</h5>
+      <h5>Add Comment</h5>
       <form onSubmit={(e) => e.preventDefault()}>
-        <textarea className={show.commentbox}
+        {/* {newComment.comment ? <></> : <p className={show.message}>**comment cannot be empty</p>} */}
+
+        <textarea
+          className={show.commentbox}
           type="text"
           id="create-comment"
           name="create-comment"
           placeholder="add your comment"
-          // value={}
+          value={newComment.comment}
           onChange={handleChange}
         />
         <button type="submit" onClick={handleSubmit}>
           {" "}
-          add{" "}
+          post{" "}
         </button>
       </form>
     </div>
